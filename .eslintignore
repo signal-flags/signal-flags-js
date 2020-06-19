@@ -1,12 +1,9 @@
-# .gitignore
+# .eslintignore
 
 node_modules
 
 # jest output
 coverage
-
-# jsDoc output
-out
 
 # build
 dist

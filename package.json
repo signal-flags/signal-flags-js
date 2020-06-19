@@ -1,0 +1,38 @@
+{
+  "name": "signal-flags",
+  "version": "0.2.0-dev",
+  "description": "Flags for the International Code of Signals",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "ci": "npm run build && npm run test",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:coverage": "jest test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensums/signal-flags.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opensums/signal-flags/issues"
+  },
+  "homepage": "https://github.com/opensums/signal-flags#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "babel-jest": "^26.0.1",
+    "eslint": "^7.3.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^23.13.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5",
+    "rollup": "^2.17.1",
+    "rollup-plugin-terser": "^6.1.0"
+  }
+}
