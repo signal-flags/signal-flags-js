@@ -1,9 +1,13 @@
 # .eslintignore
 
-node_modules
+/node_modules/
 
 # jest output
-coverage
+/coverage/
 
 # build
-dist
+/dist/
+
+# flag designs
+/designs/
+/src/designs/

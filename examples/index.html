@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signal flags</title>
+<style>
+  html {
+    font-family: sans-serif;
+  }
+  .flag {
+    max-width: 120px;
+    text-align: center;
+  }
+  .flag div {
+    margin: 0 0 0.5em;
+  }
+</style>
+</head>
+<body>
+  <h3>Default flags (borders for flags containing white)</h3>
+  <div id="flags"></div>
+  <h3>Flags with borders</h3>
+  <div id="border"></div>
+  <h3>Flags with no borders (work well on a background)</h3>
+  <div id="no-border"></div>
+  <script src="../dist/signal-flags.js"></script>
+  <script>
+    const flags = SignalFlags.getFlags();
+
+    function addFlag(id, html, key) {
+      const { name } = flags.getFlag(key);
+      document.getElementById(id).innerHTML
+        += `<div class="flag"><div>${key}: ${name}</div>${html}</div>`;
+    }
+
+    Object.keys(flags.getFlag()).forEach((key) => {
+      addFlag('flags', flags.getSvg(key), key);
+      addFlag('border', flags.getSvg(key, { border: true }), key);
+      addFlag('no-border', flags.getSvg(key, { border: false }), key);
+    });
+
+  </script>
+<script>
+
+</script>
+</body>
+</html> 

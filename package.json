@@ -4,12 +4,14 @@
   "description": "Flags for the International Code of Signals",
   "main": "src/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run build:designs && rollup -c",
+    "build:designs": "node bin/build-designs",
     "ci": "npm run build && npm run test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
-    "test:coverage": "jest test --coverage"
+    "test:unit": "jest tests/unit",
+    "test:coverage": "jest tests --coverage"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "eslint-plugin-jest": "^23.13.2",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.0.1",
+    "js-yaml": "^3.14.0",
     "prettier": "^2.0.5",
     "rollup": "^2.17.1",
     "rollup-plugin-terser": "^6.1.0"
