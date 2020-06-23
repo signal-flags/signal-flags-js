@@ -13,9 +13,9 @@ try {
   const outPath = resolve(__dirname, '..', 'src', 'designs');
   files.forEach((file) => {
     const inFile = fs.readFileSync(resolve(inPath, file), 'utf8');
-    const json = JSON.stringify(yaml.safeLoad(inFile));
-    const outFile = `export default ${json};`;
+    const json = JSON.stringify(yaml.safeLoad(inFile), null, 2);
     const outFileName = file.split('.');
+    const outFile = `// ${outFileName}\nexport default ${json};\n`;
     outFileName[outFileName.length - 1] = 'js';
     fs.writeFileSync(resolve(outPath, outFileName.join('.')), outFile);
   });

@@ -1,46 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Signal flags</title>
-<style>
-  html {
-    font-family: sans-serif;
-  }
-  .flag {
-    max-width: 120px;
-    text-align: center;
-  }
-  .flag div {
-    margin: 0 0 0.5em;
-  }
-</style>
+  <title>Signal flags</title>
+
+  <!-- Load Vuetify styles and dependencies. -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+ 
+  <!-- Styles for this page. -->
+  <style>
+    pre.code {
+      overflow: auto;
+    }
+    .flag-2x { width: 480px; }
+    .flag-1x { width: 240px; floaxt: left; }
+    .flag-0-5x { width: 120px; xfloat: left; }
+    .flag-0-25x { width: 60px; fxloat: left; }
+    /* Demo these.
+    svg path {
+      fill-opacity: 0.5;
+    }
+    svg path[fill=yellow] {
+      fill: #777;
+    }
+    */
+  </style>
 </head>
 <body>
-  <h3>Default flags (borders for flags containing white)</h3>
-  <div id="flags"></div>
-  <h3>Flags with borders</h3>
-  <div id="border"></div>
-  <h3>Flags with no borders (work well on a background)</h3>
-  <div id="no-border"></div>
-  <script src="../dist/signal-flags.js"></script>
-  <script>
-    const flags = SignalFlags.getFlags();
+<div id="app">
+  <v-app>
+    <v-main>
+      <v-container>
 
-    function addFlag(id, html, key) {
-      const { name } = flags.getFlag(key);
-      document.getElementById(id).innerHTML
-        += `<div class="flag"><div>${key}: ${name}</div>${html}</div>`;
-    }
+        <input v-model="selectedFlag"/>
 
-    Object.keys(flags.getFlag()).forEach((key) => {
-      addFlag('flags', flags.getSvg(key), key);
-      addFlag('border', flags.getSvg(key, { border: true }), key);
-      addFlag('no-border', flags.getSvg(key, { border: false }), key);
-    });
+        <v-col class="flex">
+          <div class="flag-2x" v-html="selected.svg"></div>
+          <div class="flag-1x" v-html="selected.svg"></div>
+          <div class="flag-0-5x" v-html="selected.svg"></div>
+          <div class="flag-0-25x" v-html="selected.svg"></div>
+        </v-col>
+        <v-card>
+          <v-card-subtitle>
+            { { key }}:
+            Flag { { flags.flags.flags[key].name }}&mdash;{ { flags.flags.flags[key].phonetic }}
+          </v-card-subtitle>
+          <v-card-text>Size {{ selected.svgFile.length }}</v-card-text>
+          <v-card-text><pre class="code">{{ selected.svgFile }}</pre></v-card-text>
+          <v-card-text v-html="svg"></v-card-text>
+        </v-card>
 
-  </script>
+        <h3>Default flags (outlines for flags with white on the outside)</h3>
+        <v-row id="flags" class="flag-row">
+            <v-col class="col-3" v-for="[key, svg] in flagsSvg" :key="key">
+              <v-card>
+                <v-card-subtitle>
+                  {{ key }}:
+                  Flag {{ flags.flags.flags[key].name }}&mdash;{{ flags.flags.flags[key].phonetic }}
+                </v-card-subtitle>
+                <v-card-text v-html="svg"></v-card-text>
+              </v-card>
+            </v-col>
+        </v-row>
+        <h3>Flags with outlines</h3>
+        <div id="outline" class="box"></div>
+        <h3>Flags with no outlines (work well on a background)</h3>
+        <div id="no-outline" class="box"></div>
+      </v-container>
+    </v-main>
+  </v-app>
+</div>
+
+<!-- Load Vue and Vuetify. -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+<!-- Load the local copy of the signal-flags module. -->
+<script src="../dist/signal-flags.js"></script>
+
+<!-- This is the code for the page, implemented as a Vue 2 component. -->
 <script>
-
+  const flags = SignalFlags.getFlags();
+  const colors = {
+    white: '#eee', // Just dark enough to work with no border.
+    blue: '#0033A0', // Pantone 286 Heraldic blue.
+    blue2: '#00205B', // Pantone 281 royal blue. Smart but too close to black.
+    blue1: '#041E42', // Pantone 282 navy blue. Even blacker.
+    green: '#4A7729', // Pantone 364 Green
+    green1: '#2C5234', // Not green enough
+    green2: '#215732', // Ditto
+    red: '#C8102E', // Pantone 186 Red
+    yellow: '#FFC72C', // Pantone 123 deep yellow. Attractive, not as bright.
+    yellow1: '#FEDD00', // Very bright and so closer to white.
+    black: '#111',
+  };
+  new Vue({
+    el: '#app',
+    vuetify: new Vuetify(),
+    data() {
+      return {
+        colors,
+        selectedFlag: 'a',
+        flags,
+        flagsSvg: Object.entries(flags.getSvg(null, { outline: false, colors })),
+      };
+    },
+    computed: {
+      selected() {
+        const { colors } = this;
+        return {
+          svg: flags.getSvg(this.selectedFlag, { colors }),
+          svgOutline: flags.getSvg(this.selectedFlag, { outline: true, colors}),
+          svgNoOutline: flags.getSvg(this.selectedFlag, { outline: false, colors }),
+          svgFile: flags.getSvg(this.selectedFlag, { file: true, colors }),
+          svgOutlineFile: flags.getSvg(this.selectedFlag, { outline: true, file: true, colors }),
+          svgNoOutlineFile: flags.getSvg(this.selectedFlag, { outline: false, file: true, colors }),
+        }
+      }
+    },
+  })
 </script>
 </body>
 </html> 

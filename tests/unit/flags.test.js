@@ -3,7 +3,7 @@
 import Flags from '../../src/flags';
 
 const SVG = /^<svg view.*<\/svg>$/;
-const BORDER = /path d="M0.5,0.5[^>]*fill="none"/;
+const OUTLINE = /path d="M0.5,0.5[^>]*fill="none"/;
 
 describe('The default flag set', () => {
   it('should have a q flag', () => {
@@ -14,18 +14,18 @@ describe('The default flag set', () => {
 
   it('should generate SVG for the q flag', () => {
     const svg = new Flags().getSvg('q');
-    expect(svg).toMatch(SVG);
+    expect(svg.replace(/\n/g, '')).toMatch(SVG);
   });
 
-  describe('Borders', () => {
-    it('The Q flag should not have a border by default', () => {
+  describe('Outlines', () => {
+    it('The Q flag should not have an outline by default', () => {
       const svg = new Flags().getSvg('q');
-      expect(svg).not.toMatch(BORDER);
+      expect(svg).not.toMatch(OUTLINE);
     });
 
-    it('The Q flag should have a border if you want one', () => {
-      const svg = new Flags().getSvg('q', { border: true });
-      expect(svg).toMatch(BORDER);
+    it('The Q flag should have an outline if you want one', () => {
+      const svg = new Flags().getSvg('q', { outline: true });
+      expect(svg).toMatch(OUTLINE);
     });
   });
 });

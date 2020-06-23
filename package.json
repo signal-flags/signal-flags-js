@@ -2,10 +2,11 @@
   "name": "signal-flags",
   "version": "0.2.0-dev",
   "description": "Flags for the International Code of Signals",
-  "main": "src/index.js",
+  "main": "dist/signal-flags.js",
   "scripts": {
     "build": "npm run build:designs && rollup -c",
-    "build:designs": "node bin/build-designs",
+    "build:designs": "node bin/parse-yaml",
+    "build:svg": "npm run build && node bin/build-svg",
     "ci": "npm run build && npm run test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

@@ -11,31 +11,39 @@ import defaultShapes from './shapes/default.shapes';
  * @param {object} colors Colours for this flag set.
  * @param {number[]} size The size to draw [width, height].
  */
-function buildFlagSvg({ shape, design, colors, border }) {
+function buildFlagSvg({ shape, design, colors, outline, file }) {
   // Get the dimensions for this shape and create the svg for the viewBox.
   const { size } = shape;
   const [w, h] = size;
-  const parts = [`<svg viewBox="0 0 ${w} ${h}">`];
+  let parts = [];
+  if (file) {
+    parts.push('<?xml version="1.0" encoding="UTF-8" ?>\n');
+    parts.push(
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">\n`
+    );
+  } else {
+    parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
+  }
 
-  let hasBorder = false;
+  let hasOutline = false;
   // Add the svg for each part of the design.
   design.forEach((part) => {
-    if (part[0] === 'border') {
-      // This is a border but we have turned it off.
-      if (border === false) return;
-      // Remember we have drawn a border.
-      hasBorder = true;
+    if (part[0] === 'outline') {
+      // This is an outline but we have turned it off.
+      if (outline === false) return;
+      // Remember we have drawn an outline.
+      hasOutline = true;
     }
     parts.push(shape[part[0]](part, { w, h, colors }));
   });
 
-  // If we are forcing a border and we haven't drawn one already, draw it now.
-  if (border && !hasBorder) {
-    parts.push(shape.border([], { w, h, colors }));
+  // If we are forcing an outline and we haven't drawn one already, draw it now.
+  if (outline && !hasOutline) {
+    parts.push(shape.outline([], { w, h, colors }));
   }
 
   // Close the svg element and return the whole concatenated.
-  parts.push('</svg>');
+  parts.push('</svg>\n');
   return parts.join('');
 }
 
@@ -53,6 +61,14 @@ class Flags {
   }
 
   getSvg(name, options) {
+    if (name == null) {
+      // Return svg for all flags.
+      const svg = {};
+      Object.keys(this.flags.flags).forEach((key) => {
+        svg[key] = this.getSvg(key, options);
+      });
+      return svg;
+    }
     const { design, shape } = this.flags.flags[name];
     const { shapes, colors } = this;
     return buildFlagSvg({
