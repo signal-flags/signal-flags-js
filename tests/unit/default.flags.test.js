@@ -1,7 +1,6 @@
 // test/unit/flags.test.js
 
 import Flags from '../../src/flags';
-import designs from '../../src/designs/default.flags';
 
 const OUTLINE = /path d="M0.5,0.5[^>]*fill="none"/;
 const WHITE = /fill="white"/;
@@ -16,7 +15,7 @@ const svgEntries = Object.entries(svg);
 
 describe('The default flag set', () => {
   test('flags should have an outline by default iff they have white on the outside', () => {
-    svgEntries.forEach(([key, svg]) => {
+    Object.entries(new Flags().getSvg(null, { colors: false })).forEach(([key, svg]) => {
       // P and W have white but it is surrounded by another colour.
       if (svg.match(WHITE) && ['p', 'w'].includes(key) === false) {
         expect(`Flag ${key}: ${svg}`).toMatch(OUTLINE);

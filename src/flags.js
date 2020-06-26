@@ -1,7 +1,31 @@
 // src/flags.js
 
-import defaultFlags from './designs/default.flags';
-import defaultShapes from './shapes/default.shapes';
+import defaultFlags from './default.flags';
+import defaultShapes from './default.shapes';
+
+const WRONG_LINE_ENDINGS = /[^>]$/m;
+const MISSING_LINE_ENDINGS = />./m;
+
+// Used to test for any number with more than 1 digit after the decimal point.
+const LONG_DECIMALS = /[0-9]\.[0-9]{2}/;
+
+const defaultColors = {
+  white: '#fff',
+  blue: '#0032A0', // Pantone 286 C https://www.pantone.com/color-finder/286-C
+  green: '#4A7729', // Pantone 364 C https://www.pantone.com/color-finder/364-C
+  red: '#C8102E', // Pantone 186 C https://www.pantone.com/color-finder/186-C
+  yellow: '#FEDD00', // Pantone Yellow C https://www.pantone.com/color-finder/Yellow-C
+  black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C
+};
+
+function audit(svg) {
+  // test('there should be line endings', () => {
+  if (!svg.endsWith('>\n')) return 'Missing EOL at the end';
+  if (svg.substring(0, svg.length - 1).match(WRONG_LINE_ENDINGS)) return 'Wrong line endings';
+  if (svg.match(MISSING_LINE_ENDINGS)) return 'Missing line endings';
+  if (svg.match(LONG_DECIMALS)) return 'Long decimals';
+  return true;
+}
 
 /**
  * Build the SVG for a flag.
@@ -25,6 +49,11 @@ function buildFlagSvg({ shape, design, colors, outline, file }) {
     parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
   }
 
+  let calculatedColors = colors;
+  if (!calculatedColors) {
+    calculatedColors = colors === false ? {} : defaultColors;
+  }
+
   let hasOutline = false;
   // Add the svg for each part of the design.
   design.forEach((part) => {
@@ -34,12 +63,12 @@ function buildFlagSvg({ shape, design, colors, outline, file }) {
       // Remember we have drawn an outline.
       hasOutline = true;
     }
-    parts.push(shape[part[0]](part, { w, h, colors }));
+    parts.push(shape[part[0]](part, { w, h, colors: calculatedColors }));
   });
 
   // If we are forcing an outline and we haven't drawn one already, draw it now.
   if (outline && !hasOutline) {
-    parts.push(shape.outline([], { w, h, colors }));
+    parts.push(shape.outline([], { w, h, colors: calculatedColors }));
   }
 
   // Close the svg element and return the whole concatenated.
@@ -50,7 +79,7 @@ function buildFlagSvg({ shape, design, colors, outline, file }) {
 class Flags {
   constructor(options) {
     const settings = { ...options };
-    this.colors = settings.colors || {};
+    this.colors = settings.colors;
     this.flags = settings.flags || defaultFlags;
     this.shapes = settings.shapes || defaultShapes;
   }
@@ -78,6 +107,10 @@ class Flags {
       colors,
       ...options,
     });
+  }
+
+  checkSvg(svg) {
+    return audit(svg);
   }
 }
 

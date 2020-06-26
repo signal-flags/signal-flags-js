@@ -149,9 +149,10 @@ const shapes = {
 
     // Draw an outline.
     outline(design, { w, h, colors }) {
+      const off = 0.5;
       return [
-        '<path d="M0.5,0.5',
-        `H${w - 0.5}V${h - 0.5}H0Z"`,
+        `<path d="M${off},${off}`,
+        `H${w - 0.5 - off}V${h - off}H${off}Z"`,
         ' stroke="black" fill="none"/>\n',
       ].join('');
     },
@@ -217,9 +218,10 @@ const shapes = {
     outline(design, { w, h }) {
       // Make the tail 1/4 of the width of the flag.
       const tail = w * 0.25;
+      const off = 0.5;
       return [
-        '<path d="M0.5,0.5',
-        `H${w - 0.5}L${w - tail - 0.5},${h / 2}L${w - 0.5},${h - 0.5}H0Z"`,
+        `<path d="M${off},${off}`,
+        `H${w - off}L${w - tail - off},${h / 2}L${w - off},${h - off}H${off}Z"`,
         ' stroke="black" fill="none"/>\n',
       ].join('');
     },

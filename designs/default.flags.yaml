@@ -160,6 +160,7 @@ flags:
     category: racing
     design:
       - [check, [black, white]]
+      - [outline]
 
   blue:
     name: 'Blue'
@@ -178,6 +179,7 @@ flags:
     category: racing
     design:
       - [check, [green, white]]
+      - [outline]
 
   red:
     name: 'Red'
