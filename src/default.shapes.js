@@ -3,11 +3,15 @@
 function getColor(name, colors) {
   return colors ? colors[name] || name : name;
 }
+// - Flag 16 x 12
+// - Pennant 24 x 12(4)
+// - Substitute 16 x 11
 
 const shapes = {
   default: {
-    // Dimensions must be divisible by 5 otherwise there will be long decimals.
-    size: [240, 180],
+    // Dimensions must be divisible by 30.
+    // Also w - h / 5 must be divisible by 2 for the cross to work.
+    size: [120, 90],
 
     // Draw a border design - note this is not an outline!
     border(design, { w, h, colors }) {
@@ -97,7 +101,7 @@ const shapes = {
     cross(design, { w, h, colors }) {
       const [, clrs] = design;
       const parts = [];
-      // Standard cross width is 1/5 of the length of the flag; this means x and y need
+      // Standard cross width is 1/5 of the height of the flag; this means x and y need
       // to be carefully chosen to avoid long fractions.
       const x0 = h / 5;
       const y0 = x0;
@@ -109,7 +113,7 @@ const shapes = {
       parts.push(`M0,${y1}H${w}V${y1 + y0}H${0}Z`);
       parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
       // Draw the four background rectangles.
-      parts.push(` <path d="`);
+      parts.push(`<path d="`);
       parts.push(`M0,0H${x1}V${y1}H0Z`);
       parts.push(`M${x1 + x0},0H${w}V${y1}H${x1 + x0}Z`);
       parts.push(`M0,${y1 + y0}H${x1}V${h}H0Z`);
@@ -171,7 +175,7 @@ const shapes = {
       parts.push(`M${w - x0},0H${w}V${y0}L${x0},${h}H0V${h - y0}Z`);
       parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
       // Draw the four background triangles.
-      parts.push(` <path d="`);
+      parts.push(`<path d="`);
       parts.push(`M${x0},0H${w - x0}L${w / 2},${y1}Z`);
       parts.push(`M${w},${y0}V${h - y0}L${w - x1},${h / 2}Z`);
       parts.push(`M${x0},${h}H${w - x0}L${w / 2},${h - y1}Z`);
@@ -199,8 +203,96 @@ const shapes = {
     },
   },
 
+  pennant: {
+    size: [180, 90],
+
+    // Draw a field (background).
+    solid(design, { w, h, colors }) {
+      const [, clr] = design;
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+      return [
+        '<path d="M0,0',
+        `L${w},${(h - fh) / 2}V${(h + fh) / 2}L0,${h}Z"`,
+        ` fill="${getColor(clr, colors)}"/>\n`,
+      ].join('');
+    },
+
+    // Draw an outline.
+    outline(design, { w, h }) {
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+      const off = 0.5;
+      return [
+        `<path d="M${off},${off}`,
+        `L${w - off},${(h - fh) / 2 + off}V${(h + fh) / 2 - off}L${off},${h - off}Z"`,
+        ' stroke="black" fill="none"/>\n',
+      ].join('');
+    },
+
+    // Draw vertical stripes.
+    vertical(design, { w, h, colors }) {
+      const [, clrs] = design;
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+      // Stripe width.
+      const sw = w / clrs.length;
+      // Difference in height per stripe.
+      const dh = (h - fh) / (2 * clrs.length);
+      const parts = [];
+      // t is the top left of the stripe.
+      let t = 0;
+      // l is the left edge of the stripe.
+      for (let l = 0; l < w; l += sw) {
+        parts.push(`<path d="M${l},${t}`);
+        t += dh;
+        parts.push(`L${l + sw},${t}V${h - t}L${l},${h - t + dh}Z"`);
+        parts.push(` fill="${getColor(clrs[l / sw], colors)}"/>\n`);
+      }
+      return parts.join('');
+    },
+  },
+
+  triangle: {
+    size: [120, 90],
+
+    // Draw an outline.
+    outline(design, { w, h }) {
+      const off = 0.5;
+      return [
+        `<path d="M${off},${off}`,
+        `L${w - off},${h / 2 + off}L${off},${h - off}Z"`,
+        ' stroke="black" fill="none"/>\n',
+      ].join('');
+    },
+
+    // Draw vertical stripes.
+    vertical(design, { w, h, colors }) {
+      const [, clrs] = design;
+      // Stripe width.
+      const sw = w / clrs.length * 0.8;
+      // Difference in height per stripe.
+      const dh = h / (2 * clrs.length) * 0.8;
+      const parts = [];
+      // t is the top left of the stripe.
+      let t = 0;
+      // l is the left edge of the stripe.
+      for (let l = 0; l < w - sw; l += sw) {
+        parts.push(`<path d="M${l},${t}`);
+        t += dh;
+        parts.push(`L${l + sw},${t}V${h - t}L${l},${h - t + dh}Z"`);
+        parts.push(` fill="${getColor(clrs[l / sw], colors)}"/>\n`);
+      }
+      // Last stripe goes to a point.
+      parts.push(`<path d="M${w - sw},${t}`);
+      parts.push(`L${w},${h / 2}L${w - sw},${h - t}Z"`);
+      parts.push(` fill="${getColor(clrs[clrs.length - 1], colors)}"/>\n`);
+      return parts.join('');
+    },
+  },
+
   swallowtail: {
-    size: [240, 180],
+    size: [120, 90],
 
     // Draw a field (background).
     solid(design, { w, h, colors }) {

@@ -148,6 +148,43 @@ flags:
       - [cross, [blue, white]]
       - [outline]
 
+  n3:
+    name: '3'
+    description: 'Numeral 3'
+    shape: pennant
+    design:
+      - [vertical, [red, white, blue]]
+      - [outline]
+
+  n5:
+    name: '5'
+    description: 'Numeral 5'
+    shape: pennant
+    design:
+      - [vertical, [yellow, blue]]
+
+  n0:
+    name: '0'
+    description: 'Numeral Zero'
+    shape: pennant
+    design:
+      - [vertical, [yellow, red, yellow]]
+
+  ap:
+    name: 'AP'
+    description: 'Answering Pennant'
+    shape: pennant
+    design:
+      - [vertical, [red, white, red, white, red]]
+      - [outline]
+
+  s2:
+    name: '2nd Substitute'
+    shape: triangle
+    design:
+      - [vertical, [blue, white]]
+      - [outline]
+
   # racing: [red, yellow, blue, green, black, greenwhite, blackwhite]
   black:
     name: 'Black'
