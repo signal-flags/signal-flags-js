@@ -91,6 +91,103 @@ const shapes = {
       return parts.join('');
     },
 
+    // Draw a circle.
+    circle(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+
+      // Radius.
+      const r = h / 4;
+
+      // Draw a rectangle background.
+      parts.push(`<path d="M0,0H${w}V${h}H0Z`);
+      // Draw the cut out centre anti-clockwise so it doesn't fill.
+      parts.push(`M${w / 2},${h / 2 - r}`);
+      parts.push(`A${r},${r} 0 0 0 ${w / 2 - r},${h / 2}`);
+      parts.push(`A${r},${r} 0 1 0 ${w / 2},${h / 2 - r}"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the centre.
+      parts.push(`<circle cx="${w / 2}" cy="${h / 2}" r="${r}"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Draw diagonal halves (O).
+    diagonalHalves(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+
+      // Draw the left half.
+      parts.push(`<path d="M0,0L${w},${h}H0Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the right half.
+      parts.push(`<path d="M0,0L${w},${h}V0Z"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Diagonal stripes (X) - similar to saltire.
+    diagonalStripes(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+      let x = w / 10;
+      let y = h / 10;
+      const xi = w / 5;
+      const yi = h / 5;
+      let clr = 0;
+      // The first stripe - just a triangle.
+      parts.push(`<path d="M0,0H${x}L0,${y}Z`);
+      parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Second, third, fourth and fifth stripes.
+      for (let i = 0; i < 4; i++) {
+        clr = 1 - clr;
+        parts.push(`<path d="M${x},0H${x + xi}L0,${y + yi}V${y}Z`);
+        parts.push(`" fill="${getColor(clrs[clr], colors)}"/>\n`);
+        x += xi;
+        y += yi;
+      }
+      // Sixth stripe across the diagonal.
+      clr = 1 - clr;
+      y = h / 10;
+      parts.push(`<path d="M${x},0H${w}V${y}L${w / 10},${h}H0V${h - y}Z`);
+      parts.push(`" fill="${getColor(clrs[clr], colors)}"/>\n`);
+      x = w / 10;
+      // Seventh, eighth, ninth and tenth stripes.
+      for (let i = 0; i < 4; i++) {
+        clr = 1 - clr;
+        parts.push(`<path d="M${w},${y}V${y + yi}L${x + xi},${h}H${x}Z`);
+        parts.push(`" fill="${getColor(clrs[clr], colors)}"/>\n`);
+        x += xi;
+        y += yi;
+      }
+      // The final triangle.
+      parts.push(`<path d="M${w},${y}V${h}H${x}Z`);
+      parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Draw a diamond.
+    diamond(design, { w, h, colors, borderWidth }) {
+      const [, clrs] = design;
+      const parts = [];
+      const bw = borderWidth || 1;
+
+      // Draw a rectangle background.
+      const w2 = w / 2;
+      const h2 = h / 2;
+      parts.push(`<path d="M0,0H${w}V${h}H0Z`);
+      // Draw the cut out centre anti-clockwise so it doesn't fill.
+      parts.push(
+        `M${w2},${bw}L${bw},${h2}L${w2},${h - bw}L${w - bw},${h2}L${w2},${bw}"`
+      );
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the centre.
+      parts.push(`<path d="`);
+      parts.push(`M${w2},${bw}L${bw},${h2}L${w2},${h - bw}L${w - bw},${h2}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      return parts.join('');
+    },
+
     // Draw a field (background).
     solid(design, { w, h, colors }) {
       const [, clr] = design;
@@ -156,8 +253,8 @@ const shapes = {
       const off = 0.5;
       return [
         `<path d="M${off},${off}`,
-        `H${w - 0.5 - off}V${h - off}H${off}Z"`,
-        ' stroke="black" fill="none"/>\n',
+        `H${w - off}V${h - off}H${off}Z"`,
+        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
       ].join('');
     },
 
@@ -219,14 +316,14 @@ const shapes = {
     },
 
     // Draw an outline.
-    outline(design, { w, h }) {
+    outline(design, { w, h, colors }) {
       // Make the fly height 1/3 of the height.
       const fh = h / 3;
       const off = 0.5;
       return [
-        `<path d="M${off},${off}`,
-        `L${w - off},${(h - fh) / 2 + off}V${(h + fh) / 2 - off}L${off},${h - off}Z"`,
-        ' stroke="black" fill="none"/>\n',
+        `<path d="M${off},${off}L${w - off},${(h - fh) / 2 + off}`,
+        `V${(h + fh) / 2 - off}L${off},${h - off}Z"`,
+        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
       ].join('');
     },
 
@@ -257,12 +354,12 @@ const shapes = {
     size: [120, 90],
 
     // Draw an outline.
-    outline(design, { w, h }) {
+    outline(design, { w, h, colors }) {
       const off = 0.5;
       return [
         `<path d="M${off},${off}`,
         `L${w - off},${h / 2 + off}L${off},${h - off}Z"`,
-        ' stroke="black" fill="none"/>\n',
+        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
       ].join('');
     },
 
@@ -270,9 +367,9 @@ const shapes = {
     vertical(design, { w, h, colors }) {
       const [, clrs] = design;
       // Stripe width.
-      const sw = w / clrs.length * 0.8;
+      const sw = (w / clrs.length) * 0.8;
       // Difference in height per stripe.
-      const dh = h / (2 * clrs.length) * 0.8;
+      const dh = (h / (2 * clrs.length)) * 0.8;
       const parts = [];
       // t is the top left of the stripe.
       let t = 0;
@@ -307,14 +404,14 @@ const shapes = {
     },
 
     // Draw an outline.
-    outline(design, { w, h }) {
+    outline(design, { w, h, colors }) {
       // Make the tail 1/4 of the width of the flag.
       const tail = w * 0.25;
       const off = 0.5;
       return [
         `<path d="M${off},${off}`,
         `H${w - off}L${w - tail - off},${h / 2}L${w - off},${h - off}H${off}Z"`,
-        ' stroke="black" fill="none"/>\n',
+        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
       ].join('');
     },
 

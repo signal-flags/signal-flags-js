@@ -86,3 +86,12 @@ https://commons.wikimedia.org/wiki/Commons:Pantone_color_chart/British_flag_colo
 
 ### Development version
 [![Build Status](https://travis-ci.org/opensums/signal-flags.svg?branch=develop)](https://travis-ci.org/opensums/signal-flags/branches)
+
+### Roadmap
+
+#### Blocking 1.0.0
+
+#### Deferred
+- Fix inset corners on flag F with no border.
+- Variable border width.
+- Square flags compliant with US Navy spec.

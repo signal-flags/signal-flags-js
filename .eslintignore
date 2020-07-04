@@ -9,5 +9,4 @@
 /dist/
 
 # flag designs
-/designs/
-/src/designs/
+/src/default.flags.js
