@@ -1,13 +1,5 @@
 # src/flags/default.yaml
 
-# Also need solid red, solid yellow, solid blue, solid green, green and white, solid black, black and white (Appendix D2.4C)
-
-groups:
-  numerals: [n1, n2, n3, n4, n5, n6, n7, n8, n9, n0]
-  alphabet: [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
-  substitutes: [s1, s2, s3, s4]
-  racing: [red, yellow, blue, green, black, greenwhite, blackwhite]
-
 flags:
   a:
     name: 'A'
@@ -150,6 +142,7 @@ flags:
 
   n3:
     name: '3'
+    category: numeral
     description: 'Numeral 3'
     shape: pennant
     design:
@@ -158,6 +151,7 @@ flags:
 
   n5:
     name: '5'
+    category: numeral
     description: 'Numeral 5'
     shape: pennant
     design:
@@ -165,6 +159,7 @@ flags:
 
   n0:
     name: '0'
+    category: numeral
     description: 'Numeral Zero'
     shape: pennant
     design:
@@ -172,6 +167,7 @@ flags:
 
   ap:
     name: 'AP'
+    category: pennant
     description: 'Answering Pennant'
     shape: pennant
     design:
@@ -180,6 +176,7 @@ flags:
 
   s2:
     name: '2nd Substitute'
+    category: substitute
     shape: triangle
     design:
       - [vertical, [blue, white]]
