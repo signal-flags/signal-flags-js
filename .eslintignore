@@ -1,0 +1,12 @@
+# .eslintignore
+
+/node_modules/
+
+# jest output
+/coverage/
+
+# build
+/dist/
+
+# flag designs
+/src/default.flags.js
