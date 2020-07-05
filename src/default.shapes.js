@@ -9,6 +9,8 @@ function getColor(name, colors) {
 
 const shapes = {
   default: {
+    shape: 'default',
+
     // Dimensions must be divisible by 30.
     // Also w - h / 5 must be divisible by 2 for the cross to work.
     size: [120, 90],
@@ -324,6 +326,7 @@ const shapes = {
   },
 
   pennant: {
+    shape: 'pennant',
     size: [180, 90],
 
     // Draw a circle.
@@ -419,7 +422,9 @@ const shapes = {
       parts.push(`<path d="M${x1 + x0},${h2 - hhr}V${y1}H${w}V${h2 - fh2}Z"`);
       parts.push(` fill="${clr}"/>\n`);
       // Draw the bottom right quarter.
-      parts.push(`<path d="M${x1 + x0},${h2 + hhr}V${y1 + x0}H${w}V${h2 + fh2}Z"`);
+      parts.push(
+        `<path d="M${x1 + x0},${h2 + hhr}V${y1 + x0}H${w}V${h2 + fh2}Z"`
+      );
       parts.push(` fill="${clr}"/>\n`);
       // Draw the bottom left quarter.
       parts.push(`<path d="M0,${h}V${y1 + x0}H${x1}V${h2 + hhl}Z"`);
@@ -506,6 +511,7 @@ const shapes = {
   },
 
   triangle: {
+    shape: 'triangle',
     size: [120, 90],
 
     // Draw a border design (not an outline).
@@ -591,6 +597,7 @@ const shapes = {
   },
 
   swallowtail: {
+    shape: 'swallowtail',
     size: [120, 90],
 
     // Draw a field (background).

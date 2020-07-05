@@ -38,9 +38,14 @@ function audit(svg) {
  * @param {object} colors Colours for this flag set.
  * @param {number[]} size The size to draw [width, height].
  */
-function buildFlagSvg({ shape, design, colors, outline, file }) {
+function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
   // Get the dimensions for this shape and create the svg for the viewBox.
-  const { size } = shape;
+  let size;
+  if (viewBox && viewBox[shape.shape]) {
+    size = viewBox[shape.shape];
+  } else {
+    size = shape.size;
+  }
   const [w, h] = size;
   let parts = [];
   if (file) {
