@@ -286,7 +286,7 @@ flags:
     name: 'Green and white'
     category: racing
     design:
-      - [check, [green, white]]
+      - [check, [green, white], 4]
       - [outline]
 
   red:

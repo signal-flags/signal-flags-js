@@ -654,7 +654,8 @@ export default {
           [
             "green",
             "white"
-          ]
+          ],
+          4
         ],
         [
           "outline"

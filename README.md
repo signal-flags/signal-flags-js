@@ -93,5 +93,5 @@ https://commons.wikimedia.org/wiki/Commons:Pantone_color_chart/British_flag_colo
 
 #### Deferred
 - Fix inset corners on flag F with no border.
-- Variable border width.
+- Variable outline width.
 - Square flags compliant with US Navy spec.
