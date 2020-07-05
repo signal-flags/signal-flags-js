@@ -10,18 +10,21 @@ const MISSING_LINE_ENDINGS = />./m;
 const LONG_DECIMALS = /[0-9]\.[0-9]{2}/;
 
 const defaultColors = {
+  outline: '#000', // The default outline is true black.
   white: '#fff',
-  blue: '#0032A0', // Pantone 286 C https://www.pantone.com/color-finder/286-C
-  green: '#4A7729', // Pantone 364 C https://www.pantone.com/color-finder/364-C
-  red: '#C8102E', // Pantone 186 C https://www.pantone.com/color-finder/186-C
-  yellow: '#FEDD00', // Pantone Yellow C https://www.pantone.com/color-finder/Yellow-C
-  black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C
+  blue: '#0032A0', // Pantone 286 C https://www.pantone.com/color-finder/286-C.
+  green: '#4A7729', // Pantone 364 C https://www.pantone.com/color-finder/364-C.
+  red: '#C8102E', // Pantone 186 C https://www.pantone.com/color-finder/186-C.
+  yellow: '#FEDD00', // Pantone Yellow C https://www.pantone.com/color-finder/Yellow-C.
+  black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C.
 };
 
 function audit(svg) {
   // test('there should be line endings', () => {
   if (!svg.endsWith('>\n')) return 'Missing EOL at the end';
-  if (svg.substring(0, svg.length - 1).match(WRONG_LINE_ENDINGS)) return 'Wrong line endings';
+  if (svg.substring(0, svg.length - 1).match(WRONG_LINE_ENDINGS)) {
+    return 'Wrong line endings';
+  }
   if (svg.match(MISSING_LINE_ENDINGS)) return 'Missing line endings';
   if (svg.match(LONG_DECIMALS)) return 'Long decimals';
   return true;
@@ -72,7 +75,7 @@ function buildFlagSvg({ shape, design, colors, outline, file }) {
   }
 
   // Close the svg element and return the whole concatenated.
-  parts.push('</svg>\n');
+  parts.push('</svg>');
   return parts.join('');
 }
 

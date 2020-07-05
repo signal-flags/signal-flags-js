@@ -15,9 +15,10 @@ const svgEntries = Object.entries(svg);
 
 describe('The default flag set', () => {
   test('flags should have an outline by default iff they have white on the outside', () => {
-    Object.entries(new Flags().getSvg(null, { colors: false })).forEach(([key, svg]) => {
-      // P and W have white but it is surrounded by another colour.
-      if (svg.match(WHITE) && ['p', 'w'].includes(key) === false) {
+    const flags = new Flags().getSvg(null, { colors: false });
+    Object.entries(flags).forEach(([key, svg]) => {
+      // P, W and N2 have white but it is surrounded by another colour.
+      if (svg.match(WHITE) && ['p', 'w', 'n2'].includes(key) === false) {
         expect(`Flag ${key}: ${svg}`).toMatch(OUTLINE);
       } else {
         expect(`Flag ${key}: ${svg}`).not.toMatch(OUTLINE);
@@ -28,8 +29,8 @@ describe('The default flag set', () => {
   test('there should be line endings', () => {
     svgEntries.forEach(([key, svg]) => {
       const str = `Flag ${key}: ${svg}`;
-      expect(str.endsWith('>\n')).toBe(true);
-      expect(str.substring(0, str.length - 1)).not.toMatch(WRONG_LINE_ENDINGS);
+      expect(str.endsWith('</svg>')).toBe(true);
+      expect(str).not.toMatch(WRONG_LINE_ENDINGS);
       expect(str).not.toMatch(MISSING_LINE_ENDINGS);
     });
   });

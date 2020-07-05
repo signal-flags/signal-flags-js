@@ -13,7 +13,7 @@ try {
   const outPath = resolve(__dirname, '..', 'src');
   files.forEach((file) => {
     const inFile = fs.readFileSync(resolve(inPath, file), 'utf8');
-    const json = JSON.stringify(yaml.safeLoad(inFile));
+    const json = JSON.stringify(yaml.safeLoad(inFile), null, 2);
     const outFileName = file.split('.');
     const outFile = `// ${outFileName}\nexport default ${json};\n`;
     outFileName[outFileName.length - 1] = 'js';

@@ -9,7 +9,6 @@ describe('The default flag set', () => {
   it('should have a q flag', () => {
     const q = new Flags().getFlag('q');
     expect(q.name).toBe('Q');
-    expect(q.phonetic).toBe('Quebec');
   });
 
   it('should generate SVG for the q flag', () => {
