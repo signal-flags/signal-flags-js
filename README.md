@@ -57,5 +57,5 @@ Version 0.9.0 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-j
 
 #### Consider
 - Fix inset corners on flag F with no border.
-- Variable border width.
+- Variable outline width.
 - Square flags compliant with US Navy spec.
