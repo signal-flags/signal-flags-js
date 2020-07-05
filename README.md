@@ -28,35 +28,6 @@ const svg = flags.getSvg('a');
 const svg = flags.getSvg('q', { outline: false });
 ```
 
-## Flag designs
-
-- Rectangle
-  - Horizontal stripes `horizontal`: C, D, E, J
-  - Vertical stripes `vertical`: G, H, K, T
-  - Check: L, N, U
-  - Border: P, S, W
-  - Saltire: M, V
-  - Cross: R, X
-  - Diamond: F
-  - Circle: I
-  - Diagonal halves: O
-  - Solid: Q
-  - Diagonal stripes `diagonal`: Y
-  - Diagonal quarters: Z
-- Swallowtail
-  - Vertical stripes: A
-  - Solid: B
-- Pennant
-  - Vertical stripes `vertical`: AP, 3, 5, 0
-  - Circle: 1, 2
-  - Nordic cross `nordic`: 4, 8
-  - Horizontal stripes `horizontal`: 6, 7
-  - Quarters: 9
-- Triangle
-  - Border: 1st
-  - Vertical stripes `vertical`: 2nd
-  - Horizontal stripes `horizontal`: 3rd
-
 ### Sources
 https://www.rya.org.uk/SiteCollectionImages/shop/ccicf-intcodeflags-lrg.jpg
 - Flag 16 x 12
@@ -74,24 +45,17 @@ https://www.crwflags.com/fotw/flags/xf-ics.html#prop
 US Navy Spec (alphabet flags onlycalc)
 https://commons.wikimedia.org/wiki/File:SignalFlagAlpha-USNSpec.svg#/media/File:USNavyAlphaSignalFlagsSpecs.png
 
-### Colours
-https://commons.wikimedia.org/wiki/Commons:Pantone_color_chart/British_flag_colours
-
-
 ## Development
 
-### Current version - not yet available
+### Current release
+Version 0.9.0 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=master)](https://travis-ci.org/signal-flags/signal-flags-js)
 
-[![Build Status](https://travis-ci.org/opensums/signal-flags.svg?branch=master)](https://travis-ci.org/opensums/signal-flags)
-
-### Development version
-[![Build Status](https://travis-ci.org/opensums/signal-flags.svg?branch=develop)](https://travis-ci.org/opensums/signal-flags/branches)
+### Development branch
+[![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=develop)](https://travis-ci.org/signal-flags/signal-flags-js/branches)
 
 ### Roadmap
 
-#### Blocking 1.0.0
-
-#### Deferred
+#### Consider
 - Fix inset corners on flag F with no border.
 - Variable border width.
 - Square flags compliant with US Navy spec.
