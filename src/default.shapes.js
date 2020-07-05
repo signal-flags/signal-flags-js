@@ -112,17 +112,65 @@ const shapes = {
       return parts.join('');
     },
 
+    // Draw a cross (like a +).
+    cross(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+      // Standard cross width is 1/5 of the height of the flag; this means x and y need
+      // to be carefully chosen to avoid long fractions.
+      const x0 = h / 5;
+      const y0 = x0;
+      const x1 = (w - x0) / 2;
+      const y1 = (h - y0) / 2;
+      // Draw the two limbs of the cross - it doesn't matter that they intersect.
+      parts.push(`<path d="`);
+      parts.push(`M${x1},0H${x1 + x0}V${h}H${x1}Z`);
+      parts.push(`M0,${y1}H${w}V${y1 + y0}H${0}Z`);
+      parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the four background rectangles.
+      parts.push(`<path d="`);
+      parts.push(`M0,0H${x1}V${y1}H0Z`);
+      parts.push(`M${x1 + x0},0H${w}V${y1}H${x1 + x0}Z`);
+      parts.push(`M0,${y1 + y0}H${x1}V${h}H0Z`);
+      parts.push(`M${x1 + x0},${y1 + y0}H${w}V${h}H${x1 + x0}Z`);
+      parts.push(`" fill="${getColor(clrs[1], colors)}"/>\n`);
+      return parts.join('');
+    },
+
     // Draw diagonal halves (O).
     diagonalHalves(design, { w, h, colors }) {
       const [, clrs] = design;
       const parts = [];
 
-      // Draw the left half.
-      parts.push(`<path d="M0,0L${w},${h}H0Z"`);
-      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
-      // Draw the right half.
+      // Draw the top right half.
       parts.push(`<path d="M0,0L${w},${h}V0Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the bottom left half.
+      parts.push(`<path d="M0,0L${w},${h}H0Z"`);
       parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Diagonal quarters (W).
+    diagonalQuarters(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+
+      // Start at the centre!
+      const c = `${w / 2},${h / 2}`;
+
+      // Draw the top quarter.
+      parts.push(`<path d="M${c}L0,0H${w}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the right quarter.
+      parts.push(`<path d="M${c}L${w},0V${h}Z"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the bottom quarter.
+      parts.push(`<path d="M${c}L${w},${h}H0Z"`);
+      parts.push(` fill="${getColor(clrs[2], colors)}"/>\n`);
+      // Draw the left quarter.
+      parts.push(`<path d="M${c}L0,${h}V0Z"`);
+      parts.push(` fill="${getColor(clrs[3], colors)}"/>\n`);
       return parts.join('');
     },
 
@@ -192,31 +240,6 @@ const shapes = {
     solid(design, { w, h, colors }) {
       const [, clr] = design;
       return `<path d="M0,0H${w}V${h}H0Z" fill="${getColor(clr, colors)}"/>\n`;
-    },
-
-    // Draw a cross (like a +).
-    cross(design, { w, h, colors }) {
-      const [, clrs] = design;
-      const parts = [];
-      // Standard cross width is 1/5 of the height of the flag; this means x and y need
-      // to be carefully chosen to avoid long fractions.
-      const x0 = h / 5;
-      const y0 = x0;
-      const x1 = (w - x0) / 2;
-      const y1 = (h - y0) / 2;
-      // Draw the two limbs of the cross - it doesn't matter that they intersect.
-      parts.push(`<path d="`);
-      parts.push(`M${x1},0H${x1 + x0}V${h}H${x1}Z`);
-      parts.push(`M0,${y1}H${w}V${y1 + y0}H${0}Z`);
-      parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
-      // Draw the four background rectangles.
-      parts.push(`<path d="`);
-      parts.push(`M0,0H${x1}V${y1}H0Z`);
-      parts.push(`M${x1 + x0},0H${w}V${y1}H${x1 + x0}Z`);
-      parts.push(`M0,${y1 + y0}H${x1}V${h}H0Z`);
-      parts.push(`M${x1 + x0},${y1 + y0}H${w}V${h}H${x1 + x0}Z`);
-      parts.push(`" fill="${getColor(clrs[1], colors)}"/>\n`);
-      return parts.join('');
     },
 
     // Draw horizontal stripes.
@@ -303,6 +326,150 @@ const shapes = {
   pennant: {
     size: [180, 90],
 
+    // Draw a circle.
+    circle(design, { w, h, colors }) {
+      const [, clrs] = design;
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+
+      const parts = [];
+
+      // Radius.
+      const r = h / 4;
+
+      // Centre on the x-axis.
+      const cx = w / 4;
+
+      // Draw the background.
+      parts.push('<path d="M0,0');
+      parts.push(`L${w},${(h - fh) / 2}V${(h + fh) / 2}L0,${h}Z`);
+      // Draw the cut out centre anti-clockwise so it doesn't fill.
+      parts.push(`M${cx},${h / 2 - r}`);
+      parts.push(`A${r},${r} 0 0 0 ${cx - r},${h / 2}`);
+      parts.push(`A${r},${r} 0 1 0 ${cx},${h / 2 - r}"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the centre.
+      parts.push(`<circle cx="${cx}" cy="${h / 2}" r="${r}"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Draw 2 horizontal stripes.
+    horizontal(design, { w, h, colors }) {
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+
+      const [, clrs] = design;
+      const parts = [];
+
+      const h2 = h / 2;
+      // Half the fly height.
+      const fh2 = fh / 2;
+
+      // Draw the top half.
+      parts.push(`<path d="M0,0V${h2}H${w}V${h2 - fh2}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the bottom half.
+      parts.push(`<path d="M0,${h}V${h2}H${w}V${h2 + fh2}Z"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      return parts.join('');
+    },
+
+    // Draw a Nordic cross.
+    nordic(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+
+      // Standard cross width is 1/5 of the height of the flag; this means x and y need
+      // to be carefully chosen to avoid long fractions.
+      const x0 = h / 5;
+      const y0 = x0;
+
+      // Centre the cross 1/3 of the width across the flag.
+      const w2 = w / 3;
+      const h2 = h / 2;
+
+      const x1 = w2 - x0 / 2;
+      const y1 = (h - y0) / 2;
+
+      // Half the fly height.
+      const fh2 = fh / 2;
+      // Height factor.
+      const heightFactor = (h2 - fh2) / w;
+      // Half the height at the left side of the cross.
+      const hhl = h2 - heightFactor * x1;
+      // Half the height at the right side of the cross.
+      const hhr = h2 - heightFactor * (x1 + x0);
+
+      // Draw the two limbs of the cross - it doesn't matter that they intersect.
+      parts.push(`<path d="`);
+      parts.push(
+        `M${x1 + x0},${h2 - hhr}V${h2 + hhr}L${x1},${h2 + hhl}V${h2 - hhl}Z`
+      );
+      parts.push(`M0,${y1}H${w}V${y1 + y0}H${0}Z`);
+      parts.push(`" fill="${getColor(clrs[0], colors)}"/>\n`);
+
+      const clr = getColor(clrs[1], colors);
+      // Draw the top left quarter.
+      parts.push(`<path d="M0,0V${y1}H${x1}V${h2 - hhl}Z"`);
+      parts.push(` fill="${clr}"/>\n`);
+      // Draw the top right quarter.
+      parts.push(`<path d="M${x1 + x0},${h2 - hhr}V${y1}H${w}V${h2 - fh2}Z"`);
+      parts.push(` fill="${clr}"/>\n`);
+      // Draw the bottom right quarter.
+      parts.push(`<path d="M${x1 + x0},${h2 + hhr}V${y1 + x0}H${w}V${h2 + fh2}Z"`);
+      parts.push(` fill="${clr}"/>\n`);
+      // Draw the bottom left quarter.
+      parts.push(`<path d="M0,${h}V${y1 + x0}H${x1}V${h2 + hhl}Z"`);
+      parts.push(` fill="${clr}"/>\n`);
+      return parts.join('');
+    },
+
+    // Draw an outline.
+    outline(design, { w, h, colors }) {
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+
+      const off = 0.5;
+      return [
+        `<path d="M${off},${off}L${w - off},${(h - fh) / 2 + off}`,
+        `V${(h + fh) / 2 - off}L${off},${h - off}Z"`,
+        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
+      ].join('');
+    },
+
+    // Quarters (9).
+    quarters(design, { w, h, colors }) {
+      // Make the fly height 1/3 of the height.
+      const fh = h / 3;
+
+      const [, clrs] = design;
+      const parts = [];
+
+      const w2 = w / 2;
+      const h2 = h / 2;
+      // Half the fly height.
+      const fh2 = fh / 2;
+      // Half the height half way along the flag.
+      const hh2 = (h + fh) / 4;
+
+      // Draw the top left quarter.
+      parts.push(`<path d="M0,0V${h2}H${w2}V${h2 - hh2}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the top right quarter.
+      parts.push(`<path d="M${w2},${h2 - hh2}V${h2}H${w}V${h2 - fh2}Z"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the bottom right quarter.
+      parts.push(`<path d="M${w2},${h2 + hh2}V${h2}H${w}V${h2 + fh2}Z"`);
+      parts.push(` fill="${getColor(clrs[2], colors)}"/>\n`);
+      // Draw the bottom left quarter.
+      parts.push(`<path d="M0,${h}V${h2}H${w2}V${h2 + hh2}Z"`);
+      parts.push(` fill="${getColor(clrs[3], colors)}"/>\n`);
+      return parts.join('');
+    },
+
     // Draw a field (background).
     solid(design, { w, h, colors }) {
       const [, clr] = design;
@@ -312,18 +479,6 @@ const shapes = {
         '<path d="M0,0',
         `L${w},${(h - fh) / 2}V${(h + fh) / 2}L0,${h}Z"`,
         ` fill="${getColor(clr, colors)}"/>\n`,
-      ].join('');
-    },
-
-    // Draw an outline.
-    outline(design, { w, h, colors }) {
-      // Make the fly height 1/3 of the height.
-      const fh = h / 3;
-      const off = 0.5;
-      return [
-        `<path d="M${off},${off}L${w - off},${(h - fh) / 2 + off}`,
-        `V${(h + fh) / 2 - off}L${off},${h - off}Z"`,
-        ` stroke="${getColor('outline', colors)}" fill="none"/>\n`,
       ].join('');
     },
 
@@ -352,6 +507,53 @@ const shapes = {
 
   triangle: {
     size: [120, 90],
+
+    // Draw a border design (not an outline).
+    border(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+
+      const yi = h / 6;
+      const h2 = h / 2;
+      const xi = w / 3;
+
+      // Draw the inner part.
+      parts.push(`<path d="M0,${yi}`);
+      parts.push(`V${h - yi}L${w - xi},${h2}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the outer part leaving a hole for the inner part.
+      parts.push(`<path d="M0,0`);
+      parts.push(`L${w},${h2}L0,${h}Z`);
+      parts.push(`M0,${yi}`);
+      parts.push(`V${h - yi}L${w - xi},${h2}L0,${yi}"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+
+      return parts.join('');
+    },
+
+    // Draw 3 horizontal stripes.
+    horizontal(design, { w, h, colors }) {
+      const [, clrs] = design;
+      const parts = [];
+
+      const yi = h / clrs.length;
+      const h2 = h / 2;
+      const xi = (w * 2) / clrs.length;
+      // Draw the top stripe.
+      parts.push(`<path d="M0,0`);
+      parts.push(`V${yi}H${xi}Z"`);
+      parts.push(` fill="${getColor(clrs[0], colors)}"/>\n`);
+      // Draw the middle stripe.
+      parts.push(`<path d="M0,${yi}`);
+      parts.push(`V${yi + yi}H${xi}L${w},${h2}L${xi},${yi}Z"`);
+      parts.push(` fill="${getColor(clrs[1], colors)}"/>\n`);
+      // Draw the bottom stripe.
+      parts.push(`<path d="M0,${h}`);
+      parts.push(`V${yi + yi}H${w}Z"`);
+      parts.push(` fill="${getColor(clrs[2], colors)}"/>\n`);
+
+      return parts.join('');
+    },
 
     // Draw an outline.
     outline(design, { w, h, colors }) {
