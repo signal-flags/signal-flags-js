@@ -1,6 +1,6 @@
 {
   "name": "signal-flags",
-  "version": "0.9.0",
+  "version": "0.9.1-dev",
   "description": "Flags for the International Code of Signals",
   "main": "dist/signal-flags.js",
   "scripts": {
