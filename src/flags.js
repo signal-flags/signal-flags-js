@@ -20,13 +20,13 @@ const defaultColors = {
 };
 
 function audit(svg) {
-  // test('there should be line endings', () => {
-  if (!svg.endsWith('>\n')) return 'Missing EOL at the end';
-  if (svg.substring(0, svg.length - 1).match(WRONG_LINE_ENDINGS)) {
-    return 'Wrong line endings';
+  // test('there should be line endings except for the last line', () => {
+  if (!svg.endsWith('</svg>')) throw new Error('Text after the closing tag');
+  if (svg.substring(0, svg.length).match(WRONG_LINE_ENDINGS)) {
+    throw new Error('Wrong line endings');
   }
-  if (svg.match(MISSING_LINE_ENDINGS)) return 'Missing line endings';
-  if (svg.match(LONG_DECIMALS)) return 'Long decimals';
+  if (svg.match(MISSING_LINE_ENDINGS)) throw new Error('Missing line endings');
+  if (svg.match(LONG_DECIMALS)) throw new Error('Long decimals');
   return true;
 }
 
@@ -80,7 +80,7 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
   }
 
   // Close the svg element and return the whole concatenated.
-  parts.push('</svg>');
+  parts.push(file ? '</svg>\n' : '</svg>');
   return parts.join('');
 }
 

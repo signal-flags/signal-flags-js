@@ -28,3 +28,42 @@ describe('The default flag set', () => {
     });
   });
 });
+
+describe('The `viewBox` option', () => {
+  const flags = new Flags();
+  const viewBox = { pennant: [12, 34] };
+  it('should replace a seleted viewBox', () => {
+    const svg = flags.getSvg('n1', { viewBox });
+    expect(svg).toMatch(/viewBox="0 0 12 34"/);
+  });
+});
+
+describe('The `file` option', () => {
+  const svg = new Flags().getSvg('a', { file: true });
+  it('should add the correct markup', () => {
+    expect(svg).toMatch(/^<\?xml version="1.0" encoding="UTF-8" \?>\n/);
+    expect(svg).toMatch(/<svg xmlns="http:\/\/www.w3.org\/2000\/svg" /);
+    expect(svg.endsWith('</svg>\n')).toBe(true);
+  });
+  it('should add EOL after the closing tag', () => {
+    expect(svg.endsWith('</svg>\n')).toBe(true);
+  });
+});
+
+describe('The checkSvg function', () => {
+  const flags = new Flags();
+  it('should normally succeed', () => {
+    const svg = flags.getSvg('a');
+    expect(flags.checkSvg(svg)).toBe(true);
+  });
+  it('should fail if there is anything after the closing tag', () => {
+    const svg = flags.getSvg('a');
+    expect(() => flags.checkSvg(`${svg} `)).toThrow(
+      'Text after the closing tag'
+    );
+  });
+  it('should fail if there is more than 1 decimal place', () => {
+    const svg = flags.getSvg('c', { viewBox: { default: [44, 33] } });
+    expect(() => flags.checkSvg(svg)).toThrow('Long decimals');
+  });
+});
