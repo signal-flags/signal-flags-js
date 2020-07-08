@@ -71,12 +71,14 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
       // Remember we have drawn an outline.
       hasOutline = true;
     }
-    parts.push(shape[part[0]](part, { w, h, colors: calculatedColors }));
+    parts.push(
+      shape[part[0]](part, { w, h, colors: calculatedColors, outline })
+    );
   });
 
   // If we are forcing an outline and we haven't drawn one already, draw it now.
   if (outline && !hasOutline) {
-    parts.push(shape.outline([], { w, h, colors: calculatedColors }));
+    parts.push(shape.outline([], { w, h, colors: calculatedColors, outline }));
   }
 
   // Close the svg element and return the whole concatenated.

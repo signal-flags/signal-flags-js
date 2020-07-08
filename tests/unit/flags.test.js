@@ -3,7 +3,7 @@
 import Flags from '../../src/flags';
 
 const SVG = /^<svg view.*<\/svg>$/;
-const OUTLINE = /path d="M0.5,0.5[^>]*fill="none"/;
+const OUTLINE = /path fill="none" stroke="#000" stroke-width="1" d="/;
 
 describe('The default flag set', () => {
   it('should have a q flag', () => {

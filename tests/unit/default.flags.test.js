@@ -2,7 +2,7 @@
 
 import Flags from '../../src/flags';
 
-const OUTLINE = /path d="M0.5,0.5[^>]*fill="none"/;
+const OUTLINE = /path fill="none" stroke="#000" stroke-width="1" d="/;
 const WHITE = /fill="white"/;
 const WRONG_LINE_ENDINGS = /[^>]$/m;
 const MISSING_LINE_ENDINGS = />./m;
@@ -36,8 +36,17 @@ describe('The default flag set', () => {
   });
 
   test('there should be no long decimals', () => {
-    svgEntries.forEach(([key, svg]) => {
+    const flags = new Flags().getSvg(null, { outline: false });
+    Object.entries(flags).forEach(([key, svg]) => {
       expect(`Flag ${key}: ${svg}`).not.toMatch(LONG_DECIMALS);
+    });
+  });
+
+  test('all flags should pass the audit', () => {
+    const flags = new Flags();
+    const svgFlags = flags.getSvg(null, { outline: true });
+    Object.entries(svgFlags).forEach(([, svg]) => {
+      expect(flags.checkSvg(svg)).toBe(true);
     });
   });
 });
