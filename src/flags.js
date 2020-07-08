@@ -19,10 +19,16 @@ const defaultColors = {
   black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C.
 };
 
-function audit(svg) {
-  // test('there should be line endings except for the last line', () => {
-  if (!svg.endsWith('</svg>')) throw new Error('Text after the closing tag');
-  if (svg.substring(0, svg.length).match(WRONG_LINE_ENDINGS)) {
+function audit(svg, options) {
+  let checkLength;
+  if (options && options['file']) {
+    if (!svg.endsWith('</svg>\n')) throw new Error('Text after the last line');
+    checkLength = svg.length - 1;
+  } else {
+    if (!svg.endsWith('</svg>')) throw new Error('Text after the closing tag');
+    checkLength = svg.length;
+  }
+  if (svg.substring(0, checkLength).match(WRONG_LINE_ENDINGS)) {
     throw new Error('Wrong line endings');
   }
   if (svg.match(MISSING_LINE_ENDINGS)) throw new Error('Missing line endings');
@@ -119,8 +125,8 @@ class Flags {
     });
   }
 
-  checkSvg(svg) {
-    return audit(svg);
+  checkSvg(svg, options) {
+    return audit(svg, options);
   }
 }
 
