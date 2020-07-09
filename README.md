@@ -62,7 +62,14 @@ const square = flags.getSvg(null, {
 
 ### Roadmap
 
+- Blocking v1.0.0
+  - Refactor concept of 'default' shapes - only one function with options.
+  - Remove 'default' border on flags.
+  - Refactor yaml so design becomes an object of shape options.
+  - Everything as an option - including colours, border width.
+  - Consider renaming colors to clrs - no, the term color is defined in SVG
+- Deferred
+  - Include and document options
+  - One path per colour
+
 #### Consider
-- Fix inset corners on flag F with no border.
-- Variable outline width.
-- Square flags compliant with US Navy spec.
