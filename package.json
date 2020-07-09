@@ -1,6 +1,6 @@
 {
   "name": "signal-flags",
-  "version": "0.9.1-dev",
+  "version": "0.9.1",
   "description": "Create SVG images for signal flags and other nautical flags",
   "main": "dist/signal-flags.js",
   "keywords": [
