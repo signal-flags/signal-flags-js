@@ -11,9 +11,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -39,9 +36,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -84,9 +78,6 @@ export default {
             "red",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -115,9 +106,6 @@ export default {
             "white",
             "red"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -143,9 +131,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -182,9 +167,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -198,9 +180,6 @@ export default {
             "white"
           ],
           4
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -258,9 +237,6 @@ export default {
             "blue",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -274,9 +250,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -289,9 +262,6 @@ export default {
             "red",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -304,9 +274,6 @@ export default {
             "red",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -332,9 +299,6 @@ export default {
             "blue",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -364,6 +328,21 @@ export default {
         ]
       ]
     },
+    "n0": {
+      "name": "0",
+      "category": "numeral",
+      "shape": "pennant",
+      "design": [
+        [
+          "vertical",
+          [
+            "yellow",
+            "red",
+            "yellow"
+          ]
+        ]
+      ]
+    },
     "n1": {
       "name": "1",
       "category": "numeral",
@@ -375,9 +354,6 @@ export default {
             "red",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -407,9 +383,6 @@ export default {
             "white",
             "blue"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -424,9 +397,6 @@ export default {
             "white",
             "red"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -455,9 +425,6 @@ export default {
             "black",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -486,9 +453,6 @@ export default {
             "red",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -504,24 +468,6 @@ export default {
             "black",
             "yellow",
             "red"
-          ]
-        ],
-        [
-          "outline"
-        ]
-      ]
-    },
-    "n0": {
-      "name": "0",
-      "category": "numeral",
-      "shape": "pennant",
-      "design": [
-        [
-          "vertical",
-          [
-            "yellow",
-            "red",
-            "yellow"
           ]
         ]
       ]
@@ -541,9 +487,6 @@ export default {
             "white",
             "red"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -574,9 +517,6 @@ export default {
             "blue",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -593,9 +533,6 @@ export default {
             "black",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -619,9 +556,6 @@ export default {
             "black",
             "white"
           ]
-        ],
-        [
-          "outline"
         ]
       ]
     },
@@ -656,9 +590,6 @@ export default {
             "white"
           ],
           4
-        ],
-        [
-          "outline"
         ]
       ]
     },

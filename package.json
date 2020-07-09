@@ -1,8 +1,14 @@
 {
   "name": "signal-flags",
-  "version": "0.9.1-dev",
-  "description": "Flags for the International Code of Signals",
+  "version": "0.9.1",
+  "description": "Create SVG images for signal flags and other nautical flags",
   "main": "dist/signal-flags.js",
+  "keywords": [
+    "flags",
+    "sailing",
+    "code flags",
+    "signal flags"
+  ],
   "scripts": {
     "build": "npm run build:designs && rollup -c",
     "build:designs": "node bin/parse-yaml",
@@ -31,12 +37,12 @@
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jest": "^23.17.1",
+    "eslint-plugin-jest": "^23.18.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.1.0",
     "js-yaml": "^3.14.0",
     "prettier": "^2.0.5",
-    "rollup": "^2.18.2",
+    "rollup": "^2.21.0",
     "rollup-plugin-terser": "^6.1.0"
   }
 }

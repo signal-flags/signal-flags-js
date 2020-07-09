@@ -12,21 +12,27 @@ const LONG_DECIMALS = /[0-9]\.[0-9]{2}/;
 const defaultColors = {
   outline: '#000', // The default outline is true black.
   white: '#fff',
-  blue: '#0032A0', // Pantone 286 C https://www.pantone.com/color-finder/286-C.
-  green: '#4A7729', // Pantone 364 C https://www.pantone.com/color-finder/364-C.
-  red: '#C8102E', // Pantone 186 C https://www.pantone.com/color-finder/186-C.
-  yellow: '#FEDD00', // Pantone Yellow C https://www.pantone.com/color-finder/Yellow-C.
-  black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C.
+  blue: '#005EB8', // Pantone 300 C
+  green: '#00965E', // Pantone 340 C
+  red: '#C8102E', // Pantone 186 C
+  yellow: '#FFD100', // Pantone 109 C
+  black: '#2D2926', // Pantone Black C
 };
 
-function audit(svg) {
-  // test('there should be line endings', () => {
-  if (!svg.endsWith('>\n')) return 'Missing EOL at the end';
-  if (svg.substring(0, svg.length - 1).match(WRONG_LINE_ENDINGS)) {
-    return 'Wrong line endings';
+function audit(svg, options) {
+  let checkLength;
+  if (options && options['file']) {
+    if (!svg.endsWith('</svg>\n')) throw new Error('Text after the last line');
+    checkLength = svg.length - 1;
+  } else {
+    if (!svg.endsWith('</svg>')) throw new Error('Text after the closing tag');
+    checkLength = svg.length;
   }
-  if (svg.match(MISSING_LINE_ENDINGS)) return 'Missing line endings';
-  if (svg.match(LONG_DECIMALS)) return 'Long decimals';
+  if (svg.substring(0, checkLength).match(WRONG_LINE_ENDINGS)) {
+    throw new Error('Wrong line endings');
+  }
+  if (svg.match(MISSING_LINE_ENDINGS)) throw new Error('Missing line endings');
+  if (svg.match(LONG_DECIMALS)) throw new Error('Long decimals');
   return true;
 }
 
@@ -71,16 +77,18 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
       // Remember we have drawn an outline.
       hasOutline = true;
     }
-    parts.push(shape[part[0]](part, { w, h, colors: calculatedColors }));
+    parts.push(
+      shape[part[0]](part, { w, h, colors: calculatedColors, outline })
+    );
   });
 
   // If we are forcing an outline and we haven't drawn one already, draw it now.
   if (outline && !hasOutline) {
-    parts.push(shape.outline([], { w, h, colors: calculatedColors }));
+    parts.push(shape.outline([], { w, h, colors: calculatedColors, outline }));
   }
 
   // Close the svg element and return the whole concatenated.
-  parts.push('</svg>');
+  parts.push(file ? '</svg>\n' : '</svg>');
   return parts.join('');
 }
 
@@ -117,8 +125,8 @@ class Flags {
     });
   }
 
-  checkSvg(svg) {
-    return audit(svg);
+  checkSvg(svg, options) {
+    return audit(svg, options);
   }
 }
 

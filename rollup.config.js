@@ -1,16 +1,16 @@
 // rollup.config.js
 
 import { terser } from 'rollup-plugin-terser';
-
 import json from '@rollup/plugin-json';
 
 // Configure for this module.
 const { name: packageName, version } = require('./package.json');
 const moduleName = 'SignalFlags';
+const repo = 'https://github.com/signal-flags/signal-flags-js';
 const banner = `/** ${moduleName}
- * @link https://github.com/opensums/${packageName}
- * @copyright (c) 2020 OpenSums https://opensums.com
- * @license MIT
+ * @link ${repo}
+ * @copyright (c) 2020 OpenSums https://opensums.com/
+ * @license MIT ${repo}/blob/master/LICENSE
  * @version ${version}
  */`;
 
