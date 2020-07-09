@@ -22,8 +22,8 @@ const shapes = {
 
       // Draw the border(s) from the outside in.
       // xbw and ybw are the border widths in the x and y dimension.
-      const ybw = h / (clrs.length * 2 - 1);
-      const xbw = ybw;
+      const ybw = h / (clrs.length * 2);
+      const xbw = w / (clrs.length * 2);
       let xb = 0;
       let yb = 0;
       for (let i = clrs.length - 1; i > 0; i--) {
