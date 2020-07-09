@@ -2,8 +2,6 @@
 
 import Flags from '../../src/flags';
 
-const OUTLINE = /path fill="none" stroke="#000" stroke-width="1" d="/;
-const WHITE = /fill="white"/;
 const WRONG_LINE_ENDINGS = /[^>]$/m;
 const MISSING_LINE_ENDINGS = />./m;
 
@@ -14,18 +12,6 @@ const svg = new Flags().getSvg();
 const svgEntries = Object.entries(svg);
 
 describe('The default flag set', () => {
-  test('flags should have an outline by default iff they have white on the outside', () => {
-    const flags = new Flags().getSvg(null, { colors: false });
-    Object.entries(flags).forEach(([key, svg]) => {
-      // P, W and N2 have white but it is surrounded by another colour.
-      if (svg.match(WHITE) && ['p', 'w', 'n2'].includes(key) === false) {
-        expect(`Flag ${key}: ${svg}`).toMatch(OUTLINE);
-      } else {
-        expect(`Flag ${key}: ${svg}`).not.toMatch(OUTLINE);
-      }
-    });
-  });
-
   test('there should be line endings', () => {
     svgEntries.forEach(([key, svg]) => {
       const str = `Flag ${key}: ${svg}`;

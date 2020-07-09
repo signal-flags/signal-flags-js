@@ -6,7 +6,6 @@ flags:
     shape: swallowtail
     design:
       - [vertical, [white, blue]]
-      - [outline]
 
   b:
     name: 'B'
@@ -18,7 +17,6 @@ flags:
     name: 'C'
     design:
       - [horizontal, [blue, white, red, white, blue]]
-      - [outline]
 
   d:
     name: 'D'
@@ -34,7 +32,6 @@ flags:
     name: 'F'
     design:
       - [diamond, [red, white]]
-      - [outline]
 
   g:
     name: 'G'
@@ -45,7 +42,6 @@ flags:
     name: 'H'
     design:
       - [vertical, [white, red]]
-      - [outline]
 
   i:
     name: 'I'
@@ -56,7 +52,6 @@ flags:
     name: 'J'
     design:
       - [horizontal, [blue, white, blue]]
-      - [outline]
 
   k:
     name: 'K'
@@ -72,13 +67,11 @@ flags:
     name: 'M'
     design:
       - [saltire, [white, blue]]
-      - [outline]
 
   n:
     name: 'N'
     design:
       - [check, [blue, white], 4]
-      - [outline]
 
   o:
     name: 'O'
@@ -104,25 +97,21 @@ flags:
     name: 'S'
     design:
       - [border, [blue, white]]
-      - [outline]
 
   t:
     name: 'T'
     design:
       - [vertical, [red, white, blue]]
-      - [outline]
 
   u:
     name: 'U'
     design:
       - [check, [red, white]]
-      - [outline]
 
   v:
     name: 'V'
     design:
       - [saltire, [red, white]]
-      - [outline]
 
   w:
     name: 'W'
@@ -133,7 +122,6 @@ flags:
     name: 'X'
     design:
       - [cross, [blue, white]]
-      - [outline]
 
   y:
     name: 'Y'
@@ -151,7 +139,6 @@ flags:
     shape: pennant
     design:
       - [circle, [red, white]]
-      - [outline]
 
   n2:
     name: '2'
@@ -166,7 +153,6 @@ flags:
     shape: pennant
     design:
       - [vertical, [red, white, blue]]
-      - [outline]
 
   n4:
     name: '4'
@@ -174,7 +160,6 @@ flags:
     shape: pennant
     design:
       - [nordic, [white, red]]
-      - [outline]
 
   n5:
     name: '5'
@@ -189,7 +174,6 @@ flags:
     shape: pennant
     design:
       - [horizontal, [black, white]]
-      - [outline]
 
   n7:
     name: '7'
@@ -204,7 +188,6 @@ flags:
     shape: pennant
     design:
       - [nordic, [red, white]]
-      - [outline]
 
   n9:
     name: '9'
@@ -212,7 +195,6 @@ flags:
     shape: pennant
     design:
       - [quarters, [white, black, yellow, red]]
-      - [outline]
 
   n0:
     name: '0'
@@ -228,7 +210,6 @@ flags:
     shape: pennant
     design:
       - [vertical, [red, white, red, white, red]]
-      - [outline]
 
   s1:
     name: '1st Sub'
@@ -245,7 +226,6 @@ flags:
     shape: triangle
     design:
       - [vertical, [blue, white]]
-      - [outline]
 
   s3:
     name: '3rd Sub'
@@ -254,7 +234,6 @@ flags:
     shape: triangle
     design:
       - [horizontal, [white, black, white]]
-      - [outline]
 
   # racing: [red, yellow, blue, green, black, greenwhite, blackwhite]
   black:
@@ -268,7 +247,6 @@ flags:
     category: racing
     design:
       - [check, [black, white]]
-      - [outline]
 
   blue:
     name: 'Blue'
@@ -287,7 +265,6 @@ flags:
     category: racing
     design:
       - [check, [green, white], 4]
-      - [outline]
 
   red:
     name: 'Red'
