@@ -328,6 +328,21 @@ export default {
         ]
       ]
     },
+    "n0": {
+      "name": "0",
+      "category": "numeral",
+      "shape": "pennant",
+      "design": [
+        [
+          "vertical",
+          [
+            "yellow",
+            "red",
+            "yellow"
+          ]
+        ]
+      ]
+    },
     "n1": {
       "name": "1",
       "category": "numeral",
@@ -453,21 +468,6 @@ export default {
             "black",
             "yellow",
             "red"
-          ]
-        ]
-      ]
-    },
-    "n0": {
-      "name": "0",
-      "category": "numeral",
-      "shape": "pennant",
-      "design": [
-        [
-          "vertical",
-          [
-            "yellow",
-            "red",
-            "yellow"
           ]
         ]
       ]
