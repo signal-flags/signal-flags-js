@@ -54,7 +54,7 @@ const square = flags.getSvg(null, {
 
 ## Development
 
-### Current release v0.9.0
+### Current release v0.9.1
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=master)](https://travis-ci.org/signal-flags/signal-flags-js)
 
 ### Development branch
