@@ -12,11 +12,11 @@ const LONG_DECIMALS = /[0-9]\.[0-9]{2}/;
 const defaultColors = {
   outline: '#000', // The default outline is true black.
   white: '#fff',
-  blue: '#0032A0', // Pantone 286 C https://www.pantone.com/color-finder/286-C.
-  green: '#4A7729', // Pantone 364 C https://www.pantone.com/color-finder/364-C.
-  red: '#C8102E', // Pantone 186 C https://www.pantone.com/color-finder/186-C.
-  yellow: '#FEDD00', // Pantone Yellow C https://www.pantone.com/color-finder/Yellow-C.
-  black: '#2D2926', // Pantone Black C https://www.pantone.com/color-finder/Black-C.
+  blue: '#005EB8', // Pantone 300 C
+  green: '#00965E', // Pantone 340 C
+  red: '#C8102E', // Pantone 186 C
+  yellow: '#FFD100', // Pantone 109 C
+  black: '#2D2926', // Pantone Black C
 };
 
 function audit(svg, options) {
