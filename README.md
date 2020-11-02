@@ -20,7 +20,10 @@ To use in an HTML page load from either unpkg...
 ... or jsDelivr:
 
 ```html
-<script> src="https://cdn.jsdelivr.net/npm/signal-flags@0.9/dist/signal-flags.min.js"</script>
+<script>
+  src =
+    'https://cdn.jsdelivr.net/npm/signal-flags@0.9/dist/signal-flags.min.js';
+</script>
 ```
 
 To use in Node.js install using npm `npm i signal-flags` or yarn `yarn install signal-flags`
@@ -30,6 +33,7 @@ const SignalFlags = require('signal-flags');
 ```
 
 ## Usage
+
 ```js
 // Get the default set of flags.
 const flags = SignalFlags.getFlags();
@@ -55,12 +59,26 @@ const square = flags.getSvg(null, {
 ## Development
 
 ### Current release v0.9.1
+
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=master)](https://travis-ci.org/signal-flags/signal-flags-js)
 
 ### Development branch
+
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=develop)](https://travis-ci.org/signal-flags/signal-flags-js/branches)
 
 ### Roadmap
+
+- New API
+
+```js
+get('a', {
+  colors: 'natural', // 'primary', SignalFlags.NATURAL, SignalFlags.PRIMARY
+  colorValues: [], // an array of colour values
+  outline: 2, // 0, 1, 2, 3 .NONE .THIN .NORMAL .THICK
+  shape: 'default', // square, .SQUARE .DEFAULT
+  file: false, // true to add xml and xmlns declarations for use as a standalone file
+});
+```
 
 - Blocking v1.0.0
   - Refactor concept of 'default' shapes - only one function with options.
