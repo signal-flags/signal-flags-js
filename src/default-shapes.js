@@ -2,7 +2,7 @@
 
 function getColor(name, colors) {
   if (name === 'outline') {
-    return colors ? colors.outline || 'black' : 'black';
+    return colors ? colors.outline || '#000' : '#000';
   }
   return colors ? colors[name] || name : name;
 }
