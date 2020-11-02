@@ -3,17 +3,29 @@
 import { version } from '../package.json';
 
 import flags from './default-flags';
-import shapes from './default-shapes';
+import drawShapes from './default-shapes';
 import { check } from './check';
 
-const defaultColors = {
-  outline: '#000', // The default outline is true black.
-  white: '#fff',
-  blue: '#005EB8', // Pantone 300 C
-  green: '#00965E', // Pantone 340 C
-  red: '#C8102E', // Pantone 186 C
-  yellow: '#FFD100', // Pantone 109 C
-  black: '#2D2926', // Pantone Black C
+const colorSets = {
+  default: {
+    outline: '#000', // The default outline is true black.
+    black: '#2d2926', // Pantone Black C
+    blue: '#005eb8', // Pantone 300 C
+    green: '#00965e', // Pantone 340 C
+    red: '#c8102e', // Pantone 186 C
+    yellow: '#ffd100', // Pantone 109 C
+    white: '#fff',
+  },
+
+  primary: {
+    outline: '#000',
+    black: '#000',
+    blue: '#00f',
+    green: '#0f0',
+    red: '#f00',
+    yellow: '#ff0',
+    white: '#fff',
+  },
 };
 
 /**
@@ -24,13 +36,14 @@ const defaultColors = {
  * @param {object} colors Colours for this flag set.
  * @param {number[]} size The size to draw [width, height].
  */
-function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
-  // Get the dimensions for this shape and create the svg for the viewBox.
+function buildFlagSvg({ draw, design, colors, outline, file, viewBox }) {
+
+  // Get the dimensions for this shape.
   let size;
-  if (viewBox && viewBox[shape.shape]) {
-    size = viewBox[shape.shape];
+  if (viewBox && viewBox[draw.shape]) {
+    size = viewBox[draw.shape];
   } else {
-    size = shape.size;
+    size = draw.size;
   }
   const [w, h] = size;
   let parts = [];
@@ -43,11 +56,6 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
     parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
   }
 
-  let calculatedColors = colors;
-  if (!calculatedColors) {
-    calculatedColors = colors === false ? {} : defaultColors;
-  }
-
   let hasOutline = false;
   // Add the svg for each part of the design.
   design.forEach((part) => {
@@ -58,13 +66,13 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
       hasOutline = true;
     }
     parts.push(
-      shape[part[0]](part, { w, h, colors: calculatedColors, outline })
+      draw[part[0]](part, { w, h, colors, outline })
     );
   });
 
   // If we are forcing an outline and we haven't drawn one already, draw it now.
   if (outline && !hasOutline) {
-    parts.push(shape.outline([], { w, h, colors: calculatedColors, outline }));
+    parts.push(draw.outline([], { w, h, colors, outline }));
   }
 
   // Close the svg element and return the whole concatenated.
@@ -75,7 +83,7 @@ function buildFlagSvg({ shape, design, colors, outline, file, viewBox }) {
 export function all(options) {
   // Return svg for all flags.
   const all = {};
-  Object.keys(this.flags.flags).forEach((key) => {
+  Object.keys(this.flags).forEach((key) => {
     all[key] = this.get(key, options);
   });
   return all;
@@ -83,22 +91,34 @@ export function all(options) {
 
 // The settings for this SignalFlags object.
 export const settings = {
-  colors: {...defaultColors},
+  colors: {...colorSets.default},
   outline: true,
 };
 
 // Get svg for a signal flag
-export function get(name, options) {
-  const { design, shape } = this.flags.flags[name];
-  const { shapes } = this;
-  const { colors, outline } = this.settings;
+export function get(name, options = {}) {
+  // Get the shape (pennant, triangle etc.) and design for this flag.
+  const { shape, design } = this.flags[name];
+
+  // Get the code to build this shape.
+  const { drawShapes } = this;
+  const { outline } = this.settings;
+  const { colors: optColors } = options;
+
+  let colors;
+  if (typeof optColors === 'string') {
+    colors = colorSets[optColors] ?? this.settings.colors;
+  } else {
+    colors = this.settings.colors;
+  }
+
   return buildFlagSvg({
     // If the flag has no shape use the default shape.
-    shape: shapes[shape || 'default'],
+    draw: drawShapes[shape || 'default'],
     design,
-    colors,
     outline,
     ...options,
+    colors,
   });
 }
 
@@ -108,4 +128,6 @@ export { version };
 // Check the SVG is OK for a flag.
 export { check };
 
-export { shapes, flags };
+// We must export these so they are in the imported object's scope, although
+// they are not part of the API.
+export { drawShapes, flags };

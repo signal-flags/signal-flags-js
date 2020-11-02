@@ -16,9 +16,9 @@
     "ci": "npm run build && npm run test",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write .",
-    "test": "jest",
-    "test:unit": "jest tests/unit",
-    "test:coverage": "jest tests --coverage"
+    "test": "jest --verbose",
+    "test:unit": "jest tests/unit --verbose",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**.*"
   },
   "repository": {
     "type": "git",
