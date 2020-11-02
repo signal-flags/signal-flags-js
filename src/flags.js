@@ -1,7 +1,7 @@
 // src/flags.js
 
-import defaultFlags from './default.flags';
-import defaultShapes from './default.shapes';
+import defaultFlags from './default-flags';
+import defaultShapes from './default-shapes';
 
 const WRONG_LINE_ENDINGS = /[^>]$/m;
 const MISSING_LINE_ENDINGS = />./m;
