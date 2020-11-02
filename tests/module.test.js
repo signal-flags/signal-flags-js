@@ -1,11 +1,11 @@
 // test/module.test.js
 
+const semver = require('./semver-regex');
+
 const SignalFlags = require('../dist/signal-flags.min');
 
-const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
-
-describe('The thing', () => {
+describe('The SignalFlags umd module', () => {
   it('should have a semver version', () => {
-    expect(SignalFlags.VERSION).toMatch(SEMVER);
+    expect(SignalFlags.version).toMatch(semver);
   });
 });

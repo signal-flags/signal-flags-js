@@ -35,25 +35,28 @@ const SignalFlags = require('signal-flags');
 ## Usage
 
 ```js
-// Get the default set of flags.
-const flags = SignalFlags.getFlags();
-// Get the Q flag.
-const q = flags.getSvg('q');
-// Force an outline (Q doesn't normally have one).
-const qo = flags.getSvg('q', { outline: true });
-// Get the Numeral 1 pennant - it has an outline by default.
-const n1 = flags.getSvg('n1');
-// Remove the outline.
-const n1n = flags.getSvg('n1', { outline: false });
-// Get all flags with default settings.
-const all = flags.getSvg();
-// Get all flags showing default options.
-const square = flags.getSvg(null, {
-  outline: null, // true to force an outline, false to force no outline
-  colors: [], // an array of colour values'
-  viewBox: [], // an array of viewBox size overrides for shapes
-  file: false, // true to add xml and xmlns declarations for use as a standalone file
-});
+// Get the SVG string for a flag.
+SignalFlags.get('a');
+// Get the SVG string for a flag with no outline.
+SignalFlags.get('a', { outline: false });
+// Get the SVG string for a flag as a standalone file.
+SignalFlags.get('a', { file: true });
+// Get the SVG string for a flag using the `primary` colour set.
+SignalFlags.get('a', { colors: SignalFlags.primaryColors });
+
+// Get the SVG strings for all flags (keyed by the flag name).
+SignalFlags.all();
+// Get the SVG strings for all flags with options.
+SignalFlags.all({ outline: false, file: true });
+
+// Get the current configuration.
+SignalFlags.config();
+// Set the default to no outlines.
+SignalFlags.config({ outline: false });
+// Set the default colours to the `primary` colour set.
+SignalFlags.config('colors', SignalFlags.primaryColours);
+// Set a default colour (leaves other colours unchanged).
+SignalFlags.config('colors', { black: '#000' });
 ```
 
 ## Development
@@ -76,7 +79,6 @@ get('a', {
   colorValues: [], // an array of colour values
   outline: 2, // 0, 1, 2, 3 .NONE .THIN .NORMAL .THICK
   shape: 'default', // square, .SQUARE .DEFAULT
-  file: false, // true to add xml and xmlns declarations for use as a standalone file
 });
 ```
 
