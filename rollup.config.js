@@ -1,5 +1,6 @@
 // rollup.config.js
 
+import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
 
@@ -17,7 +18,7 @@ const banner = `/** ${moduleName}
 module.exports = [
   {
     input: 'src/index.js',
-    plugins: [json()],
+    plugins: [json(), babel({ babelHelpers: 'bundled' })],
     output: [
       {
         file: `dist/${packageName}.js`,
