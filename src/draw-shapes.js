@@ -22,11 +22,19 @@ const shapes = {
     border(design, { w, h, colors }) {
       const [, clrs] = design;
       const parts = [];
+      const { length } = clrs;
 
       // Draw the border(s) from the outside in.
       // xbw and ybw are the border widths in the x and y dimension.
-      const ybw = h / (clrs.length * 2);
-      const xbw = w / (clrs.length * 2);
+      let xbw, ybw;
+      if (length === 2) {
+        // This factor works well for P and S flags.
+        ybw = h * 0.3;
+        xbw = w * 0.3;
+      } else {
+        ybw = h / (length * 2);
+        xbw = w / (length * 2);
+      }
       let xb = 0;
       let yb = 0;
       for (let i = clrs.length - 1; i > 0; i--) {
@@ -102,7 +110,7 @@ const shapes = {
       const parts = [];
 
       // Radius.
-      const r = h * 0.3;
+      const r = h * 0.25;
 
       // Draw a rectangle background.
       parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
