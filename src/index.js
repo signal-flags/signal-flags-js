@@ -50,20 +50,14 @@ function buildFlagSvg({ draw, design, colors, outline, file, shape }) {
     parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
   }
 
-  let hasOutline = false;
   // Add the svg for each part of the design.
   design.forEach((part) => {
-    if (part[0] === 'outline') {
-      // This is an outline but we have turned it off.
-      if (outline === false) return;
-      // Remember we have drawn an outline.
-      hasOutline = true;
-    }
+    // Remember some flags (F) need to know about the outline.
     parts.push(draw[part[0]](part, { w, h, colors, outline }));
   });
 
-  // If we are forcing an outline and we haven't drawn one already, draw it now.
-  if (outline && !hasOutline) {
+  // Draw the outline.
+  if (outline) {
     parts.push(draw.outline([], { w, h, colors, outline }));
   }
 
