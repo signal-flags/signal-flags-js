@@ -38,7 +38,7 @@ describe('SignalFlags', () => {
       expect(z).toMatch(match.primary);
     });
 
-    it.skip('should have a square shape option', () => {
+    it('should have a square shape option', () => {
       const q = SignalFlags.get('q', { shape: 'square' });
       expect(q).toMatch(match.square);
     });
@@ -64,6 +64,5 @@ describe('SignalFlags', () => {
     });
   });
 
-  describe('config()', () => {
-  });
+  describe('config()', () => {});
 });

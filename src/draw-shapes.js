@@ -13,7 +13,10 @@ const shapes = {
 
     // Dimensions must be divisible by 90.
     // Also w - h / 5 must be divisible by 2 for the cross to work.
-    size: [240, 180],
+    size: {
+      default: [240, 180],
+      square: [180, 180],
+    },
 
     // Draw a border design - note this is not an outline!
     border(design, { w, h, colors }) {
@@ -323,7 +326,11 @@ const shapes = {
 
   pennant: {
     shape: 'pennant',
-    size: [360, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [360, 180],
+    },
 
     // Draw a circle.
     circle(design, { w, h, colors }) {
@@ -514,7 +521,12 @@ const shapes = {
 
   swallowtail: {
     shape: 'swallowtail',
-    size: [240, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [240, 180],
+      square: [180, 180],
+    },
 
     // Draw an outline.
     outline(design, { w, h, colors, outline }) {
@@ -567,7 +579,11 @@ const shapes = {
 
   triangle: {
     shape: 'triangle',
-    size: [240, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [240, 180],
+    },
 
     // Draw a border design (not an outline).
     border(design, { w, h, colors }) {

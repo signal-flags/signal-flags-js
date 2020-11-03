@@ -3,7 +3,7 @@
 import { version } from '../package.json';
 
 import flags from './default-flags';
-import drawShapes from './default-shapes';
+import drawShapes from './draw-shapes';
 import { check } from './check';
 
 const colorSets = {
@@ -36,16 +36,10 @@ const colorSets = {
  * @param {object} colors Colours for this flag set.
  * @param {number[]} size The size to draw [width, height].
  */
-function buildFlagSvg({ draw, design, colors, outline, file, viewBox }) {
-
+function buildFlagSvg({ draw, design, colors, outline, file, shape }) {
   // Get the dimensions for this shape.
-  let size;
-  if (viewBox && viewBox[draw.shape]) {
-    size = viewBox[draw.shape];
-  } else {
-    size = draw.size;
-  }
-  const [w, h] = size;
+  const [w, h] = (shape && draw.size[shape]) || draw.size.default;
+
   let parts = [];
   if (file) {
     parts.push('<?xml version="1.0" encoding="UTF-8" ?>\n');
@@ -65,9 +59,7 @@ function buildFlagSvg({ draw, design, colors, outline, file, viewBox }) {
       // Remember we have drawn an outline.
       hasOutline = true;
     }
-    parts.push(
-      draw[part[0]](part, { w, h, colors, outline })
-    );
+    parts.push(draw[part[0]](part, { w, h, colors, outline }));
   });
 
   // If we are forcing an outline and we haven't drawn one already, draw it now.
@@ -91,20 +83,22 @@ export function all(options) {
 
 // The settings for this SignalFlags object.
 export const settings = {
-  colors: {...colorSets.default},
+  colors: { ...colorSets.default },
   outline: true,
 };
 
 // Get svg for a signal flag
-export function get(name, options = {}) {
+export function get(
+  name,
+  { colors: optColors, file, outline, shape: optShape } = {}
+) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
   const { shape, design } = this.flags[name];
 
   // Get the code to build this shape.
   const { drawShapes } = this;
-  const { outline } = this.settings;
-  const { colors: optColors } = options;
 
+  // Set the colours according to the options or defaults.
   let colors;
   if (typeof optColors === 'string') {
     colors = colorSets[optColors] ?? this.settings.colors;
@@ -113,12 +107,13 @@ export function get(name, options = {}) {
   }
 
   return buildFlagSvg({
+    colors,
+    design,
     // If the flag has no shape use the default shape.
     draw: drawShapes[shape || 'default'],
-    design,
-    outline,
-    ...options,
-    colors,
+    file,
+    outline: outline ?? this.settings.outline,
+    shape: optShape,
   });
 }
 
