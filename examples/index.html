@@ -1,188 +1,246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
 
-<title>Signal Flags Loader example</title>
+    <title>Signal Flags Loader example</title>
 
-<script src="../dist/signal-flags-loader.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-  crossorigin="anonymous">
+    <!-- Load Signal Flags Loader JavaScript -->
+    <script src="../dist/signal-flags-loader.min.js"></script>
+    <script
+      async
+      src="https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags-loader.min.js"
+    ></script>
 
-<style>
-/* Set the width for block display of signal flags */
-div.signal-flags { width: 120px; }
-.signal-flags.pennant, .pennant .signal-flags { width: 150px; }
+    <!-- Load Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
-/* Tweak Bootstrap styles */
-pre {
-  background-color: linen;
-  padding: 0.5em 0.75em;
-  border-radius: 0.5em;
-}
+    <style>
+      /* Set the width for block display of signal flags */
+      div.signal-flags {
+        width: 120px;
+      }
+      .signal-flags.pennant,
+      .pennant .signal-flags {
+        width: 150px;
+      }
 
-</style>
-</head>
+      /* Tweak Bootstrap styles */
+      pre {
+        background-color: linen;
+        padding: 0.5em 0.75em;
+        border-radius: 0.5em;
+      }
+    </style>
+  </head>
 
-<body>
-<div class="container mb-4"><div class="row"><div class="col">
-<h1>Signal Flags Loader example</h1>
+  <body>
+    <div class="container my-3">
+      <div class="row">
+        <div class="col">
+          <h1>Signal Flags Loader example</h1>
 
-<p>
-  This example page shows how to use the Signal Flags Loader to include flags on
-  any page without writing any JavaScript. There are no tricks here, although
-  we do load the
-  <a
-    target="_blank"
-    href="https://getbootstrap.com/docs/4.5/getting-started/introduction/#css"
-    >Bootstrap CSS</a>
-  to help lay things out. 
-</p>
+          <p>
+            This example page shows how to use the Signal Flags Loader to
+            include flags on any page without writing any JavaScript.
+          </p>
 
-<p>
-  Autoloading is achieved simply by including the Signal Flags Loader script
-  anywhere on the page (in the <code>head</code> is best if you use
-  <code>async</code> as in the example below).
-</p>
+          <h2>Getting started</h2>
 
-<pre onclick="copy"><code>&lt;script async src="https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags-loader.min.js"&gt;&lt;/script&gt;
+          <p>
+            Include the Signal Flags Loader script anywhere on the page (in the
+            <code>&lt;head&gt;</code> is best if you use <code>async</code> as
+            in the example below).
+          </p>
+
+          <pre><code>&lt;script async src="https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags-loader.min.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>
-  Now you can insert a small image like this <span class="signal-flags">a</a> in
-  any text by writing
-  <code>&lt;span class="signal-flags"&gt;[name]&lt;/span&gt;</code>,
-  replacing <code>[name]</code> with the abbreviated name of the flag. Images
-  are automagically sized to fit their context so they are&hellip;
-</p>
+          <p>
+            There are no other dependencies and we have not found any conflicts
+            but note that the code is unlikely to work in any version of
+            Internet Explorer other than IE 11.
+          </p>
+          <h2>Inline images</h2>
 
-<h3>
-  &hellip;bigger in a <span class="signal-flags">h</span>
-  <span class="signal-flags">n2</span> heading!
-</h3>
+          <p class="mb-0">
+            Insert a small image like this
+            <span class="signal-flags">a</span> in any text by writing
+            <code>&lt;span class="signal-flags"&gt;[name]&lt;/span&gt;</code>,
+            replacing <code>[name]</code> with the abbreviated name of the flag.
+            Inline images are sized to fit their context so they are&hellip;
+          </p>
 
-<p>
-  Now you can insert a small image like this <span class="signal-flags">a</a> in
-  any text by writing
-  <code>&lt;span class="signal-flags"&gt;[name]&lt;/span&gt;</code>,
-  replacing <code>[name]</code> with the abbreviated name of the flag. Images
-  are automagically sized to fit their context so they are&hellip;
-</p>
+          <h3>
+            &hellip;bigger in a <span class="signal-flags">h</span>
+            <span class="signal-flags">n2</span> heading!
+          </h3>
 
-<p>Letters A&hellip;Z <code>a&hellip;z</code>:
-  <span class="signal-flags">a</span>
-  <span class="signal-flags">b</span>
-  <span class="signal-flags">c</span>
-  &hellip;
-  <span class="signal-flags">d</span>
-  <span class="signal-flags">e</span>
-  <span class="signal-flags">f</span>
-</p>
+          <p>The list below shows the abbreviated flag names we use:</p>
 
-<p>Numerals 0&hellip;9 <code>n0&hellip;n9</code>:
-  <span class="signal-flags">n0</span>
-  <span class="signal-flags">n1</span>
-  <span class="signal-flags">n2</span>
-  &hellip;
-  <span class="signal-flags">n7</span>
-  <span class="signal-flags">n8</span>
-  <span class="signal-flags">n9</span>
-</p>
+          <ul>
+            <li>
+              Letters A&hellip;Z <code>a&hellip;z</code>:
+              <span class="signal-flags">a</span>
+              <span class="signal-flags">b</span>
+              <span class="signal-flags">c</span>
+              &hellip;
+              <span class="signal-flags">d</span>
+              <span class="signal-flags">e</span>
+              <span class="signal-flags">f</span>
+            </li>
 
-<p>Substitutes <code>s1&hellip;s3</code>:
-  1<sup>st</sup> <span class="signal-flags">s1</span>
-  2<sup>nd</sup> <span class="signal-flags">s2</span>
-  3<sup>rd</sup> <span class="signal-flags">s3</span>
-</p>
+            <li>
+              Numerals 0&hellip;9 <code>n0&hellip;n9</code>:
+              <span class="signal-flags">n0</span>
+              <span class="signal-flags">n1</span>
+              <span class="signal-flags">n2</span>
+              &hellip;
+              <span class="signal-flags">n7</span>
+              <span class="signal-flags">n8</span>
+              <span class="signal-flags">n9</span>
+            </li>
 
-<p>Racing flags
-  <code>black</code> <span class="signal-flags">black</span>
-  <code>blue</code> <span class="signal-flags">blue</span>
-  <code>green</code> <span class="signal-flags">green</span>
-  <code>red</code> <span class="signal-flags">red</span>
-  <code>yellow</code> <span class="signal-flags">yellow</span>
-  <code>greenwhite</code> <span class="signal-flags">greenwhite</span>
-  <code>blackwhite</code> <span class="signal-flags">blackwhite</span>
-</p>
+            <li>
+              Substitutes <code>s1&hellip;s3</code>: 1<sup>st</sup>
+              <span class="signal-flags">s1</span> 2<sup>nd</sup>
+              <span class="signal-flags">s2</span> 3<sup>rd</sup>
+              <span class="signal-flags">s3</span>
+            </li>
 
-<h2>Block elements</h2>
+            <li>
+              Racing flags <code>black</code>:
+              <span class="signal-flags">black</span> <code>blue</code>:
+              <span class="signal-flags">blue</span> <code>green</code>:
+              <span class="signal-flags">green</span> <code>red</code>:
+              <span class="signal-flags">red</span> <code>yellow</code>:
+              <span class="signal-flags">yellow</span> <code>greenwhite</code>:
+              <span class="signal-flags">greenwhite</span>
+              <code>blackwhite</code>:
+              <span class="signal-flags">blackwhite</span>
+            </li>
+          </ul>
 
-<p>
-  Use <code>&lt;div class="signal-flags"&gt;[name]&lt;/div&gt;</code> to display
-  a larger image. By default a block element will take up the whole width of the
-  containing element so you will normally need to set a <code>width</code> in
-  somehow. This page has the styles shown below in its <code>head</code>; 
-  note that pennants (numerals and the Answering Pennant) look good at 1.25&times;
-  the width of rectangular and triangular flags.
-</p>
+          <h2>Block elements</h2>
 
-<pre><code>&lt;style&gt;
+          <p>
+            Use
+            <code>&lt;div class="signal-flags"&gt;[name]&lt;/div&gt;</code> to
+            display an image outside the flow of text. By default a block
+            element will take up the whole width of the page so for smaller
+            sizes you can either use a CSS layout framework like
+            <a
+              target="_blank"
+              href="https://getbootstrap.com/docs/4.5/getting-started/introduction/#css"
+              >Bootstrap</a
+            >
+            or set the <code>width</code> in CSS yourself. This page has the
+            styles shown below in its <code>&lt;head&gt;</code>; note that
+            pennants (numerals and the Answering Pennant) look good at
+            1.25&times; the width of rectangular and triangular flags.
+          </p>
+
+          <pre><code>&lt;style&gt;
   div.signal-flags { width: 120px; }
   .signal-flags.pennant, .pennant .signal-flags { width: 150px; }
 &lt;/style&gt;
 </code></pre>
 
-<p>
-  This page uses Bootstrap's flex utilities to lay out the flags: part of this
-  code is shown below, follwed by some flags!
-</p>
+          <h3>Alphabet</h3>
 
-<pre><code>&lt;h3&gt;Substitutes&lt;/h3&gt;
+          <div
+            class="d-flex justify-content-between flex-wrap text-center mb-4"
+          >
+            <div>
+              Alpha <code>a</code>
+              <div class="signal-flags">a</div>
+            </div>
+            <div>
+              Bravo <code>b</code>
+              <div class="signal-flags">b</div>
+            </div>
+            <div>
+              Charlie <code>c</code>
+              <div class="signal-flags">c</div>
+            </div>
+            <div>
+              Delta <code>d</code>
+              <div class="signal-flags">d</div>
+            </div>
+            &hellip;
+          </div>
 
-&lt;div class="d-flex justify-content-between flex-wrap text-center mb-4"&gt;
-  &lt;div&gt;1&lt;sup&gt;st&lt;/sup&gt; substitute &lt;code&gt;s1&lt;/code&gt;&lt;div class="signal-flags"&gt;s1&lt;/div&gt;&lt;/div&gt;
-  ...
-&lt;/div&gt;
+          <h3>Substitutes</h3>
 
-&lt;h3&gt;Pennants&lt;/h3&gt;
+          <div
+            class="d-flex justify-content-between flex-wrap text-center mb-4"
+          >
+            <div>
+              1<sup>st</sup> substitute <code>s1</code>
+              <div class="signal-flags">s1</div>
+            </div>
+            <div>
+              2<sup>nd</sup> substitute <code>s2</code>
+              <div class="signal-flags">s2</div>
+            </div>
+            <div>
+              3<sup>rd</sup> substitute <code>s3</code>
+              <div class="signal-flags">s3</div>
+            </div>
+          </div>
 
-&lt;div class="pennant d-flex justify-content-between flex-wrap text-center mb-4"&gt;
-  &lt;div&gt;Answering pennant &lt;code&gt;ap&lt;/code&gt;&lt;div class="signal-flags"&gt;ap&lt;/div&gt;&lt;/div&gt;
-  ...
-&lt;/div&gt;
-</code></pre>
+          <h3>Pennants</h3>
 
-<h3>Alphabet</h3>
+          <div
+            class="pennant d-flex justify-content-between flex-wrap text-center mb-4"
+          >
+            <div>
+              Answering pennant <code>ap</code>
+              <div class="signal-flags">ap</div>
+            </div>
+            <div>
+              Numeral 0 <code>n0</code>
+              <div class="signal-flags">n0</div>
+            </div>
+            <div>
+              Numeral 1 <code>n1</code>
+              <div class="signal-flags">n1</div>
+            </div>
+            <div>
+              Numeral 2 <code>n2</code>
+              <div class="signal-flags">n2</div>
+            </div>
+            &hellip;
+          </div>
 
-<div class="d-flex justify-content-between flex-wrap text-center mb-4">
-  <div>Alpha <code>a</code><div class="signal-flags">a</div></div>
-  <div>Bravo <code>b</code><div class="signal-flags">b</div></div>
-  <div>Charlie <code>c</code><div class="signal-flags">c</div></div>
-  <div>Delta <code>d</code><div class="signal-flags">d</div></div>
-  &hellip;
-</div>
+          <h3>Racing flags</h3>
 
-<h3>Substitutes</h3>
-
-<div class="d-flex justify-content-between flex-wrap text-center mb-4">
-  <div>1<sup>st</sup> substitute <code>s1</code><div class="signal-flags">s1</div></div>
-  <div>2<sup>nd</sup> substitute <code>s2</code><div class="signal-flags">s2</div></div>
-  <div>3<sup>rd</sup> substitute <code>s3</code><div class="signal-flags">s3</div></div>
-</div>
-
-<h3>Pennants</h3>
-
-<div class="pennant d-flex justify-content-between flex-wrap text-center mb-4">
-  <div>Answering pennant <code>ap</code><div class="signal-flags">ap</div></div>
-  <div>Numeral 0 <code>n0</code><div class="signal-flags">n0</div></div>
-  <div>Numeral 1 <code>n1</code><div class="signal-flags">n1</div></div>
-  <div>Numeral 2 <code>n2</code><div class="signal-flags">n2</div></div>
-  &hellip;
-</div>
-
-<h3>Racing flags</h3>
-
-<div class="d-flex justify-content-between flex-wrap text-center">
-  <div><code>black</code><div class="signal-flags">black</div></div>
-  <div><code>blue</code><div class="signal-flags">blue</div></div>
-  <div><code>yellow</code><div class="signal-flags">yellow</div></div>
-  <div><code>greenwhite</code><div class="signal-flags">greenwhite</div></div>
-  &hellip;
-</div>
-
-</div></div></div>
-</body>
+          <div class="d-flex justify-content-between flex-wrap text-center">
+            <div>
+              <code>black</code>
+              <div class="signal-flags">black</div>
+            </div>
+            <div>
+              <code>blue</code>
+              <div class="signal-flags">blue</div>
+            </div>
+            <div>
+              <code>yellow</code>
+              <div class="signal-flags">yellow</div>
+            </div>
+            <div>
+              <code>greenwhite</code>
+              <div class="signal-flags">greenwhite</div>
+            </div>
+            &hellip;
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

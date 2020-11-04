@@ -24,7 +24,7 @@ const loaderBanner = `/*!
  * Licensed under MIT ${repo}/blob/main/LICENSE
  */`;
 
- module.exports = [
+module.exports = [
   {
     // A umd build for require('signal-flags').
     input: 'src/index.js',

@@ -17,7 +17,7 @@ function insertInto(el, name) {
 
   // For an inline node, work within the line height.
   if (inlineNodes.includes(el.nodeName)) {
-    const width = offsetHeight * (SignalFlags.isPennant(name) ? 1.875 : 1.5)
+    const width = offsetHeight * (SignalFlags.isPennant(name) ? 1.875 : 1.5);
     el.style.width = `${width}px`;
     el.style.display = 'inline-block';
   }

@@ -67,6 +67,7 @@ SignalFlags.all({ outline: false, file: true });
 ### Planned for v2.1
 
 - fix API for changing configuration something like this:
+
 ```js
 // Get the current configuration.
 SignalFlags.config();
@@ -77,6 +78,7 @@ SignalFlags.config('colors', 'primary');
 // Set a default colour (leaves other colours unchanged).
 SignalFlags.config('colors', { black: '#000' });
 ```
+
 - Better test coverage for `check()` method
 - Document and test new `has()`, `isPennant()` and `factory()` methods.
 
