@@ -66,7 +66,7 @@ function buildFlagSvg({ draw, design, colors, outline, file, shape }) {
   return parts.join('');
 }
 
-export function all(options) {
+function all(options) {
   // Return svg for all flags.
   const all = {};
   Object.keys(this.flags).forEach((key) => {
@@ -75,17 +75,16 @@ export function all(options) {
   return all;
 }
 
-// The settings for this SignalFlags object.
-export const settings = {
-  colors: { ...colorSets.default },
-  outline: true,
-};
+// Get the default settings for a SignalFlags object.
+function getDefaults() {
+  return {
+    colors: { ...colorSets.default },
+    outline: true,
+  };
+}
 
 // Get svg for a signal flag
-export function get(
-  name,
-  { colors: optColors, file, outline, shape: optShape } = {}
-) {
+function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
   const { shape, design } = this.flags[name];
 
@@ -111,12 +110,36 @@ export function get(
   });
 }
 
-// The current version.
-export { version };
+// Check a flag design exists.
+function has(name) {
+  return this.flags[name] != null;
+}
 
-// Check the SVG is OK for a flag.
-export { check };
+// Check if a 'flag' is a pennant.
+function isPennant(name) {
+  return this.flags[name].shape === 'pennant';
+}
 
-// We must export these so they are in the imported object's scope, although
-// they are not part of the API.
-export { drawShapes, flags };
+function factory() {
+  return {
+    // API instance methods.
+    all,
+    get,
+    has,
+    isPennant,
+
+    // API constant.
+    version,
+
+    // API static methods.
+    check,
+    factory,
+
+    // Not part of the API.
+    settings: getDefaults(),
+    drawShapes,
+    flags,
+  };
+}
+
+export default factory();

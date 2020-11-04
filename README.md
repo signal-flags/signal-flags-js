@@ -12,18 +12,13 @@ rights to flag designs and images included with this software.
 
 ## Installation
 
-To use in an HTML page load from either unpkg...
+To use the automagic Signal Flags Loader see the
+[Example Page](https://cdn.jsdelivr.net/npm/signal-flags@2/examples/index.html).
+
+To use in an HTML page load from jsDelivr:
 
 ```html
-<script src="https://unpkg.com/signal-flags@2/dist/signal-flags.min.js"></script>
-```
-
-... or jsDelivr:
-
-```html
-<script
-  src = "https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags.min.js">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags.min.js"></script>
 ```
 
 To use in Node.js install using npm `npm i signal-flags` or yarn `yarn install signal-flags`
@@ -48,15 +43,6 @@ SignalFlags.get('a', { colors: SignalFlags.primaryColors });
 SignalFlags.all();
 // Get the SVG strings for all flags with options.
 SignalFlags.all({ outline: false, file: true });
-
-// Get the current configuration.
-SignalFlags.config();
-// Set the default to no outlines.
-SignalFlags.config({ outline: false });
-// Set the default colours to the `primary` colour set.
-SignalFlags.config('colors', 'primary');
-// Set a default colour (leaves other colours unchanged).
-SignalFlags.config('colors', { black: '#000' });
 ```
 
 ## Current release v0.9.1
@@ -67,6 +53,36 @@ SignalFlags.config('colors', { black: '#000' });
 
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=develop)](https://travis-ci.org/signal-flags/signal-flags-js/branches)
 
-### Working towards v2.0
+### Changes since v0.9.1
+
+- The API has been completely changed with `get()` and `all()` methods replacing `getSvg()`
+- Non-breaking changes
+  - A build for browsers with DOM traversal and insertion of elements
+  - Support for IE 11 and some other browsers
+  - New 'square' shape option
+  - New 'primary' colour option
+  - Improved designs for I, P and S flags
+  - Better test coverage
+
+### Planned for v2.1
+
+- fix API for changing configuration something like this:
+```js
+// Get the current configuration.
+SignalFlags.config();
+// Set the default to no outlines.
+SignalFlags.config({ outline: false });
+// Set the default colours to the `primary` colour set.
+SignalFlags.config('colors', 'primary');
+// Set a default colour (leaves other colours unchanged).
+SignalFlags.config('colors', { black: '#000' });
+```
+- Better test coverage for `check()` method
+- Document and test new `has()`, `isPennant()` and `factory()` methods.
 
 ### Planned for later versions
+
+- Better test coverage for individual designs
+- in-browser testing
+- fix API for overrides to `flags` (individual flag designs) and `draw`
+  (code implementing designs)
