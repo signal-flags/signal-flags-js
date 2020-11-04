@@ -1,4 +1,4 @@
-// src/default.shapes.js
+// src/draw-shapes.js
 
 function getColor(name, colors) {
   if (name === 'outline') {
@@ -13,17 +13,28 @@ const shapes = {
 
     // Dimensions must be divisible by 90.
     // Also w - h / 5 must be divisible by 2 for the cross to work.
-    size: [240, 180],
+    size: {
+      default: [240, 180],
+      square: [180, 180],
+    },
 
     // Draw a border design - note this is not an outline!
     border(design, { w, h, colors }) {
       const [, clrs] = design;
       const parts = [];
+      const { length } = clrs;
 
       // Draw the border(s) from the outside in.
       // xbw and ybw are the border widths in the x and y dimension.
-      const ybw = h / (clrs.length * 2);
-      const xbw = w / (clrs.length * 2);
+      let xbw, ybw;
+      if (length === 2) {
+        // This factor works well for P and S flags.
+        ybw = h * 0.3;
+        xbw = w * 0.3;
+      } else {
+        ybw = h / (length * 2);
+        xbw = w / (length * 2);
+      }
       let xb = 0;
       let yb = 0;
       for (let i = clrs.length - 1; i > 0; i--) {
@@ -99,7 +110,7 @@ const shapes = {
       const parts = [];
 
       // Radius.
-      const r = h * 0.3;
+      const r = h * 0.25;
 
       // Draw a rectangle background.
       parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
@@ -323,7 +334,11 @@ const shapes = {
 
   pennant: {
     shape: 'pennant',
-    size: [360, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [360, 180],
+    },
 
     // Draw a circle.
     circle(design, { w, h, colors }) {
@@ -514,7 +529,12 @@ const shapes = {
 
   swallowtail: {
     shape: 'swallowtail',
-    size: [240, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [240, 180],
+      square: [180, 180],
+    },
 
     // Draw an outline.
     outline(design, { w, h, colors, outline }) {
@@ -567,7 +587,11 @@ const shapes = {
 
   triangle: {
     shape: 'triangle',
-    size: [240, 180],
+
+    // Dimensions must be divisible by 90.
+    size: {
+      default: [240, 180],
+    },
 
     // Draw a border design (not an outline).
     border(design, { w, h, colors }) {

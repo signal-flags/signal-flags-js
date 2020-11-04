@@ -1,8 +1,9 @@
 {
   "name": "signal-flags",
-  "version": "0.9.1",
+  "version": "2.0.0",
   "description": "Create SVG images for signal flags and other nautical flags",
-  "main": "dist/signal-flags.js",
+  "main": "dist/signal-flags.umd.js",
+  "browser": "dist/signal-flags.min.js",
   "keywords": [
     "flags",
     "sailing",
@@ -14,11 +15,11 @@
     "build:designs": "node bin/parse-yaml",
     "build:svg": "npm run build && node bin/build-svg",
     "ci": "npm run build && npm run test",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "test": "jest",
-    "test:unit": "jest tests/unit",
-    "test:coverage": "jest tests --coverage"
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint --fix . && prettier --write .",
+    "test": "jest --verbose",
+    "test:unit": "jest tests/unit --verbose",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**.*"
   },
   "repository": {
     "type": "git",
@@ -32,13 +33,12 @@
   "homepage": "https://github.com/signal-flags/signal-flags-js#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.10.4",
+    "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-json": "^4.1.0",
     "babel-jest": "^26.1.0",
     "eslint": "^7.4.0",
-    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.18.0",
-    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.1.0",
     "js-yaml": "^3.14.0",
     "prettier": "^2.0.5",
