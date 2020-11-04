@@ -1,4 +1,4 @@
-// src/default.shapes.js
+// src/draw-shapes.js
 
 function getColor(name, colors) {
   if (name === 'outline') {

@@ -1,6 +1,6 @@
-// test/unit/index.test.js
+// test/unit/signal-flags.test.js
 
-import * as SignalFlags from '../../src/index';
+import SignalFlags from '../../src/index';
 
 import semver from '../semver-regex';
 

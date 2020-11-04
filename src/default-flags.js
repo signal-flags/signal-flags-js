@@ -1,4 +1,5 @@
-// default-flags.js
+// src/default-flags.js
+
 export default {
   a: {
     name: 'A',

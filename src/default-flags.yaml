@@ -1,4 +1,4 @@
-# src/flags/default.yaml
+# src/default-flags.yaml
 
 a:
   name: 'A'

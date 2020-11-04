@@ -1,38 +1,17 @@
-// test/unit/flags.test.js
+// test/unit/default-flags.test.js
 
-import Flags from '../../src/index';
+import SignalFlags from '../../src/index';
 
-const WRONG_LINE_ENDINGS = /[^>]$/m;
-const MISSING_LINE_ENDINGS = />./m;
-
-// Used to test for any number with more than 1 digit after the decimal point.
-const LONG_DECIMALS = /[0-9]\.[0-9]{2}/;
-
-const svg = {}; // new Flags().getSvg();
-const svgEntries = Object.entries(svg);
-
-describe.skip('The default flag set', () => {
-  test('there should be line endings', () => {
-    svgEntries.forEach(([key, svg]) => {
-      const str = `Flag ${key}: ${svg}`;
-      expect(str.endsWith('</svg>')).toBe(true);
-      expect(str).not.toMatch(WRONG_LINE_ENDINGS);
-      expect(str).not.toMatch(MISSING_LINE_ENDINGS);
+describe('All flag designs', () => {
+  it('should pass the checks', () => {
+    Object.values(SignalFlags.all()).forEach((svg) => {
+      expect(SignalFlags.check(svg)).toBe(true);
     });
   });
 
-  test('there should be no long decimals', () => {
-    const flags = new Flags().getSvg(null, { outline: false });
-    Object.entries(flags).forEach(([key, svg]) => {
-      expect(`Flag ${key}: ${svg}`).not.toMatch(LONG_DECIMALS);
-    });
-  });
-
-  test('all flags should pass the audit', () => {
-    const flags = new Flags();
-    const svgFlags = flags.getSvg(null, { outline: true });
-    Object.entries(svgFlags).forEach(([, svg]) => {
-      expect(flags.checkSvg(svg)).toBe(true);
+  it('should pass the checks with the square option', () => {
+    Object.values(SignalFlags.all({ shape: 'square' })).forEach((svg) => {
+      expect(SignalFlags.check(svg)).toBe(true);
     });
   });
 });

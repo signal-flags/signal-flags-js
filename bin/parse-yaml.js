@@ -13,25 +13,27 @@ const files = ['src/default-flags.yaml'];
 
 // Build one file from YAML into JSON.
 async function buildFile(path, outPath) {
+  // Work out the output file name.
+  const outFileName =
+    path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.')) + '.js';
   // Read the file in.
   let parsed = await readFile(resolve(__dirname, myPath, path), 'utf8');
   // Convert from yaml into pretty JSON.
   parsed = JSON.stringify(yaml.safeLoad(parsed), null, 2);
   // Add a header to turn it into JS.
-  const outFileName =
-    path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.')) + '.js';
-  parsed = `// ${outFileName}\nexport default ${parsed};\n`;
+  parsed = `// ${outPath}/${outFileName}\n\nexport default ${parsed};\n`;
   // Make it even prettier.
   parsed = format(parsed, prettierOptions);
   // Write it out.
   await writeFile(resolve(__dirname, myPath, outPath, outFileName), parsed);
-  return { file: outFileName, size: parsed.length };
+  return { file: `${outPath}/${outFileName}`, size: parsed.length };
 }
 
 // Need to set this to avoid deprecation warning when parsing from a string.
 prettierOptions.parser = 'babel';
-const promises = [];
 
+// Build all the files and wait for them to finish.
+const promises = [];
 files.forEach((file) => {
   promises.push(
     buildFile(file, outPath)
@@ -45,4 +47,6 @@ files.forEach((file) => {
   );
 });
 
-Promise.all(promises);
+Promise.all(promises).then(() => {
+  console.log('Building complete');
+});
