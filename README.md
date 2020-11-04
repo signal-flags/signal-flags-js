@@ -39,9 +39,13 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.0.0
+## Current release v2.0.1
 
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=main)](https://travis-ci.org/signal-flags/signal-flags-js)
+
+Changes in v2.0.1
+
+- fix: Loader should run immediately if DOM is already loaded
 
 v2.0 breaks compatibility with the previous release v0.9.1
 

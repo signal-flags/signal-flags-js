@@ -43,8 +43,12 @@ function onLoad() {
   });
 }
 
-if (window) {
-  window.addEventListener('DOMContentLoaded', onLoad);
+if (document.readyState === 'loading') {
+  // Loading hasn't finished yet.
+  document.addEventListener('DOMContentLoaded', onLoad);
+} else {
+  // `DOMContentLoaded` has already fired.
+  onLoad();
 }
 
 export default SignalFlags;
