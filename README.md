@@ -41,7 +41,7 @@ SignalFlags.all({ outline: false, file: true });
 
 ## Current release v2.0.1
 
-[![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=main)](https://travis-ci.org/signal-flags/signal-flags-js)
+[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
 Changes in v2.0.1
 
@@ -63,7 +63,7 @@ v2.0 introduces the following features and improvements:
 
 ## Development
 
-[![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=develop)](https://travis-ci.org/signal-flags/signal-flags-js/branches)
+[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg?branch=develop)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
 ### Planned for v2.1
 
