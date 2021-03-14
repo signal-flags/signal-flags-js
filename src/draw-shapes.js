@@ -642,7 +642,7 @@ const shapes = {
       parts.push(`V${yi + yi}H${xi}L${w},${h2}L${xi},${yi}Z"/>\n`);
       // Draw the bottom stripe.
       parts.push(`<path fill="${getColor(clrs[2], colors)}" d="M0,${h}`);
-      parts.push(`V${yi + yi}H${w}Z"/>\n`);
+      parts.push(`V${yi + yi}H${xi}Z"/>\n`);
 
       return parts.join('');
     },
