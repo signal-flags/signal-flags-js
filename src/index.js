@@ -14,7 +14,7 @@ const colorSets = {
     green: '#00965e', // Pantone 340 C
     red: '#c8102e', // Pantone 186 C
     yellow: '#ffd100', // Pantone 109 C
-    white: '#fff',
+    white: '#f5f5f5',
   },
 
   primary: {
@@ -27,6 +27,9 @@ const colorSets = {
     white: '#fff',
   },
 };
+
+// This is used when calculating the height of elements when inserting svg.
+const inlineNodes = ['SPAN'];
 
 /**
  * Build the SVG for a flag.
@@ -115,21 +118,85 @@ function has(name) {
   return this.flags[name] != null;
 }
 
+// Thicker borders for smaller images.
+function getSuitableOutlineWidth(width, height) {
+  if (height == null) {
+    height = width / 1.5;
+  }
+
+  // Return undefined in case we are setting a property on an options object.
+  if (height == null || height > 29) return undefined;
+
+  if (height < 14) return 4;
+  if (height < 19) return 3;
+
+  // 19 <= height < 30
+  return 2;
+}
+
+function insertIntoElement(el, name) {
+  const options = {};
+
+  // Check the flag exists.
+  if (!this.has(name)) return;
+
+  const { offsetHeight } = el;
+
+  // For an inline node, work within the line height.
+  if (inlineNodes.includes(el.nodeName)) {
+    const width = offsetHeight * (this.isPennant(name) ? 1.875 : 1.5);
+    el.style.width = `${width}px`;
+    el.style.display = 'inline-block';
+  }
+
+  options.outline = getSuitableOutlineWidth(null, offsetHeight);
+
+  el.innerHTML = this.get(name, options);
+}
+
+/**
+ * Insert a flag as the `src` of an IMG tag.
+ *
+ * @param {HTMLElement} el An IMG element.
+ * @param {*} name The name of the flag.
+ */
+function insertAsImgSrc(el, name) {
+  const options = {};
+
+  // Check the flag exists.
+  if (!this.has(name)) return;
+
+  // This is the only way to get height and width before rendering.
+  const setWidth = el.attributes.width?.value;
+  const setHeight = el.attributes.height?.value;
+
+  options.outline = getSuitableOutlineWidth(setWidth, setHeight);
+
+  options.file = true;
+
+  // Base 64 encode the xml string to avoid xml parsing issues.
+  el.src = 'data:image/svg+xml;base64,' + btoa(this.get(name, options));
+}
+
 // Check if a 'flag' is a pennant.
 function isPennant(name) {
   return this.flags[name].shape === 'pennant';
 }
 
-function factory() {
+function factory(options) {
   return {
+    // API constant.
+    version,
+
     // API instance methods.
     all,
     get,
     has,
-    isPennant,
 
-    // API constant.
-    version,
+    insertAsImgSrc,
+    insertIntoElement,
+
+    isPennant,
 
     // API static methods.
     check,
@@ -139,6 +206,9 @@ function factory() {
     settings: getDefaults(),
     drawShapes,
     flags,
+
+    // Allow override in options.
+    ...options,
   };
 }
 

@@ -66,7 +66,7 @@ module.exports = [
 
   {
     // An transpiled iife build for browsers with DOM parsing and injection.
-    input: 'src/load/index.js',
+    input: 'src/load.js',
     plugins: [json(), babel({ babelHelpers: 'bundled' })],
     output: [
       {

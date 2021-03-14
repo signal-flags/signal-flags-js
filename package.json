@@ -1,6 +1,6 @@
 {
   "name": "signal-flags",
-  "version": "3.0.0-dev",
+  "version": "2.2.0-dev",
   "description": "Create SVG images for signal flags and other nautical flags",
   "main": "dist/signal-flags.umd.js",
   "browser": "dist/signal-flags.min.js",
@@ -11,7 +11,7 @@
     "signal flags"
   ],
   "scripts": {
-    "build": "npm run build:designs && rollup -c",
+    "build": "npm run build:designs && npm run lint:fix && rollup -c",
     "build:designs": "node bin/parse-yaml",
     "build:svg": "npm run build && node bin/build-svg",
     "ci": "npm run build && npm run test",
