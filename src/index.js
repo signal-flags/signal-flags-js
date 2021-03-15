@@ -34,6 +34,7 @@ const inlineNodes = ['SPAN'];
 /**
  * Build the SVG for a flag.
  *
+ * @private
  * @param {object} shape A map of functions to draw designs for this shape.
  * @param {mixed[]} design An array of design elements for the flag.
  * @param {object} colors Colours for this flag set.
@@ -99,7 +100,7 @@ function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
   if (typeof optColors === 'string') {
     colors = colorSets[optColors] ?? this.settings.colors;
   } else {
-    colors = this.settings.colors;
+    colors = { ...this.settings.colors, ...optColors };
   }
 
   return buildFlagSvg({

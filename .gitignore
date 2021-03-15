@@ -1,10 +1,15 @@
 # .gitignore
 
 node_modules
+
+# Ignore for a module.
 package-lock.json
 
-# jest output
-coverage
+# Distribution files.
+/dist/
 
-# distribution files
-dist
+# Test coverage reports.
+/coverage/
+
+# JSDoc output.
+/out/
