@@ -39,9 +39,13 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.0.1
+## Current release v2.0.2
 
 [![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=main)](https://travis-ci.org/signal-flags/signal-flags-js)
+
+Changes in v2.0.2
+
+- fix: correct bottom white stripe path on 2nd Sub
 
 Changes in v2.0.1
 
