@@ -14,19 +14,39 @@ describe('The UMD module', () => {
     expect(SignalFlags.has('aa')).toBe(false);
   });
 
-  describe('all()', () => {
-    it('Should return all flags', () => {
-      const flags = SignalFlags.all();
+  describe('all() should return:', () => {
+    const flags = SignalFlags.all();
 
+    test('47 flags in total', () => {
+      expect(Object.keys(flags).length).toBe(47);
+    });
+
+    test('26 alphabet flags (test a sample)', () => {
       expect(flags).toHaveProperty('a');
       expect(flags).toHaveProperty('z');
+    });
+
+    test('10 numeral pennants (test a sample) plus AP', () => {
+      expect(flags).toHaveProperty('ap');
       expect(flags).toHaveProperty('n0');
+      expect(flags).toHaveProperty('n1');
       expect(flags).toHaveProperty('n9');
+    });
+
+    test('1st, 2nd and 3rd sub', () => {
+      expect(flags).toHaveProperty('s1');
+      expect(flags).toHaveProperty('s2');
       expect(flags).toHaveProperty('s3');
+    });
+
+    test('7 racing flags', () => {
+      expect(flags).toHaveProperty('black');
+      expect(flags).toHaveProperty('blackwhite');
+      expect(flags).toHaveProperty('blue');
       expect(flags).toHaveProperty('green');
       expect(flags).toHaveProperty('greenwhite');
-      expect(flags).toHaveProperty('black');
       expect(flags).toHaveProperty('red');
+      expect(flags).toHaveProperty('yellow');
     });
   });
 
@@ -50,6 +70,18 @@ describe('The UMD module', () => {
       expect(no).not.toMatch(test);
     });
 
+    it('Should respect the `shape: square` option', () => {
+      const svg = SignalFlags.get('a');
+      const square = SignalFlags.get('a', { shape: 'square' });
+      const test = /^<svg viewBox="0 0 240 180">.*d="M0,0H120V180H0Z/s;
+
+      expect(svg).toMatch(test);
+      expect(square).not.toMatch(test);
+      expect(square).toMatch(
+        /^<svg viewBox="0 0 180 180">.*d="M0,0H90V180H0Z/s
+      );
+    });
+
     it('Should respect the `colors: primary` option', () => {
       const svg = SignalFlags.get('a');
       const primary = SignalFlags.get('a', { colors: 'primary' });
@@ -60,7 +92,7 @@ describe('The UMD module', () => {
       expect(primary).toMatch(/<path fill="#fff".*<path fill="#00f"/s);
     });
 
-    it("Should allow replacing only one color", () => {
+    it('Should allow replacing only one color', () => {
       const svg = SignalFlags.get('a');
       const white = SignalFlags.get('a', { colors: { white: '#123' } });
       const test = /<path fill="#f5f5f5".*<path fill="#005eb8"/s;
