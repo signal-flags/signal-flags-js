@@ -37,6 +37,7 @@ module.exports = [
         banner,
         sourcemap: true,
       },
+      /*
       {
         file: `dist/${packageName}.umd.min.js`,
         name: moduleName,
@@ -45,6 +46,7 @@ module.exports = [
         sourcemap: true,
         plugins: [terser()],
       },
+      */
     ],
   },
 
