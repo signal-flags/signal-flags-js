@@ -3,7 +3,7 @@
 import { version } from '../package.json';
 
 import flags from './default-flags';
-import drawShapes from './draw-shapes';
+import { shapes } from './shapes/index';
 import { check } from './check';
 
 const colorSets = {
@@ -92,7 +92,7 @@ function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
   const { shape, design } = this.flags[name];
 
   // Get the code to build this shape.
-  const { drawShapes } = this;
+  const { shapes } = this;
 
   // Set the colours according to the options or defaults.
   let colors;
@@ -106,7 +106,7 @@ function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
     colors,
     design,
     // If the flag has no shape use the default shape.
-    draw: drawShapes[shape || 'default'],
+    draw: shapes[shape || 'default'],
     file,
     outline: outline ?? this.settings.outline,
     shape: optShape,
@@ -204,7 +204,7 @@ function factory(options) {
 
     // Not part of the API.
     settings: getDefaults(),
-    drawShapes,
+    shapes,
     flags,
 
     // Allow override in options.
