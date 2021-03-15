@@ -168,15 +168,19 @@ function insertAsImgSrc(el, name) {
   if (!this.has(name)) return;
 
   // This is the only way to get height and width before rendering.
-  const setWidth = el.attributes.width?.value;
-  const setHeight = el.attributes.height?.value;
+  const setWidth = null; // el.attributes.width?.value;
+  const setHeight = el.offsetHeight; // el.attributes.height?.value ?? el.offsetHeight;
 
   options.outline = getSuitableOutlineWidth(setWidth, setHeight);
 
   options.file = true;
 
+  // @TODO allow %encoding as an option, although it generates longer strings.
+  // 'data:image/svg+xml;utf8,' + encodeURIComponent(this.get(name, options));
   // Base 64 encode the xml string to avoid xml parsing issues.
   el.src = 'data:image/svg+xml;base64,' + btoa(this.get(name, options));
+
+  el.height = setHeight;
 }
 
 // Check if a 'flag' is a pennant.
