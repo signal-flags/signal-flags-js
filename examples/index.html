@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>Signal Flags Loader example</title>
+    <title>Use signal flags on a website</title>
 
     <!-- Load Signal Flags Loader JavaScript -->
     <script src="../dist/signal-flags-loader.min.js"></script>
     <!-- script
       async
-      src="https://cdn.jsdelivr.net/npm/signal-flags@3/dist/signal-flags-loader.min.js"
+      src="https://cdn.jsdelivr.net/npm/signal-flags@2/dist/signal-flags-loader.min.js"
     ></script -->
 
     <!-- Load Bootstrap CSS -->
@@ -21,13 +21,17 @@
     />
 
     <style>
+      /* Ensure inline images have the right height. */
       .signal-flags-inline img {
         height: 19px;
       }
 
+      /* Display 5 rectangular flags per row. */
       .flags-block > div {
         width: 18%;
       }
+
+      /* Display 4 pennants per row. */
       .pennants-block > div {
         width: 22.5%;
       }
@@ -45,11 +49,13 @@
     <div class="container my-3">
       <div class="row">
         <div class="col">
-          <h1>Signal Flags Loader example</h1>
+          <h1>Use signal flags on a website</h1>
 
           <p>
-            This example page shows how to use the Signal Flags Loader to
-            include flags on any page without writing any JavaScript.
+            This example page shows how to use the Signal Flags JavaScript
+            loader to include many flag images on a web page without downloading
+            them individually. For more information and signal flag resources
+            see the <a href="https://signalflags.org/">Signal Flags website</a>.
           </p>
 
           <h2>Getting started</h2>
@@ -213,8 +219,8 @@
 
           <p>
             If you want full control over the display of a flag you can get the
-            <code>svg</code> markup by calling the getSvg(flag, options) method.
-            See the documentation for more information.
+            <code>svg</code> markup by calling the get(flag, options) method on
+            a SignalFlags object: see the documentation for more information.
           </p>
         </div>
       </div>

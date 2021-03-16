@@ -78,6 +78,14 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
   return parts.join('');
 }
 
+/**
+ * Get the SVG for all flags.
+ *
+ * This supports all options available in `get()`.
+ *
+ * @param {*} options
+ * @return {object} The SVG for each flag, keyed by the flag name.
+ */
 function all(options) {
   // Return svg for all flags.
   const all = {};
@@ -87,11 +95,32 @@ function all(options) {
   return all;
 }
 
-// Get the default settings for a SignalFlags object.
-function getDefaults() {
+function factory(options) {
   return {
-    colors: { ...colorSets.default },
-    outline: true,
+    // API constant.
+    version,
+
+    // API instance methods.
+    all,
+    get,
+    has,
+
+    insertAsImgSrc,
+    insertIntoElement,
+
+    isPennant,
+
+    // API static methods.
+    check,
+    factory,
+
+    // Not part of the API.
+    settings: getDefaults(),
+    shapes,
+    flags,
+
+    // Allow override in options.
+    ...options,
   };
 }
 
@@ -126,12 +155,23 @@ function get(
   });
 }
 
-// Check a flag design exists.
-function has(name) {
-  return this.flags[name] != null;
+/**
+ * Get the default settings for a SignalFlags object.
+ *
+ * @private
+ */
+function getDefaults() {
+  return {
+    colors: { ...colorSets.default },
+    outline: true,
+  };
 }
 
-// Thicker borders for smaller images.
+/**
+ * Thicker borders for smaller images.
+ *
+ * @private
+ */
 function getSuitableOutlineWidth(width, height) {
   if (height == null) {
     height = width / 1.5;
@@ -147,6 +187,65 @@ function getSuitableOutlineWidth(width, height) {
   return 2;
 }
 
+/**
+ * Check if the element has a block-like display style.
+ *
+ * @private
+ */
+function isDisplayBlock(el) {
+  const { display } = el.style;
+  if (!display) return false;
+  return display !== 'inline';
+}
+
+/**
+ * Check a flag design exists.
+ *
+ * @param {string} name The name of a flag.
+ * @return {boolean} True iff the flag has a design.
+ */
+function has(name) {
+  return this.flags[name] != null;
+}
+
+/**
+ * Insert a flag as a data URI as the `src` of an `IMG` tag.
+ *
+ * @param {HTMLElement} el   An IMG element.
+ * @param {string}      name The name of the flag.
+ */
+function insertAsImgSrc(el, name, options = {}) {
+  // Check the flag exists.
+  if (!this.has(name)) return;
+
+  // Spread the options so the object is not mutated.
+  // options = { ...options };
+
+  // First check if a height or width is set on the element.
+  const setWidth = el.attributes.width?.value;
+  const setHeight = el.attributes.height?.value;
+
+  let outline;
+  if (setWidth || setHeight) {
+    outline = getSuitableOutlineWidth(setWidth, setHeight);
+  } else if (isDisplayBlock(el)) {
+    // Base the outline on the available width.
+    outline = getSuitableOutlineWidth(el.offsetWidth ?? 240);
+  } else {
+    // If this is an inline element we must set the height.
+    console.log(name, el, el.style.display);
+    el.height = el.offsetHeight;
+    outline = getSuitableOutlineWidth(null, el.offsetHeight);
+  }
+  el.src = this.get(name, { outline, ...options, dataUri: true });
+}
+
+/**
+ * Insert a flag as SVG as children of an element.
+ *
+ * @param {HTMLElement} el   An HTML element that can be a parent.
+ * @param {string}      name The name of the flag.
+ */
 function insertIntoElement(el, name) {
   const options = {};
 
@@ -167,77 +266,14 @@ function insertIntoElement(el, name) {
   el.innerHTML = this.get(name, options);
 }
 
-function isDisplayInline(el) {
-  const { display } = el.style;
-  if (!display) return true;
-  return display === 'inline';
-}
-
 /**
- * Insert a flag as the `src` of an `IMG` tag.
+ * Check if a 'flag' has a pennant-like (i.e. wider) shape.
  *
- * @param {HTMLElement} el   An IMG element.
- * @param {string}      name The name of the flag.
+ * @param {string}   name The name of the flag.
+ * @return {boolean} True iff the flag has a design.
  */
-function insertAsImgSrc(el, name, options = {}) {
-  // Check the flag exists.
-  if (!this.has(name)) return;
-
-  // Spread the options so the object is not mutated.
-  // options = { ...options };
-
-  // First check if a height or width is set on the element.
-  const setWidth = el.attributes.width?.value;
-  const setHeight = el.attributes.height?.value;
-
-  let outline;
-  if (setWidth || setHeight) {
-    outline = getSuitableOutlineWidth(setWidth, setHeight);
-  } else if (isDisplayInline(el)) {
-    // If this is an inline element we must set the height.
-    console.log(name, el, el.style.display);
-    el.height = el.offsetHeight;
-    outline = getSuitableOutlineWidth(null, el.offsetHeight);
-  } else {
-    // Base the outline on the available width.
-    outline = getSuitableOutlineWidth(el.offsetWidth ?? 240);
-  }
-
-  el.src = this.get(name, { outline, ...options, dataUri: true });
-}
-
-// Check if a 'flag' is a pennant.
 function isPennant(name) {
   return this.flags[name].shape === 'pennant';
-}
-
-function factory(options) {
-  return {
-    // API constant.
-    version,
-
-    // API instance methods.
-    all,
-    get,
-    has,
-
-    insertAsImgSrc,
-    insertIntoElement,
-
-    isPennant,
-
-    // API static methods.
-    check,
-    factory,
-
-    // Not part of the API.
-    settings: getDefaults(),
-    shapes,
-    flags,
-
-    // Allow override in options.
-    ...options,
-  };
 }
 
 export default factory();
