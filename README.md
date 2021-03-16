@@ -39,15 +39,23 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.0.2
+## Current release v2.1.0
 
-[![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=main)](https://travis-ci.org/signal-flags/signal-flags-js)
+[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
-Changes in v2.0.2
+New features:
 
-- fix: correct bottom white stripe path on 2nd Sub
+- Data URI support to insert images into IMG tags.
+- Using 'white smoke' (#f5f5f5) for white flag elements.
+- Autoloaded images have outlines to suit their size.
 
-Changes in v2.0.1
+Bug fixes:
+
+- fix bottom white stripe path on 2nd Substitute.
+
+General improvements to documentation, testing and example page.
+
+### Changes in v2.0.1
 
 - fix: Loader should run immediately if DOM is already loaded
 
@@ -67,9 +75,9 @@ v2.0 introduces the following features and improvements:
 
 ## Development
 
-[![Build Status](https://travis-ci.org/signal-flags/signal-flags-js.svg?branch=develop)](https://travis-ci.org/signal-flags/signal-flags-js/branches)
+[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg?branch=develop)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
-### Planned for v2.1
+### Planned for v2.2
 
 - implement API for changing configuration something like this:
 
@@ -86,8 +94,6 @@ SignalFlags.config('colors', { black: '#000' });
 
 - better test coverage for `check()` method
 - add configuration to `factory()` method
-- document and test `has()` and `isPennant()` methods introduced to support
-  Loader
 - proportional borders in Loader images
 
 ### Planned for later versions

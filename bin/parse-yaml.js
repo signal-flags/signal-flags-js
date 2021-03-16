@@ -1,9 +1,9 @@
-// bin/build-flags.js
+// bin/parse-yaml.js
 
 const { readFile, writeFile } = require('fs').promises;
 const { resolve } = require('path');
 
-const yaml = require('js-yaml');
+const { load } = require('js-yaml');
 const { format } = require('prettier');
 const prettierOptions = require('../.prettierrc');
 
@@ -19,7 +19,7 @@ async function buildFile(path, outPath) {
   // Read the file in.
   let parsed = await readFile(resolve(__dirname, myPath, path), 'utf8');
   // Convert from yaml into pretty JSON.
-  parsed = JSON.stringify(yaml.safeLoad(parsed), null, 2);
+  parsed = JSON.stringify(load(parsed), null, 2);
   // Add a header to turn it into JS.
   parsed = `// ${outPath}/${outFileName}\n\nexport default ${parsed};\n`;
   // Make it even prettier.

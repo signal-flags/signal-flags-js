@@ -1,7 +1,10 @@
 # .npmignore
 
-node_modules
-package-lock.json
+# Include distribution files.
+# /dist/
 
-# jest output
-coverage
+# Test coverage reports.
+/coverage/
+
+# JSDoc output.
+/out/

@@ -1,9 +1,10 @@
 # .eslintignore
 
-/node_modules/
+# Distribution files.
+/dist/
 
-# jest output
+# Test coverage reports.
 /coverage/
 
-# build
-/dist/
+# JSDoc output.
+/out/
