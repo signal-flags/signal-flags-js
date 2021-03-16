@@ -155,32 +155,48 @@ function insertIntoElement(el, name) {
   el.innerHTML = this.get(name, options);
 }
 
-/**
- * Insert a flag as the `src` of an IMG tag.
- *
- * @param {HTMLElement} el An IMG element.
- * @param {*} name The name of the flag.
- */
-function insertAsImgSrc(el, name) {
-  const options = {};
+function isDisplayInline(el) {
+  const { display } = el.style;
+  if (!display) return true;
+  return display === 'inline';
+}
 
+/**
+ * Insert a flag as the `src` of an `IMG` tag.
+ *
+ * @param {HTMLElement} el   An IMG element.
+ * @param {string}      name The name of the flag.
+ */
+function insertAsImgSrc(el, name, options = {}) {
   // Check the flag exists.
   if (!this.has(name)) return;
 
-  // This is the only way to get height and width before rendering.
-  const setWidth = null; // el.attributes.width?.value;
-  const setHeight = el.offsetHeight; // el.attributes.height?.value ?? el.offsetHeight;
+  // Spread the options so the object is not mutated.
+  // options = { ...options };
 
-  options.outline = getSuitableOutlineWidth(setWidth, setHeight);
+  // First check if a height or width is set on the element.
+  const setWidth = el.attributes.width?.value;
+  const setHeight = el.attributes.height?.value;
 
-  options.file = true;
+  let outline;
+  if (setWidth || setHeight) {
+    outline = getSuitableOutlineWidth(setWidth, setHeight);
+  } else if (isDisplayInline(el)) {
+    // If this is an inline element we must set the height.
+    console.log(name, el, el.style.display);
+    el.height = el.offsetHeight;
+    outline = getSuitableOutlineWidth(null, el.offsetHeight);
+  } else {
+    // Base the outline on the available width.
+    outline = getSuitableOutlineWidth(el.offsetWidth ?? 240);
+  }
 
   // @TODO allow %encoding as an option, although it generates longer strings.
   // 'data:image/svg+xml;utf8,' + encodeURIComponent(this.get(name, options));
   // Base 64 encode the xml string to avoid xml parsing issues.
-  el.src = 'data:image/svg+xml;base64,' + btoa(this.get(name, options));
-
-  el.height = setHeight;
+  el.src =
+    'data:image/svg+xml;base64,' +
+    btoa(this.get(name, { outline, ...options, file: true }));
 }
 
 // Check if a 'flag' is a pennant.

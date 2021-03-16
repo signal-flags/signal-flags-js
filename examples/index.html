@@ -21,13 +21,15 @@
     />
 
     <style>
-      /* Set the width for block display of signal flags */
-      div.signal-flags {
-        width: 120px;
+      .signal-flags-inline img {
+        height: 19px;
       }
-      .signal-flags.pennant,
-      .pennant .signal-flags {
-        width: 150px;
+
+      .flags-block > div {
+        width: 18%;
+      }
+      .pennants-block > div {
+        width: 22.5%;
       }
 
       /* Tweak Bootstrap styles */
@@ -70,224 +72,150 @@
 
           <p class="mb-0">
             Insert a small image like this
-            <span class="signal-flags">a</span> in any text by writing
-            <code>&lt;span class="signal-flags"&gt;[name]&lt;/span&gt;</code>,
-            replacing <code>[name]</code> with the abbreviated name of the flag.
-            Inline images are sized to fit their context so they are&hellip;
+            <img alt="Signal flag A" /> in any text by writing
+            <code>&lt;img alt="Signal flag [name]"&gt;</code>, replacing
+            <code>[name]</code> with the abbreviated name of the flag. Inline
+            images are sized to fit their context so they are&hellip;
           </p>
 
           <h3>
-            &hellip;bigger in a <span class="signal-flags">h</span>
-            <span class="signal-flags">n2</span> heading!
+            &hellip;bigger in a <img alt="Signal flag H" />
+            <img alt="Signal flag n2 Numeral pennant 2" /> heading!
           </h3>
 
-          <p>The list below shows the abbreviated flag names we use:</p>
-
-          <ul>
-            <li>
-              Letters A&hellip;Z <code>a&hellip;z</code>:
-              <img
-                alt="Signal flag a"
-                src="signal-flag:a"
-                height="30"
-                width="50"
-              />
-              <img alt="Signal flag b" />
-              <img alt="Signal flag c" />
-              &hellip;
-              <img alt="Signal flag x" />
-              <img alt="Signal flag y" />
-              <img alt="Signal flag z" />
-            </li>
-
-            <li>
-              Numerals 0&hellip;9 <code>n0&hellip;n9</code>:
-              <img alt="Signal flag n0" />
-              <img alt="Signal flag n1" />
-              <img alt="Signal flag n2" />
-              &hellip;
-              <img alt="Signal flag n7" />
-              <img alt="Signal flag n8" />
-              <img alt="Signal flag n9" />
-            </li>
-
-            <li>
-              Substitutes <code>s1&hellip;s3</code>: 1<sup>st</sup>
-              <img alt="Signal flag s1" /> 2<sup>nd</sup>
-              <img alt="Signal flag s2" /> 3<sup>rd</sup>
-              <img alt="Signal flag s3" />
-            </li>
-
-            <li>
-              Racing flags
-              <code>black</code>: <img alt="Signal flag black" />
-              <code>blue</code>: <img alt="Signal flag blue" />
-              <code>green</code>: <img alt="Signal flag green" />
-              <code>red</code>: <img alt="Signal flag red" />
-              <code>yellow</code>: <img alt="Signal flag yellow" />
-              <code>greenwhite</code>: <img alt="Signal flag greenwhite" />
-              <code>blackwhite</code>: <img alt="Signal flag blackwhite" />
-            </li>
-          </ul>
+          <p>
+            You can also set a width and/or height for the image e.g.
+            <code>&lt;img alt="Signal flag AP" height="10"&gt;</code>
+            <img alt="Signal flag AP" height="10" />
+            <code>&lt;img alt="Signal flag n1" width="120"&gt;</code>
+            <img alt="Signal flag n1" width="120" />.
+          </p>
 
           <p>The list below shows the abbreviated flag names we use:</p>
 
-          <ul>
+          <ul class="signal-flags-inline">
             <li>
-              Letters A&hellip;Z <code>a&hellip;z</code>:
-              <span class="signal-flags">a</span>
-              <span class="signal-flags">b</span>
-              <span class="signal-flags">c</span>
-              &hellip;
-              <span class="signal-flags">d</span>
-              <span class="signal-flags">e</span>
-              <span class="signal-flags">f</span>
+              letters A&hellip;Z
+              <code>a</code> <img alt="Signal flag A" />, <code>b</code>
+              <img alt="Signal flag B" />, <code>c</code>
+              <img alt="Signal flag C" />, &hellip; <code>x</code>
+              <img alt="Signal flag X" />, <code>y</code>
+              <img alt="Signal flag Y" />, and <code>z</code>
+              <img alt="Signal flag Z" />;
             </li>
 
             <li>
-              Numerals 0&hellip;9 <code>n0&hellip;n9</code>:
-              <span class="signal-flags">n0</span>
-              <span class="signal-flags">n1</span>
-              <span class="signal-flags">n2</span>
-              &hellip;
-              <span class="signal-flags">n7</span>
-              <span class="signal-flags">n8</span>
-              <span class="signal-flags">n9</span>
+              numerals 0&hellip;9
+              <code>n0</code> <img alt="Signal flag n0:Numeral pennant 0" />,
+              <code>n1</code> <img alt="Signal flag n1:Numeral pennant 1" />,
+              <code>n2</code> <img alt="Signal flag n2:Numeral pennant 2" />,
+              &hellip; <code>n7</code>
+              <img alt="Signal flag n7:Numeral pennant 7" />, <code>n8</code>
+              <img alt="Signal flag n8:Numeral pennant 8" />, and
+              <code>n9</code> <img alt="Signal flag n9:Numeral pennant 9" />;
             </li>
 
             <li>
-              Substitutes <code>s1&hellip;s3</code>: 1<sup>st</sup>
-              <span class="signal-flags">s1</span> 2<sup>nd</sup>
-              <span class="signal-flags">s2</span> 3<sup>rd</sup>
-              <span class="signal-flags">s3</span>
+              answering pennant (AP)
+              <code>ap</code> <img alt="Signal flag ap:Answering pennant" />;
             </li>
 
             <li>
-              Racing flags <code>black</code>:
-              <span class="signal-flags">black</span> <code>blue</code>:
-              <span class="signal-flags">blue</span> <code>green</code>:
-              <span class="signal-flags">green</span> <code>red</code>:
-              <span class="signal-flags">red</span> <code>yellow</code>:
-              <span class="signal-flags">yellow</span> <code>greenwhite</code>:
-              <span class="signal-flags">greenwhite</span>
-              <code>blackwhite</code>:
-              <span class="signal-flags">blackwhite</span>
+              substitutes: 1<sup>st</sup> <code>s1</code>
+              <img alt="Signal flag s1 1st Substitute flag" />, 2<sup>nd</sup>
+              <code>s2</code> <img alt="Signal flag s2 2nd Substitute flag" />,
+              and 3<sup>rd</sup> <code>s3</code>
+              <img alt="Signal flag s3 3rd Substitute flag " />;
+            </li>
+
+            <li>
+              and finally flags from the
+              <abbr title="Racing Rules of Sailing">RRS</abbr>
+              and other racing flags:
+              <code>black</code> <img alt="Signal flag black" />,
+              <code>blue</code> <img alt="Signal flag blue" />,
+              <code>green</code> <img alt="Signal flag green" />,
+              <code>red</code> <img alt="Signal flag red" />,
+              <code>yellow</code> <img alt="Signal flag yellow" />,
+              <code>greenwhite</code> <img alt="Signal flag greenwhite" />, and
+              <code>blackwhite</code> <img alt="Signal flag blackwhite" />.
             </li>
           </ul>
 
           <h2>Block elements</h2>
 
           <p>
-            Use
-            <code>&lt;div class="signal-flags"&gt;[name]&lt;/div&gt;</code> to
-            display an image outside the flow of text. By default a block
-            element will take up the whole width of the page so for smaller
-            sizes you can either use a CSS layout framework like
+            For more control over the size and position of an image, wrap it in
+            a containing <code>&lt;div&gt;</code> and set the <code>style</code>
+            attribute like this:
+          </p>
+
+          <pre><code>&lt;img alt="Signal flag A" style="display: block;" /&gt;</code></pre>
+
+          <p>
+            By default a block element will take up the whole width of the page
+            so for smaller sizes you can either use a CSS layout framework like
             <a
               target="_blank"
               href="https://getbootstrap.com/docs/4.5/getting-started/introduction/#css"
               >Bootstrap</a
             >
-            or set the <code>width</code> in CSS yourself. This page has the
-            styles shown below in its <code>&lt;head&gt;</code>; note that
-            pennants (numerals and the Answering Pennant) look good at
-            1.25&times; the width of rectangular and triangular flags.
+            or set the <code>width</code> in CSS yourself. Pennants (numerals
+            and the Answering Pennant) look good at 1.25&times; the width of
+            rectangular and triangular flags.
           </p>
 
-          <pre><code>&lt;style&gt;
-  div.signal-flags { width: 120px; }
-  .signal-flags.pennant, .pennant .signal-flags { width: 150px; }
-&lt;/style&gt;
-</code></pre>
-
-          <h3>Alphabet</h3>
-
-          <div
-            class="d-flex justify-content-between flex-wrap text-center mb-4"
-          >
+          <div class="flags-block d-flex justify-content-between text-center">
             <div>
+              <img alt="Signal flag a" style="display: block" />
               Alpha <code>a</code>
-              <img src="" height="200" width="400" alt="Signal flag a" />
             </div>
             <div>
-              Bravo <code>b</code>
-              <div class="signal-flags">b</div>
+              <img alt="Signal flag z" style="display: block" />
+              Zulu <code>z</code>
             </div>
             <div>
-              Charlie <code>c</code>
-              <div class="signal-flags">c</div>
+              <img alt="Signal flag s1" style="display: block" />
+              1<sup>st</sup> Substitute <code>s1</code>
             </div>
             <div>
-              Delta <code>d</code>
-              <div class="signal-flags">d</div>
-            </div>
-            &hellip;
-          </div>
-
-          <h3>Substitutes</h3>
-
-          <div
-            class="d-flex justify-content-between flex-wrap text-center mb-4"
-          >
-            <div>
-              1<sup>st</sup> substitute <code>s1</code>
-              <div class="signal-flags">s1</div>
+              <img alt="Signal flag blackwhite" style="display: block" />
+              Black and white (RRS D2.4.c.) <code>blackwhite</code>
             </div>
             <div>
-              2<sup>nd</sup> substitute <code>s2</code>
-              <div class="signal-flags">s2</div>
-            </div>
-            <div>
-              3<sup>rd</sup> substitute <code>s3</code>
-              <div class="signal-flags">s3</div>
+              <img alt="Signal flag greenwhite" style="display: block" />
+              Green and white (RRS D2.4.a.) <code>greenwhite</code>
             </div>
           </div>
 
-          <h3>Pennants</h3>
-
           <div
-            class="pennant d-flex justify-content-between flex-wrap text-center mb-4"
+            class="pennants-block d-flex justify-content-between text-center"
           >
             <div>
-              Answering pennant <code>ap</code>
-              <div class="signal-flags">ap</div>
-            </div>
-            <div>
-              Numeral 0 <code>n0</code>
-              <div class="signal-flags">n0</div>
-            </div>
-            <div>
+              <img alt="Signal flag n1" style="display: block" />
               Numeral 1 <code>n1</code>
-              <div class="signal-flags">n1</div>
             </div>
             <div>
-              Numeral 2 <code>n2</code>
-              <div class="signal-flags">n2</div>
+              <img alt="Signal flag n2" style="display: block" />
+              Numeral 2 <code>n1</code>
             </div>
-            &hellip;
+            <div>
+              <img alt="Signal flag AP" style="display: block" />
+              Answering Pennant <code>ap</code>
+            </div>
+            <div>
+              <img alt="Signal flag n0" style="display: block" />
+              Numeral 0 <code>n0</code>
+            </div>
           </div>
 
-          <h3>Racing flags</h3>
+          <h2>Full control</h2>
 
-          <div class="d-flex justify-content-between flex-wrap text-center">
-            <div>
-              <code>black</code>
-              <div class="signal-flags">black</div>
-            </div>
-            <div>
-              <code>blue</code>
-              <div class="signal-flags">blue</div>
-            </div>
-            <div>
-              <code>yellow</code>
-              <div class="signal-flags">yellow</div>
-            </div>
-            <div>
-              <code>greenwhite</code>
-              <div class="signal-flags">greenwhite</div>
-            </div>
-            &hellip;
-          </div>
+          <p>
+            If you want full control over the display of a flag you can get the
+            <code>svg</code> markup by calling the getSvg(flag, options) method.
+            See the documentation for more information.
+          </p>
         </div>
       </div>
     </div>
