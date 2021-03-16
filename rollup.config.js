@@ -14,14 +14,14 @@ const link = 'https://signalflags.org/';
 
 const banner = `/*!
  * ${friendlyName} ${version} ${link}
- * Copyright 2020 SignalFlags https://signalflags.org/
- * Licensed under MIT ${repo}/blob/main/LICENSE
+ * Copyright 2020-21 SignalFlags https://signalflags.org/
+ * Licensed under the MIT ${repo}/blob/main/LICENSE
  */`;
 
 const loaderBanner = `/*!
  * ${friendlyName} Loader ${version} ${link}
- * Copyright 2020 SignalFlags https://signalflags.org/
- * Licensed under MIT ${repo}/blob/main/LICENSE
+ * Copyright 2020-21 SignalFlags https://signalflags.org/
+ * Licensed under the MIT ${repo}/blob/main/LICENSE
  */`;
 
 module.exports = [
@@ -37,6 +37,7 @@ module.exports = [
         banner,
         sourcemap: true,
       },
+      /*
       {
         file: `dist/${packageName}.umd.min.js`,
         name: moduleName,
@@ -45,6 +46,7 @@ module.exports = [
         sourcemap: true,
         plugins: [terser()],
       },
+      */
     ],
   },
 
@@ -66,7 +68,7 @@ module.exports = [
 
   {
     // An transpiled iife build for browsers with DOM parsing and injection.
-    input: 'src/load/index.js',
+    input: 'src/load.js',
     plugins: [json(), babel({ babelHelpers: 'bundled' })],
     output: [
       {

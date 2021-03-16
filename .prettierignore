@@ -1,4 +1,10 @@
 # .prettierignore
 
+# Distribution files.
 /dist/
+
+# Test coverage reports.
 /coverage/
+
+# JSDoc output.
+/out/
