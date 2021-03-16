@@ -14,14 +14,14 @@ const link = 'https://signalflags.org/';
 
 const banner = `/*!
  * ${friendlyName} ${version} ${link}
- * Copyright 2020 SignalFlags https://signalflags.org/
- * Licensed under MIT ${repo}/blob/main/LICENSE
+ * Copyright 2020-21 SignalFlags https://signalflags.org/
+ * Licensed under the MIT ${repo}/blob/main/LICENSE
  */`;
 
 const loaderBanner = `/*!
  * ${friendlyName} Loader ${version} ${link}
- * Copyright 2020 SignalFlags https://signalflags.org/
- * Licensed under MIT ${repo}/blob/main/LICENSE
+ * Copyright 2020-21 SignalFlags https://signalflags.org/
+ * Licensed under the MIT ${repo}/blob/main/LICENSE
  */`;
 
 module.exports = [
