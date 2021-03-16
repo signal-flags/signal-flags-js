@@ -61,6 +61,15 @@ describe('The UMD module', () => {
       expect(svg).toMatch(/^<\?xml version.*<\/svg>\n$/s);
     });
 
+    it('Should return a data URI with the `dataUri` option', () => {
+      // Line endings are stripped out for a shorter base64 string.
+      const fileSvg = SignalFlags.get('a', { file: true }).replace(/\n/g, '');
+
+      const svg = SignalFlags.get('a', { dataUri: true });
+
+      expect(svg).toMatch('data:image/svg+xml;base64,' + btoa(fileSvg));
+    });
+
     it('Should respect the `outline` option', () => {
       const svg = SignalFlags.get('a');
       const no = SignalFlags.get('a', { outline: false });

@@ -40,12 +40,12 @@ const inlineNodes = ['SPAN'];
  * @param {object} colors Colours for this flag set.
  * @param {number[]} size The size to draw [width, height].
  */
-function buildFlagSvg({ draw, design, colors, outline, file, shape }) {
+function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
   // Get the dimensions for this shape.
   const [w, h] = (shape && draw.size[shape]) || draw.size.default;
 
   let parts = [];
-  if (file) {
+  if (file || dataUri) {
     parts.push('<?xml version="1.0" encoding="UTF-8" ?>\n');
     parts.push(
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">\n`
@@ -67,6 +67,14 @@ function buildFlagSvg({ draw, design, colors, outline, file, shape }) {
 
   // Close the svg element and return the whole concatenated.
   parts.push(file ? '</svg>\n' : '</svg>');
+
+  if (dataUri) {
+    // support %-encoding as an option, although it generates longer strings?
+    // 'data:image/svg+xml;utf8,' + encodeURIComponent(...);
+    return (
+      'data:image/svg+xml;base64,' + btoa(parts.join('').replace(/\n/g, ''))
+    );
+  }
   return parts.join('');
 }
 
@@ -88,7 +96,10 @@ function getDefaults() {
 }
 
 // Get svg for a signal flag
-function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
+function get(
+  name,
+  { colors: optColors, file, dataUri, outline, shape: optShape } = {}
+) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
   const { shape, design } = this.flags[name];
 
@@ -109,6 +120,7 @@ function get(name, { colors: optColors, file, outline, shape: optShape } = {}) {
     // If the flag has no shape use the default shape.
     draw: shapes[shape || 'default'],
     file,
+    dataUri,
     outline: outline ?? this.settings.outline,
     shape: optShape,
   });
@@ -191,12 +203,7 @@ function insertAsImgSrc(el, name, options = {}) {
     outline = getSuitableOutlineWidth(el.offsetWidth ?? 240);
   }
 
-  // @TODO allow %encoding as an option, although it generates longer strings.
-  // 'data:image/svg+xml;utf8,' + encodeURIComponent(this.get(name, options));
-  // Base 64 encode the xml string to avoid xml parsing issues.
-  el.src =
-    'data:image/svg+xml;base64,' +
-    btoa(this.get(name, { outline, ...options, file: true }));
+  el.src = this.get(name, { outline, ...options, dataUri: true });
 }
 
 // Check if a 'flag' is a pennant.
