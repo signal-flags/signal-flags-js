@@ -109,6 +109,13 @@ export default {
     name: 'Z',
     design: [['diagonalQuarters', ['yellow', 'blue', 'red', 'black']]],
   },
+  nap: {
+    name: 'AP (alt)',
+    category: 'pennant',
+    description: 'Answering Pennant',
+    shape: 'pennant',
+    design: [['vertical', ['red', 'white', 'red', 'white', 'red']]],
+  },
   n0: {
     name: '0',
     category: 'numeral',
@@ -174,7 +181,7 @@ export default {
     category: 'pennant',
     description: 'Answering Pennant',
     shape: 'pennant',
-    design: [['vertical', ['red', 'white', 'red', 'white', 'red']]],
+    design: [['vertical', ['red', 'white', 'blue', 'white', 'red']]],
   },
   s1: {
     name: '1st Sub',
@@ -196,6 +203,13 @@ export default {
     category: 'substitute',
     shape: 'triangle',
     design: [['horizontal', ['white', 'black', 'white']]],
+  },
+  s4: {
+    name: '4th Sub',
+    description: '4th substitute',
+    category: 'substitute',
+    shape: 'triangle',
+    design: [['border', ['pink', 'purple']]],
   },
   black: {
     name: 'Black',
@@ -231,5 +245,25 @@ export default {
     name: 'Yellow',
     category: 'racing',
     design: [['solid', 'yellow']],
+  },
+  plus: {
+    name: 'Plus',
+    category: 'racing',
+    design: [['solid', 'pink']],
+  },
+  minus: {
+    name: 'Minus',
+    category: 'racing',
+    design: [['solid', 'pink']],
+  },
+  port: {
+    name: 'Port',
+    category: 'racing',
+    design: [['solid', 'pink']],
+  },
+  starboard: {
+    name: 'Starboard',
+    category: 'racing',
+    design: [['solid', 'pink']],
   },
 };

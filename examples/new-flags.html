@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Use signal flags on a website</title>
+
+    <!-- Load Signal Flags Loader JavaScript -->
+    <script src="../dist/signal-flags-loader.min.js"></script>
+    <!-- script async src="https://cdn.jsdelivr.net/npm/signal-flags@2"></script -->
+
+    <!-- Load Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      /* Ensure inline images have the right height. */
+      .signal-flags-inline img {
+        height: 19px;
+      }
+
+      /* Display 5 rectangular flags per row. */
+      .flags-block > div {
+        width: 18%;
+      }
+
+      /* Display 4 pennants per row. */
+      .pennants-block > div {
+        width: 22.5%;
+      }
+
+      /* Tweak Bootstrap styles */
+      pre {
+        background-color: linen;
+        padding: 0.5em 0.75em;
+        border-radius: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container my-3">
+      <div class="row">
+        <div class="col">
+          <h1>New and changed flags</h1>
+
+          <p>New and updated flag designs are shown below.</p>
+
+          <div class="flags-block d-flex justify-content-between text-center">
+            <div>
+              <img alt="Signal flag i" style="display: block" />
+              India <code>i</code>
+            </div>
+            <div>
+              <img alt="Signal flag p" style="display: block" />
+              Papa <code>p</code>
+            </div>
+            <div>
+              <img alt="Signal flag s" style="display: block" />
+              Sierra <code>s</code>
+            </div>
+            <div>
+              <img alt="Signal flag s4" style="display: block" />
+              4<sup>th</sup> substitute <code>s4</code>
+            </div>
+          </div>
+
+          <div class="flags-block d-flex justify-content-between text-center">
+            <div>
+              <img alt="Signal flag plus" style="display: block" />
+              Plus <code>plus</code>
+            </div>
+            <div>
+              <img alt="Signal flag minus" style="display: block" />
+              Minus <code>minus</code>
+            </div>
+            <div>
+              <img alt="Signal flag port" style="display: block" />
+              Port <code>port</code>
+            </div>
+            <div>
+              <img alt="Signal flag starboard" style="display: block" />
+              Starboard <code>starboard</code>
+            </div>
+          </div>
+
+          <div
+            class="pennants-block d-flex justify-content-between text-center"
+          >
+            <div>
+              <img alt="Signal flag nap" style="display: block" />
+              Old Answering Pennant <code>nap</code>
+            </div>
+            <div>
+              <img alt="Signal flag ap" style="display: block" />
+              Answering Pennant <code>ap</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

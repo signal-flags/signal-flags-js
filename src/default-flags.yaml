@@ -1,5 +1,7 @@
 # src/default-flags.yaml
 
+# --- Letters ------------------------------------------------------------------
+
 a:
   name: 'A'
   shape: swallowtail
@@ -132,6 +134,16 @@ z:
   design:
     - [diagonalQuarters, [yellow, blue, red, black]]
 
+# --- Numerals -----------------------------------------------------------------
+
+nap:
+  name: 'AP (alt)'
+  category: pennant
+  description: 'Answering Pennant'
+  shape: pennant
+  design:
+    - [vertical, [red, white, red, white, red]]
+
 n0:
   name: '0'
   category: numeral
@@ -202,13 +214,17 @@ n9:
   design:
     - [quarters, [white, black, yellow, red]]
 
-ap:
+# --- Answering pennant --------------------------------------------------------
+
+ap: # @TODO
   name: 'AP'
   category: pennant
   description: 'Answering Pennant'
   shape: pennant
   design:
-    - [vertical, [red, white, red, white, red]]
+    - [vertical, [red, white, blue, white, red]]
+
+# --- Substitutes --------------------------------------------------------------
 
 s1:
   name: '1st Sub'
@@ -234,7 +250,16 @@ s3:
   design:
     - [horizontal, [white, black, white]]
 
-# racing: [red, yellow, blue, green, black, greenwhite, blackwhite]
+s4: # @TODO
+  name: 4th Sub
+  description: 4th substitute
+  category: substitute
+  shape: triangle
+  design:
+    - [border, [pink, purple]]
+
+# --- Racing -------------------------------------------------------------------
+
 black:
   name: 'Black'
   category: racing
@@ -276,3 +301,27 @@ yellow:
   category: racing
   design:
     - [solid, yellow]
+
+plus: # TODO
+  name: Plus
+  category: racing
+  design:
+    - [solid, pink]
+
+minus: # TODO
+  name: Minus
+  category: racing
+  design:
+    - [solid, pink]
+
+port: # TODO
+  name: Port
+  category: racing
+  design:
+    - [solid, pink]
+
+starboard: # TODO
+  name: Starboard
+  category: racing
+  design:
+    - [solid, pink]
