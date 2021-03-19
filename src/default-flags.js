@@ -181,6 +181,7 @@ export default {
     category: 'pennant',
     description: 'Answering Pennant',
     shape: 'pennant',
+    size: 'long',
     design: [['vertical', ['red', 'white', 'blue', 'white', 'red']]],
   },
   s1: {

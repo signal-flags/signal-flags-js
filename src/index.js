@@ -130,7 +130,13 @@ function get(
   { colors: optColors, file, dataUri, outline, shape: optShape } = {}
 ) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
-  const { shape, design } = this.flags[name];
+  const { shape, design, size } = this.flags[name];
+
+  // Use any override size from the flag definition: note this will override
+  // the explicit `shape` option. This is only currently used for the AP flag.
+  if (size) {
+    optShape = size;
+  }
 
   // Get the code to build this shape.
   const { shapes } = this;
