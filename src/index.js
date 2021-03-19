@@ -7,7 +7,8 @@ import { shapes } from './shapes/index';
 import { check } from './check';
 
 // Ponyfill for btoa in node.
-const toBase64 = btoa || ((b) => Buffer.from(b).toString('base64'));
+const toBase64 =
+  typeof btoa === 'undefined' ? (b) => Buffer.from(b).toString('base64') : btoa;
 
 const colorSets = {
   default: {
