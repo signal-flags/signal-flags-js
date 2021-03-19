@@ -50,16 +50,19 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
   const [w, h] = (shape && draw.size[shape]) || draw.size.default;
 
   let parts = [];
+
   if (file || dataUri) {
+    // Add the xml declaration for a file.
     parts.push('<?xml version="1.0" encoding="UTF-8" ?>\n');
     parts.push(
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">\n`
     );
   } else {
+    // Just the svg tag for a DOM node.
     parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
   }
 
-  // Add the svg for each part of the design.
+  // Add the tags for each part of the design.
   design.forEach((part) => {
     // Remember some flags (F) need to know about the outline.
     parts.push(draw[part[0]](part, { w, h, colors, outline }));
@@ -70,16 +73,17 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
     parts.push(draw.outline([], { w, h, colors, outline }));
   }
 
-  // Close the svg element and return the whole concatenated.
-  parts.push(file ? '</svg>\n' : '</svg>');
+  // Close the svg element with or without a final newline.
+  parts.push(file || dataUri ? '</svg>\n' : '</svg>');
 
+  // Return the markup as a dataUri...
   if (dataUri) {
-    // support %-encoding as an option, although it generates longer strings?
+    // ? support %-encoding as an option, although it generates longer strings?
     // 'data:image/svg+xml;utf8,' + encodeURIComponent(...);
-    return (
-      'data:image/svg+xml;base64,' + toBase64(parts.join('').replace(/\n/g, ''))
-    );
+    return 'data:image/svg+xml;base64,' + toBase64(parts.join(''));
   }
+
+  // ... or just plain text.
   return parts.join('');
 }
 

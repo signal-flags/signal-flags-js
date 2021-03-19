@@ -73,11 +73,14 @@ describe('The UMD module', () => {
 
     it('Should return a data URI with the `dataUri` option', () => {
       // Line endings are stripped out for a shorter base64 string.
-      const fileSvg = SignalFlags.get('a', { file: true }).replace(/\n/g, '');
+      const fileSvg = SignalFlags.get('a', { file: true });
 
-      const svg = SignalFlags.get('a', { dataUri: true });
+      // Use a node version of btoa.
+      const base64 = Buffer.from(fileSvg).toString('base64');
 
-      expect(svg).toMatch('data:image/svg+xml;base64,' + btoa(fileSvg));
+      const dataUri = SignalFlags.get('a', { dataUri: true });
+
+      expect(dataUri).toMatch('data:image/svg+xml;base64,' + base64);
     });
 
     it('Should respect the `outline` option', () => {
