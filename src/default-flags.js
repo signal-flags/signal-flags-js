@@ -182,7 +182,7 @@ export default {
     description: 'Answering Pennant',
     shape: 'pennant',
     size: 'long',
-    design: [['vertical', ['red', 'white', 'blue', 'white', 'red']]],
+    design: [['vertical', ['red', 'white', 'red', 'white', 'red']]],
   },
   s1: {
     name: '1st Sub',
@@ -210,7 +210,7 @@ export default {
     description: '4th substitute',
     category: 'substitute',
     shape: 'triangle',
-    design: [['border', ['pink', 'purple']]],
+    design: [['border', ['gray', 'gray']]],
   },
   black: {
     name: 'Black',
@@ -250,21 +250,26 @@ export default {
   plus: {
     name: 'Plus',
     category: 'racing',
-    design: [['solid', 'pink']],
+    design: [['solid', 'gray']],
   },
   minus: {
     name: 'Minus',
     category: 'racing',
-    design: [['solid', 'pink']],
+    design: [['solid', 'gray']],
   },
   port: {
     name: 'Port',
     category: 'racing',
-    design: [['solid', 'pink']],
+    design: [['solid', 'gray']],
   },
   starboard: {
     name: 'Starboard',
     category: 'racing',
-    design: [['solid', 'pink']],
+    design: [['triangle', ['green', 'white']]],
+  },
+  orange: {
+    name: 'Orange',
+    category: 'racing',
+    design: [['solid', 'orange']],
   },
 };

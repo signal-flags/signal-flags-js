@@ -15,6 +15,7 @@ const colorSets = {
     red: '#c8102e', // Pantone 186 C
     yellow: '#ffd100', // Pantone 109 C
     white: '#f5f5f5',
+    orange: '#ff4f00', // International orange?
   },
 
   primary: {
@@ -25,6 +26,7 @@ const colorSets = {
     red: '#f00',
     yellow: '#ff0',
     white: '#fff',
+    orange: '#f60', // ?
   },
 };
 

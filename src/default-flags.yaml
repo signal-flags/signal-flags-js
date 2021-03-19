@@ -223,7 +223,7 @@ ap: # @TODO
   shape: pennant
   size: long
   design:
-    - [vertical, [red, white, blue, white, red]]
+    - [vertical, [red, white, red, white, red]]
 
 # --- Substitutes --------------------------------------------------------------
 
@@ -257,7 +257,7 @@ s4: # @TODO
   category: substitute
   shape: triangle
   design:
-    - [border, [pink, purple]]
+    - [border, [gray, gray]]
 
 # --- Racing -------------------------------------------------------------------
 
@@ -307,22 +307,28 @@ plus: # TODO
   name: Plus
   category: racing
   design:
-    - [solid, pink]
+    - [solid, gray]
 
 minus: # TODO
   name: Minus
   category: racing
   design:
-    - [solid, pink]
+    - [solid, gray]
 
 port: # TODO
   name: Port
   category: racing
   design:
-    - [solid, pink]
+    - [solid, gray]
 
 starboard: # TODO
   name: Starboard
   category: racing
   design:
-    - [solid, pink]
+    - [triangle, [green, white]]
+
+orange: # TODO
+  name: Orange
+  category: racing
+  design:
+    - [solid, orange]

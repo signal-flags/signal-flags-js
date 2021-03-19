@@ -311,6 +311,29 @@ export const defaultShape = {
     return `<path fill="${getColor(clr, colors)}" d="M0,0H${w}V${h}H0Z"/>\n`;
   },
 
+  // Draw a triangle (RRS change to starboard).
+  triangle(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    // Height.
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ht2 = h * 0.375;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
+    parts.push(` d="M0,0H${w}V${h}H0Z`);
+    // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+    parts.push(`M${w2},${h2 - ht2}L${w2 - ht2},${h2 + ht2}H${w2 + ht2}Z"/>\n`);
+    // Draw the centre shape.
+    parts.push(`<path fill="${getColor(clrs[0], colors)}" `);
+    parts.push(
+      `d="M${w2},${h2 - ht2}L${w2 + ht2},${h2 + ht2}H${w2 - ht2}Z"/>\n`
+    );
+    return parts.join('');
+  },
+
   // Draw vertical stripes.
   vertical(design, { w, h, colors }) {
     const [, clrs] = design;

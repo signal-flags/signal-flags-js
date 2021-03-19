@@ -17,8 +17,8 @@ describe('The UMD module', () => {
   describe('all() should return:', () => {
     const flags = SignalFlags.all();
 
-    test('53 flags in total', () => {
-      expect(Object.keys(flags).length).toBe(53);
+    test('54 flags in total', () => {
+      expect(Object.keys(flags).length).toBe(54);
     });
 
     test('26 alphabet flags (test a sample)', () => {
@@ -44,18 +44,19 @@ describe('The UMD module', () => {
       expect(flags).toHaveProperty('s4');
     });
 
-    test('11 racing flags', () => {
+    test('12 racing flags', () => {
       expect(flags).toHaveProperty('black');
       expect(flags).toHaveProperty('blackwhite');
       expect(flags).toHaveProperty('blue');
       expect(flags).toHaveProperty('green');
       expect(flags).toHaveProperty('greenwhite');
-      expect(flags).toHaveProperty('red');
-      expect(flags).toHaveProperty('yellow');
-      expect(flags).toHaveProperty('port');
-      expect(flags).toHaveProperty('starboard');
-      expect(flags).toHaveProperty('plus');
       expect(flags).toHaveProperty('minus');
+      expect(flags).toHaveProperty('orange');
+      expect(flags).toHaveProperty('plus');
+      expect(flags).toHaveProperty('port');
+      expect(flags).toHaveProperty('red');
+      expect(flags).toHaveProperty('starboard');
+      expect(flags).toHaveProperty('yellow');
     });
   });
 
