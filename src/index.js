@@ -6,6 +6,9 @@ import flags from './default-flags';
 import { shapes } from './shapes/index';
 import { check } from './check';
 
+// Ponyfill for btoa in node.
+const toBase64 = btoa || ((b) => Buffer.from(b).toString('base64'));
+
 const colorSets = {
   default: {
     outline: '#000', // The default outline is true black.
@@ -74,7 +77,7 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
     // support %-encoding as an option, although it generates longer strings?
     // 'data:image/svg+xml;utf8,' + encodeURIComponent(...);
     return (
-      'data:image/svg+xml;base64,' + btoa(parts.join('').replace(/\n/g, ''))
+      'data:image/svg+xml;base64,' + toBase64(parts.join('').replace(/\n/g, ''))
     );
   }
   return parts.join('');
