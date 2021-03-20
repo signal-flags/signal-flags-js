@@ -47,7 +47,9 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.2.0
+## Current release v2.2.1 _20 March 2021_
+
+[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
 - 6 new designs:
   - orange for the start line
@@ -58,39 +60,29 @@ SignalFlags.all({ outline: false, file: true });
 - `long` shape option added for pennants
 - ponyfill added for `btoa` on nodejs when creating dataURIs
 
-## Current release v2.1.0
+###
 
-[![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
-
-New features:
-
-- Data URI support to insert images into IMG tags.
-- Using 'white smoke' (#f5f5f5) for white flag elements.
-- Autoloaded images have outlines to suit their size.
-
-Bug fixes:
-
-- fix bottom white stripe path on 2nd Substitute.
-
-General improvements to documentation, testing and example page.
-
-### Changes in v2.0.1
-
-- fix: Loader should run immediately if DOM is already loaded
-
-v2.0 breaks compatibility with the previous release v0.9.1
-
-- new API with `get()` and `all()` methods replacing `getSvg()`
-
-v2.0 introduces the following features and improvements:
-
-- Loader build for browsers with DOM traversal and auto-insertion
-- support for IE 11 and some other browsers through Babel
-- new 'square' shape option
-- new 'primary' colour option
-- improved designs for I, P and S flags
-- better test coverage
-- example HTML page
+- **Changes in v2.1.0**
+  - New features:
+    - Data URI support to insert images into IMG tags.
+    - Using 'white smoke' (#f5f5f5) for white flag elements.
+    - Autoloaded images have outlines to suit their size.
+  - Bug fixes:
+    - fix bottom white stripe path on 2nd Substitute.
+  - General improvements to documentation, testing and example page.
+- **Changes in v2.0.1**
+  - fix: Loader should run immediately if DOM is already loaded
+- **Changes in v2.0.0**
+  - v2.0 breaks compatibility with the previous release v0.9.1.
+  - v2.0 introduces the following features and improvements:
+    - new API with `get()` and `all()` methods replacing `getSvg()`
+    - Loader build for browsers with DOM traversal and auto-insertion
+    - support for IE 11 and some other browsers through Babel
+    - new 'square' shape option
+    - new 'primary' colour option
+    - improved designs for I, P and S flags
+    - better test coverage
+    - example HTML page
 
 ## Development
 
