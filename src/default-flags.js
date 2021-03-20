@@ -109,19 +109,6 @@ export default {
     name: 'Z',
     design: [['diagonalQuarters', ['yellow', 'blue', 'red', 'black']]],
   },
-  nap: {
-    name: 'AP (alt)',
-    category: 'pennant',
-    description: 'Answering Pennant',
-    shape: 'pennant',
-    design: [['vertical', ['red', 'white', 'red', 'white', 'red']]],
-  },
-  n0: {
-    name: '0',
-    category: 'numeral',
-    shape: 'pennant',
-    design: [['vertical', ['yellow', 'red', 'yellow']]],
-  },
   n1: {
     name: '1',
     category: 'numeral',
@@ -176,12 +163,17 @@ export default {
     shape: 'pennant',
     design: [['quarters', ['white', 'black', 'yellow', 'red']]],
   },
+  n0: {
+    name: '0',
+    category: 'numeral',
+    shape: 'pennant',
+    design: [['vertical', ['yellow', 'red', 'yellow']]],
+  },
   ap: {
     name: 'AP',
     category: 'pennant',
     description: 'Answering Pennant',
     shape: 'pennant',
-    size: 'long',
     design: [['vertical', ['red', 'white', 'red', 'white', 'red']]],
   },
   s1: {
@@ -210,7 +202,7 @@ export default {
     description: '4th substitute',
     category: 'substitute',
     shape: 'triangle',
-    design: [['border', ['gray', 'gray']]],
+    design: [['hoistSquare', ['yellow', 'red']]],
   },
   black: {
     name: 'Black',

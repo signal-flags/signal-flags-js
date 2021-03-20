@@ -32,7 +32,7 @@ const colorSets = {
     red: '#f00',
     yellow: '#ff0',
     white: '#fff',
-    orange: '#f50', // Close to Pantone Orange C #fe5000
+    orange: '#ffa500', // HTML orange.
   },
 };
 

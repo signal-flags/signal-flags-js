@@ -17,8 +17,8 @@ describe('The UMD module', () => {
   describe('all() should return:', () => {
     const flags = SignalFlags.all();
 
-    test('54 flags in total', () => {
-      expect(Object.keys(flags).length).toBe(54);
+    test('53 flags in total', () => {
+      expect(Object.keys(flags).length).toBe(53);
     });
 
     test('26 alphabet flags (test a sample)', () => {
@@ -27,14 +27,10 @@ describe('The UMD module', () => {
     });
 
     test('10 numeral pennants (test a sample) plus AP', () => {
-      expect(flags).toHaveProperty('nap');
+      expect(flags).toHaveProperty('ap');
       expect(flags).toHaveProperty('n0');
       expect(flags).toHaveProperty('n1');
       expect(flags).toHaveProperty('n9');
-    });
-
-    test('A longer AP', () => {
-      expect(flags).toHaveProperty('ap');
     });
 
     test('1st, 2nd, 3rd and 4th sub', () => {

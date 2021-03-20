@@ -134,22 +134,7 @@ z:
   design:
     - [diagonalQuarters, [yellow, blue, red, black]]
 
-# --- Numerals -----------------------------------------------------------------
-
-nap:
-  name: 'AP (alt)'
-  category: pennant
-  description: 'Answering Pennant'
-  shape: pennant
-  design:
-    - [vertical, [red, white, red, white, red]]
-
-n0:
-  name: '0'
-  category: numeral
-  shape: pennant
-  design:
-    - [vertical, [yellow, red, yellow]]
+# --- Pennants -----------------------------------------------------------------
 
 n1:
   name: '1'
@@ -214,14 +199,18 @@ n9:
   design:
     - [quarters, [white, black, yellow, red]]
 
-# --- Answering pennant --------------------------------------------------------
+n0:
+  name: '0'
+  category: numeral
+  shape: pennant
+  design:
+    - [vertical, [yellow, red, yellow]]
 
-ap: # @TODO
+ap:
   name: 'AP'
   category: pennant
   description: 'Answering Pennant'
   shape: pennant
-  size: long
   design:
     - [vertical, [red, white, red, white, red]]
 
@@ -251,13 +240,13 @@ s3:
   design:
     - [horizontal, [white, black, white]]
 
-s4: # @TODO
+s4:
   name: 4th Sub
   description: 4th substitute
   category: substitute
   shape: triangle
   design:
-    - [border, [gray, gray]]
+    - [hoistSquare, [yellow, red]]
 
 # --- Racing -------------------------------------------------------------------
 
@@ -309,7 +298,7 @@ plus:
   design:
     - [plus, [black, white]]
 
-minus: # TODO
+minus:
   name: Minus
   category: racing
   design:
