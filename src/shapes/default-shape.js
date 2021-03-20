@@ -23,8 +23,8 @@ export const defaultShape = {
     let xbw, ybw;
     if (length === 2) {
       // This factor works well for P and S flags.
-      ybw = h * 0.3;
-      xbw = w * 0.3;
+      ybw = h * 0.25;
+      xbw = w * 0.25;
     } else {
       ybw = h / (length * 2);
       xbw = w / (length * 2);
@@ -104,7 +104,7 @@ export const defaultShape = {
     const parts = [];
 
     // Radius.
-    const r = h * 0.25;
+    const r = Math.round(h * 0.275, 0);
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
