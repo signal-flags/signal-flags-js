@@ -1,6 +1,6 @@
 {
   "name": "signal-flags",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Create SVG images for signal flags and other nautical flags",
   "main": "dist/signal-flags.umd.js",
   "browser": "dist/signal-flags-loader.min.js",
@@ -26,10 +26,10 @@
     "type": "git",
     "url": "git+https://github.com/signal-flags/signal-flags-js.git"
   },
-  "author": "",
+  "author": "Signal Flags (https://signalflags.org/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/signal-flags/signal-flags-js/issues"
+    "url": "https://github.com/signal-flags/signal-flags/issues"
   },
   "homepage": "https://github.com/signal-flags/signal-flags-js#readme",
   "devDependencies": {
