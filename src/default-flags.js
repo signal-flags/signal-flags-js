@@ -250,17 +250,17 @@ export default {
   plus: {
     name: 'Plus',
     category: 'racing',
-    design: [['solid', 'gray']],
+    design: [['plus', ['black', 'white']]],
   },
   minus: {
     name: 'Minus',
     category: 'racing',
-    design: [['solid', 'gray']],
+    design: [['minus', ['black', 'white']]],
   },
   port: {
     name: 'Port',
     category: 'racing',
-    design: [['solid', 'gray']],
+    design: [['square', ['red', 'white']]],
   },
   starboard: {
     name: 'Starboard',

@@ -303,31 +303,31 @@ yellow:
   design:
     - [solid, yellow]
 
-plus: # TODO
+plus:
   name: Plus
   category: racing
   design:
-    - [solid, gray]
+    - [plus, [black, white]]
 
 minus: # TODO
   name: Minus
   category: racing
   design:
-    - [solid, gray]
+    - [minus, [black, white]]
 
-port: # TODO
+port:
   name: Port
   category: racing
   design:
-    - [solid, gray]
+    - [square, [red, white]]
 
-starboard: # TODO
+starboard:
   name: Starboard
   category: racing
   design:
     - [triangle, [green, white]]
 
-orange: # TODO
+orange:
   name: Orange
   category: racing
   design:
