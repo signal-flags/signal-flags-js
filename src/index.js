@@ -6,15 +6,22 @@ import flags from './default-flags';
 import { shapes } from './shapes/index';
 import { check } from './check';
 
+// Ponyfill for btoa in node.
+const toBase64 =
+  typeof btoa === 'undefined' ? (b) => Buffer.from(b).toString('base64') : btoa;
+
 const colorSets = {
   default: {
     outline: '#000', // The default outline is true black.
     black: '#2d2926', // Pantone Black C
     blue: '#005eb8', // Pantone 300 C
+    // Consider the Irish flag colours Pantone 347 C #009a44 or 347 U #169b62.
     green: '#00965e', // Pantone 340 C
     red: '#c8102e', // Pantone 186 C
     yellow: '#ffd100', // Pantone 109 C
     white: '#f5f5f5',
+    // Consider the Irish flag colours Pantone 151 C #ff8200 or 347 U #ff883e.
+    orange: '#e37017', // Arithmetical mean red and yellow best in 'tests'.
   },
 
   primary: {
@@ -25,6 +32,7 @@ const colorSets = {
     red: '#f00',
     yellow: '#ff0',
     white: '#fff',
+    orange: '#ffa500', // HTML orange.
   },
 };
 
@@ -45,16 +53,19 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
   const [w, h] = (shape && draw.size[shape]) || draw.size.default;
 
   let parts = [];
+
   if (file || dataUri) {
+    // Add the xml declaration for a file.
     parts.push('<?xml version="1.0" encoding="UTF-8" ?>\n');
     parts.push(
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">\n`
     );
   } else {
+    // Just the svg tag for a DOM node.
     parts.push(`<svg viewBox="0 0 ${w} ${h}">\n`);
   }
 
-  // Add the svg for each part of the design.
+  // Add the tags for each part of the design.
   design.forEach((part) => {
     // Remember some flags (F) need to know about the outline.
     parts.push(draw[part[0]](part, { w, h, colors, outline }));
@@ -65,16 +76,17 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
     parts.push(draw.outline([], { w, h, colors, outline }));
   }
 
-  // Close the svg element and return the whole concatenated.
-  parts.push(file ? '</svg>\n' : '</svg>');
+  // Close the svg element with or without a final newline.
+  parts.push(file || dataUri ? '</svg>\n' : '</svg>');
 
+  // Return the markup as a dataUri...
   if (dataUri) {
-    // support %-encoding as an option, although it generates longer strings?
+    // ? support %-encoding as an option, although it generates longer strings?
     // 'data:image/svg+xml;utf8,' + encodeURIComponent(...);
-    return (
-      'data:image/svg+xml;base64,' + btoa(parts.join('').replace(/\n/g, ''))
-    );
+    return 'data:image/svg+xml;base64,' + toBase64(parts.join(''));
   }
+
+  // ... or just plain text.
   return parts.join('');
 }
 
@@ -130,7 +142,13 @@ function get(
   { colors: optColors, file, dataUri, outline, shape: optShape } = {}
 ) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
-  const { shape, design } = this.flags[name];
+  const { shape, design, size } = this.flags[name];
+
+  // Use any override size from the flag definition: note this will override
+  // the explicit `shape` option. This is only currently used for the AP flag.
+  if (size) {
+    optShape = size;
+  }
 
   // Get the code to build this shape.
   const { shapes } = this;

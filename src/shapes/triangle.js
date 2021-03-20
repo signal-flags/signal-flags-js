@@ -64,6 +64,28 @@ export const triangle = {
     return parts.join('');
   },
 
+  // A square on the hoist.
+  hoistSquare(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    const s = h / 3;
+    const h2 = h / 2;
+
+    // Draw the ground...
+    parts.push(
+      `<path fill="${getColor(clrs[1], colors)}" d="`,
+      `M0,0L${w},${h2}L0,${h}Z`,
+      // ...with a cut-out drawn anti-clockwise so it doesn't fill.
+      `M0,${s}V${s * 2}H${s}V${s}H0Z"/>\n`,
+      // Draw the square.
+      `<path fill="${getColor(clrs[0], colors)}" d="`,
+      `M0,${s}H${s}V${s * 2}H0Z"/>\n`
+    );
+
+    return parts.join('');
+  },
+
   // Draw 2 vertical stripes.
   vertical(design, { w, h, colors }) {
     const [, clrs] = design;

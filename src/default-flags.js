@@ -109,12 +109,6 @@ export default {
     name: 'Z',
     design: [['diagonalQuarters', ['yellow', 'blue', 'red', 'black']]],
   },
-  n0: {
-    name: '0',
-    category: 'numeral',
-    shape: 'pennant',
-    design: [['vertical', ['yellow', 'red', 'yellow']]],
-  },
   n1: {
     name: '1',
     category: 'numeral',
@@ -169,6 +163,12 @@ export default {
     shape: 'pennant',
     design: [['quarters', ['white', 'black', 'yellow', 'red']]],
   },
+  n0: {
+    name: '0',
+    category: 'numeral',
+    shape: 'pennant',
+    design: [['vertical', ['yellow', 'red', 'yellow']]],
+  },
   ap: {
     name: 'AP',
     category: 'pennant',
@@ -196,6 +196,13 @@ export default {
     category: 'substitute',
     shape: 'triangle',
     design: [['horizontal', ['white', 'black', 'white']]],
+  },
+  s4: {
+    name: '4th Sub',
+    description: '4th substitute',
+    category: 'substitute',
+    shape: 'triangle',
+    design: [['hoistSquare', ['yellow', 'red']]],
   },
   black: {
     name: 'Black',
@@ -231,5 +238,30 @@ export default {
     name: 'Yellow',
     category: 'racing',
     design: [['solid', 'yellow']],
+  },
+  plus: {
+    name: 'Plus',
+    category: 'racing',
+    design: [['plus', ['black', 'white']]],
+  },
+  minus: {
+    name: 'Minus',
+    category: 'racing',
+    design: [['minus', ['black', 'white']]],
+  },
+  port: {
+    name: 'Port',
+    category: 'racing',
+    design: [['square', ['red', 'white']]],
+  },
+  starboard: {
+    name: 'Starboard',
+    category: 'racing',
+    design: [['triangle', ['green', 'white']]],
+  },
+  orange: {
+    name: 'Orange',
+    category: 'racing',
+    design: [['solid', 'orange']],
   },
 };

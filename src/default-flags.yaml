@@ -1,5 +1,7 @@
 # src/default-flags.yaml
 
+# --- Letters ------------------------------------------------------------------
+
 a:
   name: 'A'
   shape: swallowtail
@@ -132,12 +134,7 @@ z:
   design:
     - [diagonalQuarters, [yellow, blue, red, black]]
 
-n0:
-  name: '0'
-  category: numeral
-  shape: pennant
-  design:
-    - [vertical, [yellow, red, yellow]]
+# --- Pennants -----------------------------------------------------------------
 
 n1:
   name: '1'
@@ -202,6 +199,13 @@ n9:
   design:
     - [quarters, [white, black, yellow, red]]
 
+n0:
+  name: '0'
+  category: numeral
+  shape: pennant
+  design:
+    - [vertical, [yellow, red, yellow]]
+
 ap:
   name: 'AP'
   category: pennant
@@ -209,6 +213,8 @@ ap:
   shape: pennant
   design:
     - [vertical, [red, white, red, white, red]]
+
+# --- Substitutes --------------------------------------------------------------
 
 s1:
   name: '1st Sub'
@@ -234,7 +240,16 @@ s3:
   design:
     - [horizontal, [white, black, white]]
 
-# racing: [red, yellow, blue, green, black, greenwhite, blackwhite]
+s4:
+  name: 4th Sub
+  description: 4th substitute
+  category: substitute
+  shape: triangle
+  design:
+    - [hoistSquare, [yellow, red]]
+
+# --- Racing -------------------------------------------------------------------
+
 black:
   name: 'Black'
   category: racing
@@ -276,3 +291,33 @@ yellow:
   category: racing
   design:
     - [solid, yellow]
+
+plus:
+  name: Plus
+  category: racing
+  design:
+    - [plus, [black, white]]
+
+minus:
+  name: Minus
+  category: racing
+  design:
+    - [minus, [black, white]]
+
+port:
+  name: Port
+  category: racing
+  design:
+    - [square, [red, white]]
+
+starboard:
+  name: Starboard
+  category: racing
+  design:
+    - [triangle, [green, white]]
+
+orange:
+  name: Orange
+  category: racing
+  design:
+    - [solid, orange]

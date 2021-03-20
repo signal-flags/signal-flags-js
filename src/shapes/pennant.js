@@ -8,6 +8,7 @@ export const pennant = {
   // Dimensions must be divisible by 90.
   size: {
     default: [360, 180],
+    long: [480, 120],
   },
 
   // Draw a circle.

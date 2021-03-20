@@ -26,18 +26,37 @@ const SignalFlags = require('signal-flags');
 ```js
 // Get the SVG string for a flag.
 SignalFlags.get('a');
-// Get the SVG string for a flag with no outline.
+// ... with no outline.
 SignalFlags.get('a', { outline: false });
-// Get the SVG string for a flag as a standalone file.
+// ... as a standalone file.
 SignalFlags.get('a', { file: true });
-// Get the SVG string for a flag using the `primary` colour set.
-SignalFlags.get('a', { colors: SignalFlags.primaryColors });
+// ... as a Data URI for inserting into an IMG tag.
+SignalFlags.get('a', { dataUri: true });
+// ... using the `primary` colour set.
+SignalFlags.get('a', { colors: 'primary });
+// ... overriding one or more colours.
+SignalFlags.get('a', { colors: white: '#ffffff' });
+// ... square option for rectangular flags.
+SignalFlags.get('ap', { shape: 'square' });
+// ... long option for pennants.
+SignalFlags.get('ap', { shape: 'long' });
 
 // Get the SVG strings for all flags (keyed by the flag name).
 SignalFlags.all();
-// Get the SVG strings for all flags with options.
+// ... with options.
 SignalFlags.all({ outline: false, file: true });
 ```
+
+## Current release v2.2.0
+
+- 6 new designs:
+  - orange for the start line
+  - plus, minus, port and starboard for mark changes
+  - 4th substitute
+- improvements to I (India), P (Papa) and S (Sierra) flags (the centre element
+  in each is now larger)
+- `long` shape option added for pennants
+- ponyfill added for `btoa` on nodejs when creating dataURIs
 
 ## Current release v2.1.0
 
@@ -77,7 +96,7 @@ v2.0 introduces the following features and improvements:
 
 [![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg?branch=develop)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
-### Planned for v2.2
+### Planned for v3.0
 
 - implement API for changing configuration something like this:
 
@@ -94,10 +113,6 @@ SignalFlags.config('colors', { black: '#000' });
 
 - better test coverage for `check()` method
 - add configuration to `factory()` method
-- proportional borders in Loader images
-
-### Planned for later versions
-
 - better test coverage for individual designs
 - in-browser testing
 - fix API for overrides to `flags` (individual flag designs) and `draw`

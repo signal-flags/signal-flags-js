@@ -23,8 +23,8 @@ export const defaultShape = {
     let xbw, ybw;
     if (length === 2) {
       // This factor works well for P and S flags.
-      ybw = h * 0.3;
-      xbw = w * 0.3;
+      ybw = h * 0.25;
+      xbw = w * 0.25;
     } else {
       ybw = h / (length * 2);
       xbw = w / (length * 2);
@@ -104,7 +104,7 @@ export const defaultShape = {
     const parts = [];
 
     // Radius.
-    const r = h * 0.25;
+    const r = h * 0.3; // Match flag of Japan.
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
@@ -272,6 +272,31 @@ export const defaultShape = {
     return parts.join('');
   },
 
+  // Draw a minus sign.
+  minus(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ht2 = h * 0.375;
+    const t = h / 12;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
+    parts.push(
+      `M0,0H${w}V${h}H0Z`,
+      // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+      `M${w2 - ht2},${h2 - t}V${h2 + t}H${w2 + ht2}V${h2 - t}Z"/>\n`
+    );
+    // Draw the centre shape.
+    parts.push(
+      `<path fill="${getColor(clrs[0], colors)}" d="`,
+      `M${w2 - ht2},${h2 - t}H${w2 + ht2}V${h2 + t}H${w2 - ht2}Z"/>\n`
+    );
+    return parts.join('');
+  },
+
   // Draw an outline.
   outline(design, { w, h, colors, outline }) {
     if (outline === false) return;
@@ -282,6 +307,35 @@ export const defaultShape = {
       `<path fill="none" stroke="${color}" stroke-width="${ow}" `,
       `d="M${off},${off}H${w - off}V${h - off}H${off}Z"/>\n`,
     ].join('');
+  },
+
+  // Draw a plus sign.
+  plus(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ht2 = h * 0.375;
+    const t = h / 12;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
+    parts.push(
+      `M0,0H${w}V${h}H0Z`,
+      // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+      `M${w2 - t},${h2 - ht2}V${h2 - t}H${w2 - ht2}`,
+      `V${h2 + t}H${w2 - t}V${h2 + ht2}H${w2 + t}V${h2 + t}H${w2 + ht2}`,
+      `V${h2 - t}H${w2 + t}V${h2 - ht2}Z"/>\n`
+    );
+    // Draw the centre shape.
+    parts.push(
+      `<path fill="${getColor(clrs[0], colors)}" d="`,
+      `M${w2 - t},${h2 - ht2}H${w2 + t}V${h2 - t}H${w2 + ht2}`,
+      `V${h2 + t}H${w2 + t}V${h2 + ht2}H${w2 - t}V${h2 + t}H${w2 - ht2}`,
+      `V${h2 - t}H${w2 - t}Z"/>\n`
+    );
+    return parts.join('');
   },
 
   // Draw a saltire (like an X).
@@ -305,10 +359,56 @@ export const defaultShape = {
     return parts.join('');
   },
 
+  // Draw a square (RRS change to port).
+  square(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    // Height.
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ht2 = h * 0.375;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
+    parts.push(` d="M0,0H${w}V${h}H0Z`);
+    // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+    parts.push(
+      `M${w2 - ht2},${h2 - ht2}V${h2 + ht2}H${w2 + ht2}V${h2 - ht2}Z"/>\n`
+    );
+    // Draw the centre shape.
+    parts.push(`<path fill="${getColor(clrs[0], colors)}" `);
+    parts.push(
+      `d="M${w2 - ht2},${h2 - ht2}H${w2 + ht2}V${h2 + ht2}H${w2 - ht2}Z"/>\n`
+    );
+    return parts.join('');
+  },
+
   // Draw a field (background).
   solid(design, { w, h, colors }) {
     const [, clr] = design;
     return `<path fill="${getColor(clr, colors)}" d="M0,0H${w}V${h}H0Z"/>\n`;
+  },
+
+  // Draw a triangle (RRS change to starboard).
+  triangle(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    // Height.
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const ht2 = h * 0.375;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
+    parts.push(`M0,0H${w}V${h}H0Z`);
+    // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+    parts.push(`M${w2},${h2 - ht2}L${w2 - ht2},${h2 + ht2}H${w2 + ht2}Z"/>\n`);
+    // Draw the centre shape.
+    parts.push(`<path fill="${getColor(clrs[0], colors)}" d="`);
+    parts.push(`M${w2},${h2 - ht2}L${w2 + ht2},${h2 + ht2}H${w2 - ht2}Z"/>\n`);
+    return parts.join('');
   },
 
   // Draw vertical stripes.

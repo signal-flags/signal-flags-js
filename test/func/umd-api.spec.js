@@ -17,8 +17,8 @@ describe('The UMD module', () => {
   describe('all() should return:', () => {
     const flags = SignalFlags.all();
 
-    test('47 flags in total', () => {
-      expect(Object.keys(flags).length).toBe(47);
+    test('53 flags in total', () => {
+      expect(Object.keys(flags).length).toBe(53);
     });
 
     test('26 alphabet flags (test a sample)', () => {
@@ -33,19 +33,25 @@ describe('The UMD module', () => {
       expect(flags).toHaveProperty('n9');
     });
 
-    test('1st, 2nd and 3rd sub', () => {
+    test('1st, 2nd, 3rd and 4th sub', () => {
       expect(flags).toHaveProperty('s1');
       expect(flags).toHaveProperty('s2');
       expect(flags).toHaveProperty('s3');
+      expect(flags).toHaveProperty('s4');
     });
 
-    test('7 racing flags', () => {
+    test('12 racing flags', () => {
       expect(flags).toHaveProperty('black');
       expect(flags).toHaveProperty('blackwhite');
       expect(flags).toHaveProperty('blue');
       expect(flags).toHaveProperty('green');
       expect(flags).toHaveProperty('greenwhite');
+      expect(flags).toHaveProperty('minus');
+      expect(flags).toHaveProperty('orange');
+      expect(flags).toHaveProperty('plus');
+      expect(flags).toHaveProperty('port');
       expect(flags).toHaveProperty('red');
+      expect(flags).toHaveProperty('starboard');
       expect(flags).toHaveProperty('yellow');
     });
   });
@@ -63,11 +69,14 @@ describe('The UMD module', () => {
 
     it('Should return a data URI with the `dataUri` option', () => {
       // Line endings are stripped out for a shorter base64 string.
-      const fileSvg = SignalFlags.get('a', { file: true }).replace(/\n/g, '');
+      const fileSvg = SignalFlags.get('a', { file: true });
 
-      const svg = SignalFlags.get('a', { dataUri: true });
+      // Use a node version of btoa.
+      const base64 = Buffer.from(fileSvg).toString('base64');
 
-      expect(svg).toMatch('data:image/svg+xml;base64,' + btoa(fileSvg));
+      const dataUri = SignalFlags.get('a', { dataUri: true });
+
+      expect(dataUri).toMatch('data:image/svg+xml;base64,' + base64);
     });
 
     it('Should respect the `outline` option', () => {
