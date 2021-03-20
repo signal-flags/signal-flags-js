@@ -104,7 +104,9 @@ export const defaultShape = {
     const parts = [];
 
     // Radius.
-    const r = Math.round(h * 0.275, 0);
+    // const r = Math.round(h * 0.275, 0);
+    // Match flag of Japan.
+    const r = Math.round(h * 0.3, 0);
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
