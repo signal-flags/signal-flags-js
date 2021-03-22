@@ -3,17 +3,22 @@
 import SignalFlags from '../../src/index';
 
 const match = {
-  ap: 'viewBox="0 0 480 120"',
+  long: 'viewBox="0 0 540 180"',
+  pennant: 'viewBox="0 0 360 180"',
   orange: 'path fill="testOrange" d="M0,0H240V180H0Z"',
   s4: /(M0,0L360,90L0,180ZM0,60V120H60V60H0Z).*(M0,60H60V120H0Z)/s,
-  starboard: /(M0,0H240V180H0ZM120,30L60,150H180Z).+(M120,30L180,150H60Z)/s,
+  starboard: /(M0,0H240V180H0ZM120,30L75,150H165Z).+(M120,30L165,150H75Z)/s,
 };
 
 describe('Flag designs', () => {
-  describe('AP', () => {
+  describe('Long pennants', () => {
     it('should be wider and less tall than other pennants', () => {
-      const svg = SignalFlags.get('ap', { shape: 'long' });
-      expect(svg).toMatch(match.ap);
+      const svg = SignalFlags.get('ap');
+      const longSvg = SignalFlags.get('ap', { shape: 'long' });
+
+      expect(svg).not.toMatch(match.long);
+      expect(svg).toMatch(match.pennant);
+      expect(longSvg).toMatch(match.long);
     });
   });
 

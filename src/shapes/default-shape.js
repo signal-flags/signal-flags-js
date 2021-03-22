@@ -285,8 +285,8 @@ export const defaultShape = {
 
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h / 3;
-    const t = h / 15;
+    const ht2 = h / 4;
+    const t = h / 20;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
@@ -322,8 +322,8 @@ export const defaultShape = {
 
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h / 3;
-    const t = h / 15;
+    const ht2 = h / 4;
+    const t = h / 20;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
@@ -340,6 +340,30 @@ export const defaultShape = {
       `M${w2 - t},${h2 - ht2}H${w2 + t}V${h2 - t}H${w2 + ht2}`,
       `V${h2 + t}H${w2 + t}V${h2 + ht2}H${w2 - t}V${h2 + t}H${w2 - ht2}`,
       `V${h2 - t}H${w2 - t}Z"/>\n`
+    );
+    return parts.join('');
+  },
+
+  // Draw a rectangle (RRS change to port).
+  rectangle(design, { w, h, colors }) {
+    const [, clrs] = design;
+    const parts = [];
+
+    // Height.
+    const w2 = w / 2;
+    const h2 = h / 2;
+    const rh = h / 3;
+    const rw = h / 4;
+
+    // Draw a rectangle background.
+    parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
+    parts.push(` d="M0,0H${w}V${h}H0Z`);
+    // Draw the cut out centre shape anti-clockwise so it doesn't fill.
+    parts.push(`M${w2 - rw},${h2 - rh}V${h2 + rh}H${w2 + rw}V${h2 - rh}Z"/>\n`);
+    // Draw the centre shape.
+    parts.push(`<path fill="${getColor(clrs[0], colors)}" `);
+    parts.push(
+      `d="M${w2 - rw},${h2 - rh}H${w2 + rw}V${h2 + rh}H${w2 - rw}Z"/>\n`
     );
     return parts.join('');
   },
@@ -365,31 +389,6 @@ export const defaultShape = {
     return parts.join('');
   },
 
-  // Draw a square (RRS change to port).
-  square(design, { w, h, colors }) {
-    const [, clrs] = design;
-    const parts = [];
-
-    // Height.
-    const w2 = w / 2;
-    const h2 = h / 2;
-    const ht2 = h / 3;
-
-    // Draw a rectangle background.
-    parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
-    parts.push(` d="M0,0H${w}V${h}H0Z`);
-    // Draw the cut out centre shape anti-clockwise so it doesn't fill.
-    parts.push(
-      `M${w2 - ht2},${h2 - ht2}V${h2 + ht2}H${w2 + ht2}V${h2 - ht2}Z"/>\n`
-    );
-    // Draw the centre shape.
-    parts.push(`<path fill="${getColor(clrs[0], colors)}" `);
-    parts.push(
-      `d="M${w2 - ht2},${h2 - ht2}H${w2 + ht2}V${h2 + ht2}H${w2 - ht2}Z"/>\n`
-    );
-    return parts.join('');
-  },
-
   // Draw a field (background).
   solid(design, { w, h, colors }) {
     const [, clr] = design;
@@ -404,16 +403,17 @@ export const defaultShape = {
     // Height.
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h / 3;
+    const th = h / 3;
+    const tw = h / 4;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
     parts.push(`M0,0H${w}V${h}H0Z`);
     // Draw the cut out centre shape anti-clockwise so it doesn't fill.
-    parts.push(`M${w2},${h2 - ht2}L${w2 - ht2},${h2 + ht2}H${w2 + ht2}Z"/>\n`);
+    parts.push(`M${w2},${h2 - th}L${w2 - tw},${h2 + th}H${w2 + tw}Z"/>\n`);
     // Draw the centre shape.
     parts.push(`<path fill="${getColor(clrs[0], colors)}" d="`);
-    parts.push(`M${w2},${h2 - ht2}L${w2 + ht2},${h2 + ht2}H${w2 - ht2}Z"/>\n`);
+    parts.push(`M${w2},${h2 - th}L${w2 + tw},${h2 + th}H${w2 - tw}Z"/>\n`);
     return parts.join('');
   },
 

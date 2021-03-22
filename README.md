@@ -47,7 +47,7 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.3.0
+## Current release v2.3.1
 
 [![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
@@ -55,7 +55,7 @@ SignalFlags.all({ outline: false, file: true });
   - triangles now 2:1 ratio matching pennants
   - I, P, and S flags have different inner shape sizes on square flags
   - Improvements to wide pennants for numerals 1,2,4 and 8
-  - Improvements to mark moving flags +, -, square, triangle
+  - Improvements to mark moving flags +, -, red rectangle, green triangle
 - New feature to select options in the JS autoloader with class="sfoption-[key]-[value]"
 
 ## Changelog

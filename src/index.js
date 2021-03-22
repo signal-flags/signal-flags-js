@@ -50,7 +50,9 @@ const inlineNodes = ['SPAN'];
  */
 function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
   // Get the dimensions for this shape.
-  const [w, h] = (shape && draw.size[shape]) || draw.size.default;
+  const [w, h] = Array.isArray(shape)
+    ? shape
+    : (shape && draw.size[shape]) || draw.size.default;
 
   let parts = [];
 
@@ -121,6 +123,7 @@ function factory(options) {
     insertIntoElement,
 
     isPennant,
+    isType,
 
     // API static methods.
     check,
@@ -142,13 +145,7 @@ function get(
   { colors: optColors, file, dataUri, outline, shape: optShape } = {}
 ) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
-  const { shape, design, size } = this.flags[name];
-
-  // Use any override size from the flag definition: note this will override
-  // the explicit `shape` option. This is only currently used for the AP flag.
-  if (size) {
-    optShape = size;
-  }
+  const { shape, design } = this.flags[name];
 
   // Get the code to build this shape.
   const { shapes } = this;
@@ -292,6 +289,20 @@ function insertIntoElement(el, name) {
  */
 function isPennant(name) {
   return this.flags[name].shape === 'pennant';
+}
+
+/**
+ * Check the type of a flag.
+ *
+ * @param {string}   key The name of the flag.
+ * @param {string}   type The type to check against.g.
+ * @return {boolean} true iff the flag is the requested type.
+ */
+function isType(key, type) {
+  const { shape } = flags[key];
+  return (
+    (shape ?? 'flag') === type || (shape === 'swallowtail' && type === 'flag')
+  );
 }
 
 export default factory();

@@ -252,7 +252,7 @@ export default {
   port: {
     name: 'Port',
     category: 'racing',
-    design: [['square', ['red', 'white']]],
+    design: [['rectangle', ['red', 'white']]],
   },
   starboard: {
     name: 'Starboard',

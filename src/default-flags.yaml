@@ -308,7 +308,7 @@ port:
   name: Port
   category: racing
   design:
-    - [square, [red, white]]
+    - [rectangle, [red, white]]
 
 starboard:
   name: Starboard
