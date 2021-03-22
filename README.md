@@ -47,22 +47,29 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.2.1 _20 March 2021_
+## Current release v2.3.0
 
 [![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
-- 6 new designs:
-  - orange for the start line
-  - plus, minus, port and starboard for mark changes
-  - 4th substitute
-- improvements to I (India), P (Papa) and S (Sierra) flags (the centre element
-  in each is now larger)
-- `long` shape option added for pennants
-- ponyfill added for `btoa` on nodejs when creating dataURIs
+- Design improvements:
+  - triangles now 2:1 ratio matching pennants
+  - I, P, and S flags have different inner shape sizes on square flags
+  - Improvements to wide pennants for numerals 1,2,4 and 8
+  - Improvements to mark moving flags +, -, square, triangle
+- New feature to select options in the JS autoloader with class="sfoption-[key]-[value]"
 
-###
+## Changelog
 
-- **Changes in v2.1.0**
+- **v2.2.1**
+  - 6 new designs:
+    - orange for the start line
+    - plus, minus, port and starboard for mark changes
+    - 4th substitute
+  - improvements to I (India), P (Papa) and S (Sierra) flags (the centre element
+    in each is now larger)
+  - `long` shape option added for pennants
+  - ponyfill added for `btoa` on nodejs when creating dataURIs
+- **v2.1.0**
   - New features:
     - Data URI support to insert images into IMG tags.
     - Using 'white smoke' (#f5f5f5) for white flag elements.
@@ -70,9 +77,9 @@ SignalFlags.all({ outline: false, file: true });
   - Bug fixes:
     - fix bottom white stripe path on 2nd Substitute.
   - General improvements to documentation, testing and example page.
-- **Changes in v2.0.1**
+- **v2.0.1**
   - fix: Loader should run immediately if DOM is already loaded
-- **Changes in v2.0.0**
+- **v2.0.0**
   - v2.0 breaks compatibility with the previous release v0.9.1.
   - v2.0 introduces the following features and improvements:
     - new API with `get()` and `all()` methods replacing `getSvg()`
@@ -109,7 +116,6 @@ SignalFlags.config('colors', { black: '#000' });
 - in-browser testing
 - fix API for overrides to `flags` (individual flag designs) and `draw`
   (code implementing designs)
-- options for Loader images
 
 ## Important information
 
