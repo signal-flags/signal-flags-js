@@ -22,9 +22,15 @@ export const defaultShape = {
     // xbw and ybw are the border widths in the x and y dimension.
     let xbw, ybw;
     if (length === 2) {
-      // This factor works well for P and S flags.
-      ybw = h * 0.25;
-      xbw = w * 0.25;
+      if (w === h) {
+        // This factor is close to the US Navy spec.
+        ybw = h * 0.32;
+        xbw = w * 0.32;
+      } else {
+        // This factor works well for rectangular P and S flags.
+        ybw = h * 0.25;
+        xbw = w * 0.25;
+      }
     } else {
       ybw = h / (length * 2);
       xbw = w / (length * 2);
@@ -103,8 +109,8 @@ export const defaultShape = {
     const [, clrs] = design;
     const parts = [];
 
-    // Radius.
-    const r = h * 0.3; // Match flag of Japan.
+    // Radius - smaller on square flags to match USN spec, otherwise match flag of Japan.
+    const r = w === h ? h * 0.2 : h * 0.3;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
@@ -279,8 +285,8 @@ export const defaultShape = {
 
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h * 0.375;
-    const t = h / 12;
+    const ht2 = h / 3;
+    const t = h / 15;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
@@ -316,8 +322,8 @@ export const defaultShape = {
 
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h * 0.375;
-    const t = h / 12;
+    const ht2 = h / 3;
+    const t = h / 15;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);
@@ -367,7 +373,7 @@ export const defaultShape = {
     // Height.
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h * 0.375;
+    const ht2 = h / 3;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}"`);
@@ -398,7 +404,7 @@ export const defaultShape = {
     // Height.
     const w2 = w / 2;
     const h2 = h / 2;
-    const ht2 = h * 0.375;
+    const ht2 = h / 3;
 
     // Draw a rectangle background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="`);

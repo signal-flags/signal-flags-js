@@ -23,19 +23,24 @@
         height: 19px;
       }
 
-      /* Display 5 rectangular flags per row. */
+      /* Flags are 4x3 (8x6). */
       .flags-block > div {
-        width: 18%;
+        width: 8%;
       }
 
-      /* Display 4 pennants per row. */
-      .pennants-block > div {
-        width: 22.5%;
+      /* Pennants are 5x2.5 (10x5). */
+      .flags-block.triangle > div {
+        width: 10%;
       }
 
-      /* Display wider AP. */
-      .ap-block > div {
-        width: 36%;
+      /* Long pennants are 6x2 (16x5.3333). */
+      .flags-block.long > div {
+        width: 16%;
+      }
+
+      /* Square flags are 3x3 (6x6). */
+      .flags-block.square > div {
+        width: 6%;
       }
 
       /* Tweak Bootstrap styles */
@@ -53,9 +58,106 @@
         <div class="col">
           <h1>New and changed flags</h1>
 
-          <p>New and updated flag designs are shown below.</p>
+          <h2>Alternative longer pennants</h2>
 
-          <div class="flags-block d-flex justify-content-between text-center">
+          <div
+            class="flags-block long d-flex flex-wrap justify-content-around text-center"
+          >
+            <div>
+              <img
+                alt="Signal flag n1"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 1 <code>n1</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n2"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 2 <code>n2</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n3"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 3 <code>n3</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n4"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 4 <code>n4</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n5"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 5 <code>n5</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n6"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 6 <code>n6</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n7"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 7 <code>n7</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n8"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 8 <code>n8</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n9"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 9 <code>n9</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag n0"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Numeral 0 <code>n0</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag ap"
+                class="sfoption-shape-long"
+                style="display: block"
+              />
+              Answering Pennant <code>ap</code>
+            </div>
+          </div>
+
+          <h2>Better sizes for inner shapes on I, P and S</h2>
+
+          <h3>Larger on rectangular flags</h3>
+
+          <div class="flags-block d-flex justify-content-around text-center">
             <div>
               <img alt="Signal flag i" style="display: block" />
               India <code>i</code>
@@ -68,13 +170,42 @@
               <img alt="Signal flag s" style="display: block" />
               Sierra <code>s</code>
             </div>
+          </div>
+
+          <h3>Smaller on square flags</h3>
+
+          <div
+            class="flags-block square d-flex justify-content-around text-center"
+          >
             <div>
-              <img alt="Signal flag s4" style="display: block" />
-              4<sup>th</sup> substitute <code>s4</code>
+              <img
+                alt="Signal flag i"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              India <code>i</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag p"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Papa <code>p</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag s"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Sierra <code>s</code>
             </div>
           </div>
 
-          <div class="flags-block d-flex justify-content-between text-center">
+          <h2>All missing flags from RRS 2021-24</h2>
+
+          <div class="flags-block d-flex justify-content-around text-center">
             <div>
               <img alt="Signal flag orange" style="display: block" />
               Orange <code>orange</code>
@@ -94,6 +225,76 @@
             <div>
               <img alt="Signal flag starboard" style="display: block" />
               Starboard <code>starboard</code>
+            </div>
+          </div>
+
+          <h3>&hellip;also in square shapes of course</h3>
+
+          <div
+            class="flags-block square d-flex justify-content-around text-center"
+          >
+            <div>
+              <img
+                alt="Signal flag orange"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Orange <code>orange</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag plus"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Plus <code>plus</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag minus"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Minus <code>minus</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag port"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Port <code>port</code>
+            </div>
+            <div>
+              <img
+                alt="Signal flag starboard"
+                class="sfoption-shape-square"
+                style="display: block"
+              />
+              Starboard <code>starboard</code>
+            </div>
+          </div>
+
+          <h2>New fourth substitute; triangles resized to 2:1 ratio</h2>
+
+          <div
+            class="flags-block triangle d-flex justify-content-around text-center"
+          >
+            <div>
+              <img alt="Signal flag s1" style="display: block" />
+              First substitute <code>s1</code>
+            </div>
+            <div>
+              <img alt="Signal flag s2" style="display: block" />
+              Second substitute <code>s2</code>
+            </div>
+            <div>
+              <img alt="Signal flag s3" style="display: block" />
+              Third substitute <code>s3</code>
+            </div>
+            <div>
+              <img alt="Signal flag s4" style="display: block" />
+              Fourth substitute <code>s4</code>
             </div>
           </div>
         </div>

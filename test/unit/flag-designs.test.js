@@ -5,8 +5,8 @@ import SignalFlags from '../../src/index';
 const match = {
   ap: 'viewBox="0 0 480 120"',
   orange: 'path fill="testOrange" d="M0,0H240V180H0Z"',
-  s4: /(M0,0L240,90L0,180ZM0,60V120H60V60H0Z).*(M0,60H60V120H0Z)/s,
-  starboard: /(M120,22.5L52.5,157.5H187.5Z).+(M120,22.5L187.5,157.5H52.5Z)/s,
+  s4: /(M0,0L360,90L0,180ZM0,60V120H60V60H0Z).*(M0,60H60V120H0Z)/s,
+  starboard: /(M0,0H240V180H0ZM120,30L60,150H180Z).+(M120,30L180,150H60Z)/s,
 };
 
 describe('Flag designs', () => {

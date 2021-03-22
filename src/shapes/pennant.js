@@ -22,8 +22,8 @@ export const pennant = {
     // Radius.
     const r = h / 4;
 
-    // Centre on the x-axis.
-    const cx = w / 3;
+    // Centre 3 radii from hoist.
+    const cx = r * 3;
 
     // Draw the background.
     parts.push(`<path fill="${getColor(clrs[1], colors)}" d="M0,0`);
@@ -71,8 +71,8 @@ export const pennant = {
     const x0 = h / 5;
     const y0 = x0;
 
-    // Centre the cross 1/3 of the width across the flag.
-    const w2 = w / 3;
+    // Centre the cross 1/3 of the width across the flag, or the height if less
+    const w2 = Math.min(w / 3, h);
     const h2 = h / 2;
 
     const x1 = w2 - x0 / 2;
