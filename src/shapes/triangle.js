@@ -7,7 +7,7 @@ export const triangle = {
 
   // Dimensions must be divisible by 90.
   size: {
-    default: [360, 180],
+    default: [240, 180],
   },
 
   // Draw a border design (not an outline).
