@@ -103,8 +103,11 @@ function buildFlagSvg({ draw, design, colors, outline, file, dataUri, shape }) {
 function all(options) {
   // Return svg for all flags.
   const all = {};
+  const { type } = options ?? {};
   Object.keys(this.flags).forEach((key) => {
-    all[key] = this.get(key, options);
+    if (!type || isType(key, type)) {
+      all[key] = this.get(key, options);
+    }
   });
   return all;
 }
@@ -142,10 +145,16 @@ function factory(options) {
 // Get svg for a signal flag
 function get(
   name,
-  { colors: optColors, file, dataUri, outline, shape: optShape } = {}
+  { colors: optColors, file, dataUri, outline, shape: optShape, size } = {}
 ) {
   // Get the shape (pennant, triangle etc.) and design for this flag.
   const { shape, design } = this.flags[name];
+
+  // Use any override size from the flag definition: note this will override
+  // the explicit `shape` option. This is only currently used for the AP flag.
+  if (size) {
+    optShape = size;
+  }
 
   // Get the code to build this shape.
   const { shapes } = this;

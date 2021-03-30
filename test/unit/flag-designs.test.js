@@ -1,24 +1,34 @@
 // test/unit/signal-flags.test.js
 
 import SignalFlags from '../../src/index';
+import { colors } from '../helpers';
+
+const { red, yellow, white } = colors;
 
 const match = {
-  long: 'viewBox="0 0 540 180"',
-  pennant: 'viewBox="0 0 360 180"',
+  pennant: 'viewBox="0 0 540 180"',
+  short: 'viewBox="0 0 360 180"',
   orange: 'path fill="testOrange" d="M0,0H240V180H0Z"',
-  s4: /(M0,0L360,90L0,180ZM0,60V120H60V60H0Z).*(M0,60H60V120H0Z)/s,
-  starboard: /(M0,0H240V180H0ZM120,30L75,150H165Z).+(M120,30L165,150H75Z)/s,
+  s4: new RegExp(
+    `${red}.+M0,0L240,90L0,180ZM0,60V120H60V60H0Z.+${yellow}.+M0,60H60V120H0Z`,
+    's'
+  ),
+  tostarboard: /(M0,0H240V180H0ZM120,30L75,150H165Z).+(M120,30L165,150H75Z)/s,
+  toport: new RegExp(
+    `${white}.+M0,0H240V180H0ZM75,30V150H165V30Z.+${red}.+M75,30H165V150H75Z`,
+    's'
+  ),
 };
 
 describe('Flag designs', () => {
-  describe('Long pennants', () => {
-    it('should be wider and less tall than other pennants', () => {
+  describe('Short pennants', () => {
+    it('should be shorter than default pennants', () => {
       const svg = SignalFlags.get('ap');
-      const longSvg = SignalFlags.get('ap', { shape: 'long' });
+      const shortSvg = SignalFlags.get('ap', { shape: 'short' });
 
-      expect(svg).not.toMatch(match.long);
+      expect(svg).not.toMatch(match.short);
       expect(svg).toMatch(match.pennant);
-      expect(longSvg).toMatch(match.long);
+      expect(shortSvg).toMatch(match.short);
     });
   });
 
@@ -30,10 +40,17 @@ describe('Flag designs', () => {
     });
   });
 
-  describe('Starboard', () => {
+  describe('To port', () => {
+    it('should be a red rectangle on a cut-out red background', () => {
+      const svg = SignalFlags.get('toport');
+      expect(svg).toMatch(match.toport);
+    });
+  });
+
+  describe('To starboard', () => {
     it('should be a green triangle on a cut-out white background', () => {
-      const svg = SignalFlags.get('starboard');
-      expect(svg).toMatch(match.starboard);
+      const svg = SignalFlags.get('tostarboard');
+      expect(svg).toMatch(match.tostarboard);
     });
   });
 

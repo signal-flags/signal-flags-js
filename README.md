@@ -47,18 +47,27 @@ SignalFlags.all();
 SignalFlags.all({ outline: false, file: true });
 ```
 
-## Current release v2.3.2
+## Current release v2.4.0
 
 [![build](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml/badge.svg)](https://github.com/signal-flags/signal-flags-js/actions/workflows/build.yaml)
 
 - Design improvements:
-  - triangles now 2:1 ratio matching pennants
-  - I, P, and S flags have different inner shape sizes on square flags
-  - Improvements to wide pennants for numerals 1,2,4 and 8
-  - Improvements to mark moving flags +, -, red rectangle, green triangle
-- New feature to select options in the JS autoloader with class="sfoption-[key]-[value]"
+  - Reverted triangles to 4:3 ratio.
+  - Default pennants are now 3:1 (this was previously the `long` option which is
+    now removed), with a new `short` option for the previously `default` 2:1.
+- Renamed `port` and `starboard` mark changing flags to `toport` and
+  `tostarboard` respectively to avoid future clashes, and `minus` and `plus` to
+  `decrease` and `increase` respectively for consistency.
 
 ## Changelog
+
+- **v2.3.2**
+- Design improvements:
+  - triangles now 2:1 ratio matching pennants
+  - I, P, and S flags have different inner shape sizes on square flags
+  - Improvements to wide pennants for numerals 1, 2, 4 and 8
+  - Improvements to mark moving flags +, -, red rectangle, green triangle
+- New feature to select options in the JS autoloader with class="sfoption-[key]-[value]"
 
 - **v2.2.1**
   - 6 new designs:

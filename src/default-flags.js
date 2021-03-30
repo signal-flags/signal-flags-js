@@ -219,6 +219,11 @@ export default {
     category: 'racing',
     design: [['solid', 'blue']],
   },
+  decrease: {
+    name: 'Decrease',
+    category: 'racing',
+    design: [['minus', ['black', 'white']]],
+  },
   green: {
     name: 'Green',
     category: 'racing',
@@ -229,39 +234,34 @@ export default {
     category: 'racing',
     design: [['check', ['green', 'white'], 4]],
   },
-  red: {
-    name: 'Red',
-    category: 'racing',
-    design: [['solid', 'red']],
-  },
-  yellow: {
-    name: 'Yellow',
-    category: 'racing',
-    design: [['solid', 'yellow']],
-  },
-  plus: {
-    name: 'Plus',
+  increase: {
+    name: 'Increase',
     category: 'racing',
     design: [['plus', ['black', 'white']]],
-  },
-  minus: {
-    name: 'Minus',
-    category: 'racing',
-    design: [['minus', ['black', 'white']]],
-  },
-  port: {
-    name: 'Port',
-    category: 'racing',
-    design: [['rectangle', ['red', 'white']]],
-  },
-  starboard: {
-    name: 'Starboard',
-    category: 'racing',
-    design: [['triangle', ['green', 'white']]],
   },
   orange: {
     name: 'Orange',
     category: 'racing',
     design: [['solid', 'orange']],
+  },
+  red: {
+    name: 'Red',
+    category: 'racing',
+    design: [['solid', 'red']],
+  },
+  toport: {
+    name: 'To port',
+    category: 'racing',
+    design: [['rectangle', ['red', 'white']]],
+  },
+  tostarboard: {
+    name: 'To starboard',
+    category: 'racing',
+    design: [['triangle', ['green', 'white']]],
+  },
+  yellow: {
+    name: 'Yellow',
+    category: 'racing',
+    design: [['solid', 'yellow']],
   },
 };

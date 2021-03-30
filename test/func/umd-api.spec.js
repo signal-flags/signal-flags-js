@@ -44,14 +44,14 @@ describe('The UMD module', () => {
       expect(flags).toHaveProperty('black');
       expect(flags).toHaveProperty('blackwhite');
       expect(flags).toHaveProperty('blue');
+      expect(flags).toHaveProperty('decrease');
       expect(flags).toHaveProperty('green');
       expect(flags).toHaveProperty('greenwhite');
-      expect(flags).toHaveProperty('minus');
+      expect(flags).toHaveProperty('increase');
       expect(flags).toHaveProperty('orange');
-      expect(flags).toHaveProperty('plus');
-      expect(flags).toHaveProperty('port');
       expect(flags).toHaveProperty('red');
-      expect(flags).toHaveProperty('starboard');
+      expect(flags).toHaveProperty('toport');
+      expect(flags).toHaveProperty('tostarboard');
       expect(flags).toHaveProperty('yellow');
     });
   });

@@ -65,4 +65,14 @@ describe('SignalFlags', () => {
   });
 
   describe('config()', () => {});
+
+  describe.skip('isType()', () => {
+    // Needs tests.
+  });
+
+  describe.skip('buildSvg()', () => {
+    describe.skip('the `shape` option', () => {
+      it('should work with `shape: [x, y]`', () => {});
+    });
+  });
 });
