@@ -1,6 +1,11 @@
-# Signal Flags
+# DEPRECATED
 
-Flag images for International Code of Signals Flags.
+> **This repository is deprecated. The npm package `signal-flags` is now based at
+[signal-flags-ts](https://github.com/signal-flags/signal-flags-ts).**
+
+---
+
+> Flag images for International Code of Signals Flags.
 
 ## Getting started: Signal Flags Loader
 
